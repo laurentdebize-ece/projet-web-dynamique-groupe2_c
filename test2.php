@@ -1,11 +1,12 @@
 <?php
 // Connexion à la base de données
-$servername = "localhost";
-$username = "nom_utilisateur";
-$password = "mot_de_passe";
-$dbname = "projet_info_ing2";
+$serveur = "localhost";
+$nomUtilisateur = "votre_nom_dutilisateur";
+$mdpUtilisateur = "votre_mot_de_passe";
+$baseDeDonnees = "projet_info_ing2";
 
-$conn = mysqli_connect($servername, 'root', 'root', $dbname);
+// Connexion à la base de données
+$conn = mysqli_connect($serveur, 'root', 'root', $baseDeDonnees);
 
 // Vérification de la connexion
 if (!$conn) {
@@ -14,10 +15,10 @@ if (!$conn) {
 
 // Récupération des données du formulaire
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = $_POST['mot_de_passe'];
 
 // Requête SQL pour vérifier si l'utilisateur existe dans la base de données
-$sql = "SELECT * FROM utilisateurs WHERE email='$email' AND password='$password'";
+$sql = "SELECT * FROM utilisateurs WHERE email='$email' AND password='$mot_de_passe'";
 $result = mysqli_query($conn, $sql);
 
 // Vérification du résultat de la requête

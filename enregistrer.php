@@ -17,10 +17,17 @@ $Nom = $_POST['Nom'];
 $Prenom = $_POST['Prenom'];
 $email = $_POST['email'];
 $mot_de_passe = $_POST['mot_de_passe'];
-$Id_utilisateur = $_POST['1'];
+// Récupération du dernier ID_utilisateur inséré dans la table "utilisateur"
+$sql = "SELECT MAX(Id_utilisateur) as max_id FROM utilisateur";
+$resultat = mysqli_query($connexion, $sql);
+$max_id = mysqli_fetch_assoc($resultat)['max_id'];
+
+// Incrémentation de l'ID_utilisateur pour la nouvelle inscription
+$nouvel_id = $max_id + 1;
+
 
 // Préparation de la requête SQL pour insérer les données dans la table "utilisateurs"
-$sql = "INSERT INTO utilisateur (Id_utilisateur,Nom, Prenom, email, mot_de_passe) VALUES ('1','$Nom', '$Prenom', '$email', '$mot_de_passe')";
+$sql = "INSERT INTO utilisateur (Id_utilisateur,Nom, Prenom, email, mot_de_passe) VALUES ('$nouvel_id','$Nom', '$Prenom', '$email', '$mot_de_passe')";
 
 // Exécution de la requête SQL
 if (mysqli_query($connexion, $sql)) {

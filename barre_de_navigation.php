@@ -16,10 +16,10 @@ function barre_de_navigation() {
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="page_accueil_etudiant.php">Accueil</a></li>
-                    <li><a href="test1.php">Matières</a></li>
-                    <li><a href="#tour">Mes Compétences</a></li>
-                    <li><a href="#contact">Compétences transverses</a></li>
-                    <li><a href="#contact">Toutes les Compétences</a></li>
+                    <li><a href="Matiere_etudiant.php">Matières</a></li>
+                    <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
+                    <li><a href="test4.php">Compétences transverses</a></li>
+                    <li><a href="test2.php">Toutes les Compétences</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

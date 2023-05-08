@@ -36,13 +36,13 @@ if (!isset($_SESSION['Id_utilisateur'])) {
 $idUtilisateur = $_SESSION['Id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
 
 // Requête SQL pour récupérer les données
-$sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
+$sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competence, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
     FROM etudiant e
     JOIN etudiiant_matiere em ON e.id_utilisateur = em.id_etudiant
     JOIN matiere m ON em.id_matiere = m.id_matiere
-    JOIN competences_matieres mc ON m.id_matiere = mc.id_matiere
-    JOIN competences c ON mc.id_competence = c.id_competences
-    LEFT JOIN competences_etudiants ce ON c.id_competences = ce.id_competence AND e.id_utilisateur = ce.id_etudiant
+    JOIN compet_trans_matiere mc ON m.id_matiere = mc.id_matiere
+    JOIN competences_transversales c ON mc.id_competence = c.id_competence
+    LEFT JOIN compet_trans_etudiant ce ON c.id_competence = ce.id_competence AND e.id_utilisateur = ce.id_etudiant
     LEFT JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
     LEFT JOIN professeur p ON pm.id_professeur = p.id_professeur
     WHERE e.id_utilisateur = $idUtilisateur";
@@ -120,7 +120,7 @@ if ($result->num_rows > 0) {
                 <td>" . $row["nom_competences"] . "</td>
                 <td>
                     <form method='POST' action='" . $_SERVER["PHP_SELF"] . "'>
-                        <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competences"] . "]' value='" . $niveauAcquisitionActuel . "'>
+                        <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competence"] . "]' value='" . $niveauAcquisitionActuel . "'>
                         <input type='hidden' name='idEtudiant' value='" . $row["id_utilisateur"] . "'>
                         <button type='submit' name='submit'>Envoyer</button>
                     </form>
@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
         // Vérification si la nouvelle valeur est valide (entre 1 et 3)
         if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
             // Requête de mise à jour
-            $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ? WHERE id_etudiant = ? AND id_competence = ?");
+            $requete = $conn->prepare("UPDATE compet_trans_etudiant SET Id_niveau_acquisition = ? WHERE id_etudiant = ? AND id_competence = ?");
             $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
 
             // Exécution de la requête

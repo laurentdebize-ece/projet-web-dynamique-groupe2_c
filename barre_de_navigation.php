@@ -16,10 +16,10 @@ function barre_de_navigation() {
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="page_accueil_etudiant.php">Accueil</a></li>
-                    <li><a href="Matiere_etudiant.php">Matières</a></li>
+                    <li><a href="Matiere_etudiant_bouton.php">Matières</a></li>
                     <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
-                    <li><a href="test4.php">Compétences transverses</a></li>
-                    <li><a href="test2.php">Toutes les Compétences</a></li>
+                    <li><a href="Mes_competences_transversales.php">Compétences transverses</a></li>
+                    <li><a href="test5.php">Toutes les Compétences</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
@@ -48,7 +48,7 @@ function pied_de_page () {
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Accueil</a></li>
+                <li class="list-inline-item"><a href="page_accueil_etudiant.php">Accueil</a></li>
                 <li class="list-inline-item"><a href="#">Mentions Légales</a></li>
                 <li class="list-inline-item"><a href="#">Nous Contacter</a></li>
                 <li class="list-inline-item"><a href="#">Crédits</a></li>

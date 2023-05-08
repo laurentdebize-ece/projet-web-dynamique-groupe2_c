@@ -1,44 +1,33 @@
 <?php
 session_start();
 
-if (!empty($_POST)) {
-	try {
-		$bdd = new PDO("mysql:host=localhost;dbname=famille;charset=utf8", "root", "root");
-		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch (Exception $e) {
-		die("Erreur : " . $e->getMessage());
-	}
+// Connexion à la base de données
+$host = "localhost";
+$user = "root";
+$password = "root";
+$dbname = "Projet_info_ing2";
 
-	// Récupération des données du formulaire
-	$nom = $_POST['nom'];
-	$prenom = $_POST['prenom'];
-	$date_naissance = $_POST['date_naissance'];
-	$mot_de_passe = $_POST['mot_de_passe'];
+$conn = mysqli_connect($host, $user, $password, $dbname);
 
-	// Récupération du mot de passe correspondant à l'utilisateur
-	$sql = "SELECT Statut FROM membre WHERE Nom = :nom AND Prenom = :prenom AND `Date Naissance` = :date_naissance";
-	$requete = $bdd->prepare($sql);
-	$requete->execute(array(
-		'nom' => $nom,
-		'prenom' => $prenom,
-		'date_naissance' => $date_naissance
-	));
-	$resultat = $requete->fetch();
-	$mot_de_passe_bdd = $resultat['Statut'];
+// Vérification des informations d'identification
+$email = $_POST['email'];
+$mot_de_passe = $_POST['mot_de_passe'];
+$query = "SELECT * FROM utilisateur WHERE email='$email' AND mot_de_passe='$mot_de_passe'";
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    // Enregistrement des informations de l'utilisateur dans la session
+    $_SESSION['id_utilisateur'] = $row['Id_utilisateur'];
+    $_SESSION['nom'] = $row['Nom'];
+    $_SESSION['prenom'] = $row['Prenom'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['mot_de_passe'] = $row['mot_de_passe'];
 
-	// Vérification du mot de passe
-	if (password_verify($mot_de_passe, $mot_de_passe_bdd)) {
-		// Mot de passe correct : on enregistre les informations de l'utilisateur en session
-		$_SESSION['nom'] = $nom;
-		$_SESSION['prenom'] = $prenom;
-		$_SESSION['date_naissance'] = $date_naissance;
-
-		// Redirection vers la page souhaitée (à adapter)
-		header('Location: page_accueil_etudiant.php');
-		exit();
-	} else {
-		// Mot de passe incorrect : affichage d'un message d'erreur
-		echo "Nom, prénom, date de naissance ou mot de passe incorrects.";
-	}
+    // Redirection vers la page de résultat
+    header("Location: page_accueil_etudiant.php");
+} else {
+    // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
+    echo "Identifiant ou mot de passe incorrect.";
 }
+mysqli_close($conn);
 ?>

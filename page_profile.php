@@ -1,17 +1,11 @@
 <?php
 session_start();
 
-// Vérification que l'utilisateur est connecté
-if (!isset($_SESSION['nom']) || !isset($_SESSION['prenom']) || !isset($_SESSION['date_naissance'])) {
-	// Si l'utilisateur n'est pas connecté, on le redirige vers la page de login
-	header('Location: login.php');
-	exit();
-}
-
 // Récupération des informations de l'utilisateur depuis la session
 $nom = $_SESSION['nom'];
 $prenom = $_SESSION['prenom'];
-$date_naissance = $_SESSION['date_naissance'];
+$email = $_SESSION['email'];
+$mot_de_passe = $_SESSION['mot_de_passe'];
 
 // Affichage des informations de l'utilisateur
 
@@ -34,7 +28,7 @@ $date_naissance = $_SESSION['date_naissance'];
 </head>
 
 <body>
-	<?php barre_de_navigation(); ?>
+	<?php barre_de_navigation_etudiants(); ?>
 	
 	<div class="container-titre">
 		<h1>Profil</h1>
@@ -45,7 +39,8 @@ $date_naissance = $_SESSION['date_naissance'];
 			<div class="text-container">
 				<p><strong>Nom :</strong> <?php echo $nom ?></p>
 				<p><strong>Prénom :</strong> <?php echo $prenom ?></p>
-				<p><strong>Date de naissance :</strong> <?php echo $date_naissance ?></p>
+				<p><strong>Email :</strong> <?php echo $email ?></p>
+				<p><strong>Mot de Passe :</strong> <?php echo $mot_de_passe ?></p>
 			</div>
 		</div>
 	</div>

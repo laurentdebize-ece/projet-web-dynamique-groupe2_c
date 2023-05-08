@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="pied_de_page.css">
-	<link rel="stylesheet" type="text/css" href="page_Identification.css">
+	<link rel="stylesheet" type="text/css" href="css_Id_Ajout_Modif_Supp.css">
 </head>
 
 <body>

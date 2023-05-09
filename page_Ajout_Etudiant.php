@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page d'ajout d'utilisateur</title>
+    <title>Page d'ajout d'un Etudiant</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,12 +14,11 @@
 
 <body>
     <div class="logo_centré">
-        <img src="logo.png" alt="Logo Omnes" width="375" height="125"> 
+        <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Ajouter un Utilisateur</h1>
-        <form method="post" action="traitement_Ajout_Utilisateur.php">
-
+        <h1>Ajouter un Etudiant</h1>
+        <form method="post" action="traitement_Ajout_Etudiant.php">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" required><br>
 
@@ -32,12 +31,30 @@
             <label for="mot_de_passe">Mot de passe :</label>
             <input type="password" id="mot_de_passe" name="mot_de_passe" required><br>
 
-            //ajouter champ "statut"
-    
+            <label for="classe">Classe :</label>
+            <select id="classe" name="classe" required>
+                <?php
+                // Connexion à la base de données
+                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
+
+                // Récupération des données de la table 'classe'
+                $reponse = $bdd->query('SELECT id_classe, nom_classe FROM classe');
+
+                // Affichage des options de la liste déroulante
+                while ($donnees = $reponse->fetch()) {
+                    echo '<option value="' . $donnees['id_classe'] . '">' . $donnees['nom_classe'] . '</option>';
+                }
+
+                // Fermeture de la connexion à la base de données
+                $reponse->closeCursor();
+                ?>
+            </select>
+
             <input type="submit" value="Ajouter">
         </form>
     </div><br>
     <?php pied_de_page(); ?>
+
 </body>
 
 </html>

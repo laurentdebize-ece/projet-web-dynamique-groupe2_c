@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page de suppression utilisateur</title>
+    <title>Page d'ajout d'un Professeur</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,12 +14,11 @@
 
 <body>
     <div class="logo_centré">
-        <img src="logo.png" alt="Logo Omnes" width="375" height="125"> 
+        <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Supprimer un Utilisateur</h1>
-        <form method="post" action="traitement_Supp_Utilisateur.php">
-
+        <h1>Ajouter un Professeur</h1>
+        <form method="post" action="traitement_Ajout_Professeur.php">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" required><br>
 
@@ -28,11 +27,15 @@
 
             <label for="email">Email :</label>
             <input type="email" id="email" name="email" required><br>
-    
-            <input type="submit" value="Supprimer">
+
+            <label for="mot_de_passe">Mot de passe :</label>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br>
+
+            <input type="submit" value="Ajouter">
         </form>
     </div><br>
     <?php pied_de_page(); ?>
+
 </body>
 
 </html>

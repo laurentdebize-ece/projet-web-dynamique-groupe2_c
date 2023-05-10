@@ -2,19 +2,21 @@
 
     text-align: center;
 }
-.carousel {
+
+.carousel-container {
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 
-.carousel-inner {
+.carousel {
   display: flex;
-  animation: scroll 10s linear infinite;
+  transition: transform 0.5s ease;
 }
 
-.carousel-inner img {
-  width: 200px;
+.carousel img {
+  flex-shrink: 0;
+  width: 100%;
   height: auto;
 }
 
@@ -31,6 +33,7 @@
   line-height: 40px;
   text-decoration: none;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .carousel-prev {
@@ -39,13 +42,4 @@
 
 .carousel-next {
   right: 10px;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
 }

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="pied_de_page.css">
 </head>
 
-
 <?php
 include 'barre_de_navigation.php';
 
@@ -49,103 +48,127 @@ $sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competence, c.nom_competences, 
 
 $result = $conn->query($sql);
 
+// Fonction pour regrouper les données par compétences
+function groupDataByCompetence($result)
+{
+    $groupedData = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $competenceId = $row['id_competence'];
+        $profName = $row['Nom_prof'];
+        $matiereName = $row['nom_matiere'];
+        if (!isset($groupedData[$competenceId])) {
+            $groupedData[$competenceId] = $row;
+            $groupedData[$competenceId]['profList'] = [];
+            $groupedData[$competenceId]['matiereList'] = [];
+        }
+
+        $groupedData[$competenceId]['profList'][] = $profName;
+        $groupedData[$competenceId]['matiereList'][] = $matiereName;
+    }
+
+    return $groupedData;
+}
+
 // Affichage des résultats
 if ($result->num_rows > 0) {
     echo "<style>
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-            
-            table {
-                width: 100%;
-                height : 50%;
-                border-collapse: collapse;
-            }
-            
-            th, td {
-                padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
-            
-            th {
-                background-color: #f2f2f2;
-                height : 30%;
-            }
-            .acquis {
-                background-color: green;
-            }
-            
-            .en-cours {
-                background-color: orange;
-            }
-            
-            .non-acquis {
-                background-color: red;
-            }
-        </style>";
-    
-    echo "<div class='container'>";
-    echo "<table>
-            <tr>
-                <th>Matière</th>
-                <th>Nom du professeur</th>
-                <th>Compétence</th>
-                <th>Modifier niveau d'acquisition</th>
-                <th>Niveau d'acquisition</th>
-                <th>Commentaire du professeur</th>
-            </tr>";
-
-    while ($row = $result->fetch_assoc()) {
-        // Récupérer la valeur actuelle du niveau d'acquisition depuis la base de données
-        $niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
-        $nomProf= $row["Nom_prof"];
-        $acquisition = $row['acquisition'];
-        
-
-        $class = '';
-        if ($acquisition === 'Acquis') {
-            $class = 'acquis';
-        } elseif ($acquisition === 'En cours d\'acquisition'){
-            $class = 'en-cours';
-            } elseif ($acquisition === 'Non acquis') {
-            $class = 'non-acquis';
-            }
-        echo "<tr>
-                <td>" . $row["nom_matiere"] . "</td>
-                <td>" . $nomProf . "</td>
-                <td>" . $row["nom_competences"] . "</td>
-                <td>
-                    <form method='POST' action='" . $_SERVER["PHP_SELF"] . "'>
-                        <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competence"] . "]' value='" . $niveauAcquisitionActuel . "'>
-                        <input type='hidden' name='idEtudiant' value='" . $row["id_utilisateur"] . "'>
-                        <button type='submit' name='submit'>Envoyer</button>
-                    </form>
-                </td>
-                <td class=\"$class\">" . $acquisition . "</td>
-                <td>" . $row["commentaire"] . "</td>
-            </tr>";
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
+    
+    table {
+        width: 100%;
+        height : 50%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        height : 30%;
+    }
+    .acquis {
+        background-color: green;
+    }
+    
+    .en-cours {
+        background-color: orange;
+    }
+    
+    .non-acquis {
+        background-color: red;
+    }
+</style>";
 
-    echo "</table>";
-    echo "</div>";
+echo "<div class='container'>";
+echo "<table>
+<tr>
+    <th>Matière</th>
+    <th>Nom du professeur</th>
+    <th>Compétence</th>
+    <th>Modifier niveau d'acquisition</th>
+    <th>Niveau d'acquisition</th>
+    <th>Commentaire du professeur</th>
+</tr>";
+
+$groupedData = groupDataByCompetence($result);
+
+foreach ($groupedData as $competenceId => $row) {
+$niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
+$profList = implode(', ', $row['profList']);
+$matiereList = implode(', ', $row['matiereList']);
+$acquisition = $row['acquisition'];
+
+$class = '';
+if ($acquisition === 'Acquis') {
+$class = 'acquis';
+} elseif ($acquisition === 'En cours d\'acquisition') {
+$class = 'en-cours';
+} elseif ($acquisition === 'Non acquis') {
+$class = 'non-acquis';
+}
+echo "<tr>
+    <td>" . $matiereList . "</td>
+    <td>" . $profList . "</td>
+    <td>" . $row["nom_competences"] . "</td>
+    <td>
+        <form method='POST' action='" . $_SERVER["PHP_SELF"] . "'>
+            <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competence"] . "]' value='" . $niveauAcquisitionActuel . "'>
+            <input type='hidden' name='idEtudiant' value='" . $row["id_utilisateur"] . "'>
+            <button type='submit' name='submit'>Envoyer</button>
+        </form>
+    </td>
+    <td class=\"$class\">" . $acquisition . "</td>
+    <td>" . $row["commentaire"] . "</td>
+</tr>";
+}
+
+echo "</table>";
+echo "</div>";
 } else {
-    echo "Aucun résultat trouvé.";
+echo "Aucun résultat trouvé.";
 }
 
 // Vérification si le formulaire a été soumis
 if (isset($_POST['submit'])) {
-    // Parcourir les valeurs du formulaire soumis
-    foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
-        // Extraire l'ID de la matière et de la compétence
-        $idArray = explode("_", $idMatiereCompetence);
-        $idMatiere = $idArray[0];
-        $idCompetence = $idArray[1];
+// Parcourir les valeurs du formulaire soumis
+foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
+// Extraire l'ID de la matière et de la compétence
+$idArray = explode("_", $idMatiereCompetence);
+$idMatiere = $idArray[0];
+$idCompetence = $idArray[1];
 
-        // Récupérer la nouvelle valeur saisie par l'utilisateur
+
+    // Récupérer la nouvelle valeur saisie par l'utilisateur
         $nouvelleValeur = intval($nouvelleValeur);
         $idEtudiant = $_POST["idEtudiant"];
 
@@ -160,17 +183,38 @@ if (isset($_POST['submit'])) {
         } else {
             echo "La valeur saisie pour la matière avec l'ID $idMatiere et la compétence avec l'ID $idCompetence n'est pas valide. Veuillez saisir une valeur entre 1 et 3.";
         }
+    // Requête SQL pour vérifier si l'enregistrement existe déjà
+    $sql = "SELECT * FROM compet_trans_etudiant WHERE id_etudiant = $idUtilisateur AND id_matiere = $idMatiere AND id_competence = $idCompetence";
+    $result = $conn->query($sql);
+
+    // Mise à jour ou insertion de la nouvelle valeur
+    if ($result->num_rows > 0) {
+        // Mise à jour de l'enregistrement existant
+        $sql = "UPDATE compet_trans_etudiant SET Id_niveau_acquisition = $nouvelleValeur WHERE id_etudiant = $idUtilisateur AND id_matiere = $idMatiere AND id_competence = $idCompetence";
+    } else {
+        // Insertion d'un nouvel enregistrement
+        $sql = "INSERT INTO compet_trans_etudiant (id_etudiant, id_matiere, id_competence, Id_niveau_acquisition) VALUES ($idUtilisateur, $idMatiere, $idCompetence, $nouvelleValeur)";
     }
 
-    echo "Les valeurs ont été mises à jour avec succès.";
-    // Redirection vers la page actuelle
+    // Exécution de la requête
+    if ($conn->query($sql) === TRUE) {
+        echo "Mise à jour effectuée avec succès.";
+    } else {
+        echo "Erreur lors de la mise à jour : " . $conn->error;
+    }
+}
+// Actualiser la page pour afficher les nouvelles valeurs
+
 header("Location: " . $_SERVER["PHP_SELF"]);
 exit(); // Assure la fin de l'exécution du script après la redirection
 }
 
+// Fermeture de la connexion à la base de données
+$conn->close();
+
+// Inclusion du pied de page
 include 'pied_de_page.php';
 ?>
-
 <body>
     <?php barre_de_navigation(); ?>
     <br><br><br><br><br><br><br><br>

@@ -12,6 +12,11 @@ session_start();
 $Nom = $_SESSION['Nom'];
 $Prenom = $_SESSION['Prenom'];
 $email = $_SESSION['email'];
+$nom_classe = $_SESSION['nom_classe'];
+$Nom_ecole = $_SESSION['Nom_ecole'];
+
+
+
 
 // Affichage des informations de l'utilisateur
 
@@ -46,6 +51,8 @@ $email = $_SESSION['email'];
 				<p><strong>Nom :</strong> <?php echo $Nom ?></p>
 				<p><strong>Prénom :</strong> <?php echo $Prenom ?></p>
 				<p><strong>email :</strong> <?php echo $email ?></p>
+				<p><strong>Ecole :</strong> <?php echo $Nom_ecole ?></p>
+				<p><strong>Classe :</strong> <?php echo $nom_classe ?></p>
 			</div>
 		</div>
 	</div>

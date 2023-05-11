@@ -1,3 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="page_accueil_etudiant.css">
+    <link rel="stylesheet" href="barre_de_navigation.css">
+    <link rel="stylesheet" href="pied_de_page.css">
+    <title>Matières</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: 500px;
+        }
+    </style>
+</head>
 <?php
 include 'barre_de_navigation.php';
 session_start();
@@ -24,54 +66,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 $matieres = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
-include 'pied_de_page.php';
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="page_accueil_etudiant.css">
-    <link rel="stylesheet" href="barre_de_navigation.css">
-    <link rel="stylesheet" href="pied_de_page.css">
-    <title>Matières</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
-</head>
 <body>
     <?php barre_de_navigation(); ?>
     <div class="container">
         <h1>Matières</h1>
         <?php foreach ($matieres as $matiere): ?>
-            <li>
                 <button onclick="window.location.href= 'Matiere_etudiant_competences.php?matiere_id=<?php echo $matiere['id_matiere']; ?>'"><?php echo $matiere['nom_matiere']; ?></button>
-            </li>
         <?php endforeach; ?>
     </div>
     <?php pied_de_page(); ?>
 </body>
 </html>
-

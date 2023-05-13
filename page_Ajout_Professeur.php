@@ -28,9 +28,6 @@
             <label for="email">Email :</label>
             <input type="email" id="email" name="email" required><br>
 
-            <label for="mot_de_passe">Mot de passe :</label>
-            <input type="password" id="mot_de_passe" name="mot_de_passe" required><br>
-
             <input type="submit" value="Ajouter">
         </form>
     </div><br>

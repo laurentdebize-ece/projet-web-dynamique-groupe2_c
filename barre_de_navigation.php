@@ -57,7 +57,7 @@ function barre_de_navigation_professeurs() {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+                    <li><a href="page_accueil_professeur.php">Accueil</a></li>
                     <li><a href="#band">Etudiants</a></li>
                     <li><a href="#tour">Compétences</a></li>
                     <li><a href="#contact">Validations</a></li>
@@ -99,12 +99,12 @@ function barre_de_navigation_administrateur() {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+                    <li><a href="page_accueil_administrateur.php">Accueil</a></li>
                     <li><a href="#band">Professeurs</a></li>
                     <li><a href="#tour">Etudiants</a></li>
                     <li><a href="#contact">Matieres</a></li>
                     <li><a href="#contact">Competences</a></li>
-                    <li><a href="#contact">Ajouts/Modifications</a></li>
+                    <li><a href="page_Admin_6_Ajout&Modif.php">Ajouts/Modifications</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

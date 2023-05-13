@@ -36,6 +36,16 @@ $requete->execute(array(
 'email' => $email
 ));
 
+// Suppression d'un admin de la table 'administrateur'
+$sql = "DELETE FROM administrateur WHERE id_utilisateur IN (
+    SELECT Id_utilisateur FROM utilisateur
+    WHERE Nom = :nom AND Prenom = :prenom AND email = :email)";
+$requete = $bdd->prepare($sql);
+$requete->execute(array(
+'nom' => $nom,
+'prenom' => $prenom,
+'email' => $email
+));
 
 // Suppression de l'utilisateur de la table 'utilisateur'
 $sql2 = "DELETE FROM utilisateur WHERE Nom = :nom AND Prenom = :prenom AND email = :email";

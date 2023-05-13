@@ -12,9 +12,8 @@ try {
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $email = $_POST['email'];
-$statut = 'Professeur'; // Modification de la valeur de 'statut'
+$statut = 'Administrateur'; // Modification de la valeur de 'statut'
 $premiere_connexion = $_POST['premiere_connexion'] = 1;
-
 
 
 // Générer un mot de passe aléatoire
@@ -55,19 +54,18 @@ $requete->execute(array(
     'premiere_connexion' => $premiere_connexion
 ));
 
-// Récupération du nouvel ID etudiant
-$sql4 = "SELECT MAX(id_professeur) as max_id_professeur FROM professeur";
-$resultat_prof = $bdd->query($sql4);
-$max_id_professeur = $resultat_prof->fetch()['max_id_professeur'];
-$nouvel_id_professeur = $max_id_professeur + 1;
+// Récupération du nouvel ID administrateur
+$sql4 = "SELECT MAX(Id_administrateur) as max_id_administrateur FROM administrateur";
+$resultat_Admin = $bdd->query($sql4);
+$max_id_Admin = $resultat_Admin ->fetch()['max_id_administrateur'];
+$nouvel_id_Admin  = $max_id_Admin  + 1;
 
 
-$sql3 = "INSERT INTO professeur (id_professeur, id_utilisateur, Nom_prof) VALUES (:id_professeur, :id, :nom)";
-$requete_etu = $bdd->prepare($sql3);
-$requete_etu->execute(array(
+$sql3 = "INSERT INTO administrateur (Id_administrateur, id_utilisateur) VALUES (:Id_administrateur, :id)";
+$requete = $bdd->prepare($sql3);
+$requete->execute(array(
 	'id' => $nouvel_id,
-	'id_professeur' => $nouvel_id_professeur,
-	'nom' => $nom 
+	'Id_administrateur' => $nouvel_id_Admin
 ));
 
 // Redirection vers la page d'identification

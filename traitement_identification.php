@@ -22,12 +22,28 @@ if (mysqli_num_rows($result) > 0) {
     $_SESSION['prenom'] = $row['Prenom'];
     $_SESSION['email'] = $row['email'];
     $_SESSION['mot_de_passe'] = $row['mot_de_passe'];
+    $_SESSION['Statut'] = $row['Statut'];
+    $_SESSION['premiere_connexion'] = $row['premiere_connexion'];
 
-    // Redirection vers la page de résultat
-    header("Location: page_accueil_etudiant.php");
-} else {
+
+   
+        // Redirection vers la page en fonction du statut de l'utilisateur
+        $statut = $row['Statut'];
+        if ($statut == 'Etudiant') {
+            header("Location: page_accueil_etudiant.php");
+            exit();
+        } elseif ($statut == 'Professeur') {
+            header("Location: page_accueil_professeur.php");
+            exit();
+        } elseif ($statut == 'Administrateur') {
+            header("Location: page_accueil_administrateur.php");
+            exit();
+        }
+    }
+else {
     // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
     echo "Identifiant ou mot de passe incorrect.";
 }
+
 mysqli_close($conn);
 ?>

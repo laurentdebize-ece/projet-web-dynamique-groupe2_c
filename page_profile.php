@@ -14,6 +14,7 @@ $Prenom = $_SESSION['Prenom'];
 $email = $_SESSION['email'];
 $nom_classe = $_SESSION['nom_classe'];
 $Nom_ecole = $_SESSION['Nom_ecole'];
+$ID_matiere_prof = $_SESSION['id_matiere'];
 
 
 

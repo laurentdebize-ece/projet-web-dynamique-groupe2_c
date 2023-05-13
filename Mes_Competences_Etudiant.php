@@ -283,7 +283,7 @@ if ($result->num_rows > 0) {
     ?>
     <body>
     <?php barre_de_navigation(); ?>
-    <div id="FiltreUnAUN" class="form-container">
+    <div style = "display : none" id="FiltreUnAUN" class="form-container">
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_filtre">
             <label for="teacher">Filtrer par professeur :</label><br></br>
             <select name="teacher" id="teacher">
@@ -319,7 +319,7 @@ if ($result->num_rows > 0) {
         </form>
     </div>
 
-    <div id="FiltrePlusieurs" class="form-container">
+    <div style = "display : none" id="FiltrePlusieurs" class="form-container">
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_filtre4">
             <label for="teacher">Filtrer par professeur :</label><br></br>
             <select name="teacher" id="teacher">

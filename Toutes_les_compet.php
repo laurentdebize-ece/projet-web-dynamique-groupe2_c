@@ -111,7 +111,6 @@ if ($result1->num_rows > 0 || $result2->num_rows > 0) {
               </tr>";
     }
 
-    // Affichage des compétences qui ne sont pas associées à l
     // Affichage des compétences qui ne sont pas associées à l'étudiant actuellement connecté
     if ($result2->num_rows > 0) {
         while($row = $result2->fetch_assoc()) {
@@ -133,7 +132,7 @@ if ($result1->num_rows > 0 || $result2->num_rows > 0) {
     echo "</table>";
     echo "</div>";
 } else {
-    echo "Aucun résultat trouvé.";
+    echo "Aucun résultat trouvé.........";
 }
 
 if (isset($_POST['submit'])) {

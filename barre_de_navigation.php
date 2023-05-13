@@ -15,7 +15,7 @@ function barre_de_navigation() {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+                    <li><a href="Professeurs_etudiant.php">Accueil</a></li>
                     <li><a href="Matiere_etudiant_bouton.php">Matières</a></li>
                     <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
                     <li><a href="Mes_competences_transversales.php">Compétences transverses</a></li>

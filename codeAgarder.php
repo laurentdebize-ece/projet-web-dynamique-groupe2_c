@@ -48,11 +48,6 @@
             top: 100px;
             left: 1250px;
         }
-        .button-position {
-            position: absolute;
-            top: 400px; 
-            left: 50px;
-        }
     </style>
     <script>
     function UnFiltre() {
@@ -66,6 +61,21 @@
     }
   </script>
 </head>
+
+<p>
+<form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_trie">
+    <label for="sort">Trier le tableau:</label><br></br>
+    <select name="sort" id="sort">
+        <option value="croissant_competences">Ordre alphabétique croissant du nom des compétences</option>
+        <option value="decroissant_competences">Ordre alphabétique décroissant du nom des compétences</option>
+        <option value="croissant_date">Date d'évaluation croissante</option>
+        <option value="decroissant_date">Date d'évaluation décroissante</option>
+        <input type="submit" value="Trier">
+    </select>
+</form>
+
+</p>
+
 <?php
 include 'barre_de_navigation.php';
 
@@ -155,13 +165,13 @@ if ($result->num_rows > 0) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                position: relative;
-                top: 250px; 
+                height: 100vh;
+                
             }
             
             table {
                 width: 100%;
-                height : 20%;
+                height : 50%;
                 border-collapse: collapse;
                 
             }
@@ -169,7 +179,7 @@ if ($result->num_rows > 0) {
             th, td {
                 padding: 8px;
                 text-align: left;
-                border: 1px solid black;
+                border-bottom: 1px solid #ddd;
             }
             
             th {
@@ -273,19 +283,8 @@ if ($result->num_rows > 0) {
     
     include 'pied_de_page.php';
     ?>
-   
     <body>
     <?php barre_de_navigation(); ?>
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_trie">
-        <label for="sort">Trier le tableau:</label><br></br>
-        <select name="sort" id="sort">
-            <option value="croissant_competences">Ordre alphabétique croissant du nom des compétences</option>
-            <option value="decroissant_competences">Ordre alphabétique décroissant du nom des compétences</option>
-            <option value="croissant_date">Date d'évaluation croissante</option>
-            <option value="decroissant_date">Date d'évaluation décroissante</option>
-            <input type="submit" value="Trier">
-        </select>
-    </form>
     <div style = "display : none" id="FiltreUnAUN" class="form-container">
         <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_filtre">
             <label for="teacher">Filtrer par professeur :</label><br></br>
@@ -353,8 +352,9 @@ if ($result->num_rows > 0) {
     </div>
     
     
+    
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-    <input class="button-position" type="submit" name="reset" value="Réinitialiser">
+    <input type="submit" name="reset" value="Réinitialiser">
     </form>
 
 

@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page d'ajout d'une Competence</title>
+    <title>Page d'ajout d'une Compétence</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,45 +17,36 @@
         <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Ajouter une Competence</h1>
+        <h1>Ajouter une Compétence</h1>
         <form method="post" action="traitement_Ajout_Comp_Prof.php">
+            <label for="nom_competence">Nom :</label>
+            <input type="text" id="nom_competence" name="nom_competence" required><br>
 
             <label for="matiere">Matière :</label>
             <select id="matiere" name="matiere" required>
                 <?php
-                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
+                // Récupération de l'identifiant du professeur depuis la session
+                $id_professeur = $_SESSION['id_professeur'];
 
-                $reponse = $bdd->query('SELECT id_matiere, nom_matiere FROM matiere');
-                while ($donnees = $reponse->fetch()) {
+                // Requête pour récupérer les matières enseignées par le professeur
+                $stmt = $bdd->prepare("
+                    SELECT m.id_matiere, m.nom_matiere
+                    FROM matiere m
+                    INNER JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
+                    WHERE pm.id_professeur = :id_professeur
+                ");
+                $stmt->bindParam(':id_professeur', $id_professeur);
+                $stmt->execute();
+                while ($donnees = $stmt->fetch()) {
                     echo '<option value="' . $donnees['id_matiere'] . '">' . $donnees['nom_matiere'] . '</option>';
                 }
-                $reponse->closeCursor();
                 ?>
-
             </select>
 
             <label for="classe">Classe :</label>
             <select id="classe" name="classe" required>
-                <?php
-                // Connexion à la base de données
-                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
-
-                // Récupération des données de la table 'classe'
-                $reponse = $bdd->query('SELECT id_classe, nom_classe FROM classe');
-
-                // Affichage des options de la liste déroulante
-                while ($donnees = $reponse->fetch()) {
-                    echo '<option value="' . $donnees['id_classe'] . '">' . $donnees['nom_classe'] . '</option>';
-                }
-
-                // Fermeture de la connexion à la base de données
-                $reponse->closeCursor();
-                ?>
+                <!-- Ajoutez ici les options correspondant aux classes -->
             </select>
-
-            <label for="nom_competence">Nom :</label>
-            <input type="text" id="nom_competence" name="nom_competence" required><br>
-
 
             <input type="submit" value="Ajouter">
         </form>

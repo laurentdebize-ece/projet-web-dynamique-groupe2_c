@@ -23,7 +23,7 @@
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Ajout_Etudiant.php"target="_blank">Ajouter</a>
+                    <a href="page_Ajout_Comp_Prof.php"target="_blank">Ajouter</a>
                     <a href="page_Ajout_Professeur.php"target="_blank">Modifier</a>
                     <a href="page_Ajout_Administrateur.php"target="_blank">Supprimer</a>
                 </div>

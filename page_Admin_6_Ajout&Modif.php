@@ -27,10 +27,13 @@
                     <a href="page_Ajout_Professeur.php"target="_blank">Ajouter un professeur</a>
                     <a href="page_Ajout_Administrateur.php"target="_blank">Ajouter un administrateur</a>
                     <a href="page_Ajout_Matiere.php"target="_blank">Ajouter une matière</a>
+                    <a href="page_Ajout_Classe.php"target="_blank">Ajouter une classe</a>
                     <a href="page_Ajout_Competence.php"target="_blank">Ajouter une compétence</a>
                     <a href="page_Ajout_CompetenceTransv.php"target="_blank">Ajouter une compétence transverse</a>
                     <a href="#"target="_blank">Affecter une classe à une matière</a>
-                    <a href="#"target="_blank">Affecter un professeur à une matière</a>
+                    <a href="page_Affecter_Mat-Prof.php"target="_blank">Affecter un professeur à une matière</a>
+                    <a href="page_Affecter_Prof-Classe.php"target="_blank">Affecter un professeur à une classe</a>
+
                 </div>
             </div>
         </div>

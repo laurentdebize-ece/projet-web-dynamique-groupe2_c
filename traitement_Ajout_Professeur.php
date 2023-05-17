@@ -62,13 +62,20 @@ $max_id_professeur = $resultat_prof->fetch()['max_id_professeur'];
 $nouvel_id_professeur = $max_id_professeur + 1;
 
 
-$sql3 = "INSERT INTO professeur (id_professeur, id_utilisateur, Nom_prof) VALUES (:id_professeur, :id, :nom)";
+$sql3 = "INSERT INTO professeur (id_professeur, id_utilisateur, Nom_prof, id_classe) VALUES (:id_professeur, :id, :nom, NULL)";
 $requete_etu = $bdd->prepare($sql3);
 $requete_etu->execute(array(
 	'id' => $nouvel_id,
 	'id_professeur' => $nouvel_id_professeur,
 	'nom' => $nom 
 ));
+
+$sql4 = "INSERT INTO professeur_matiere (id_professeur, id_matiere) VALUES (:id_professeur, NULL)";
+$requete_etu = $bdd->prepare($sql4);
+$requete_etu->execute(array(
+	'id_professeur' => $nouvel_id_professeur,
+));
+
 
 // Redirection vers la page d'identification
 header("Location: page_accueil_etudiant.php");

@@ -68,6 +68,15 @@ $requete->execute(array(
 	'id_matiere' => $id_matiere
 ));
 
-// Redirection vers la page d'accueil étudiant
-header("Location: page_accueil_etudiant.php");
-exit;
+if ($requete->rowCount() > 0) {
+    $message = "Succes : La compétence '$nom_competence' a été ajoutée";
+    echo '<script>alert("' . $message . '");
+    window.location.href = "page_Admin_6_Ajout&Modif.php";
+    </script>';
+    exit();
+} else {
+    echo '<script>alert("Erreur, aucune action effectuée.");
+    window.location.href = "page_Ajout_Competence.php";
+    </script>';
+    exit();
+}

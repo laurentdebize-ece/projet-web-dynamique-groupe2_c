@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page d'affectation d'un professeur à une classe</title>
+    <title>Affecter un professeur a une classe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -53,6 +53,8 @@
 
             <label for="professeur">Professeur :</label>
             <select id="professeur" name="professeur" required>
+            <option disabled selected value="">Sélectionnez un Professeur</option>
+
                 <?php
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
                 $reponse = $bdd->query('SELECT id_professeur, nom_prof FROM professeur');

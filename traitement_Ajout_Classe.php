@@ -25,7 +25,15 @@ $requete->execute(array(
 	'nom_classe' => $nom_classe,
 ));
 
-// Redirection vers la page d'identification
-header("Location: page_accueil_etudiant.php");
-exit;
-?>
+if ($requete->rowCount() > 0) {
+    $message = "Succes : Une nouvelle classe a été ajoutée : $nom_classe";
+    echo '<script>alert("' . $message . '");
+    window.location.href = "page_Admin_6_Ajout&Modif.php";
+    </script>';
+    exit();
+} else {
+    echo '<script>alert("Erreur, aucune action effectuée.");
+    window.location.href = "page_Ajout_Classe.php";
+    </script>';
+    exit();
+}

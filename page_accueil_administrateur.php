@@ -30,7 +30,7 @@
                     id_utilisateur: '<?php echo $id_utilisateur; ?>'
                 },
                 success: function(response) {
-                    alert("Le mot de passe a été modifié avec succès. Voici votre nouveau mot de passe : " + response);
+                    alert("Le mot de passe a été modifié avec succès. Voici votre nouveau mot de passe :" + response);
                     
                     <?php $premiere_connexion = $_SESSION['premiere_connexion'] = 0;?>
                 },

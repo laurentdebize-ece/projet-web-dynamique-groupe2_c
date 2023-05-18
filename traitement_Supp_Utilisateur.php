@@ -56,7 +56,16 @@ $requete2->execute(array(
     'email' => $email
 ));
 
-// Redirection vers la page d'accueil
-header("Location: page_accueil_etudiant.php");
-exit;
+if ($requete->rowCount() > 0) {
+    $message = "L'utilisateur '$prenom $nom' a été supprimée avec succès";
+    echo '<script>alert("' . $message . '");
+    window.location.href = "page_Admin_6_Ajout&Modif.php";
+    </script>';
+    exit();
+} else {
+    echo '<script>alert("Erreur, aucune action effectuée.");
+    window.location.href = "page_Supp_Utilisateur.php";
+    </script>';
+    exit();
+}
 ?>

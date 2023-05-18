@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Ajouter une competence</title>
+    <title>Demande d'évaluation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -10,19 +10,45 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="pied_de_page.css">
     <link rel="stylesheet" type="text/css" href="css_Id_Ajout_Modif_Supp.css">
+    <script>
+        $(document).ready(function() {
+            $('#matiere').change(function() {
+                var id_matiere = $(this).val();
+                $.ajax({
+                    url: 'z_affect_comp_formu.php',
+                    type: 'POST',
+                    data: {
+                        id_matiere: id_matiere
+                    },
+                    success: function(response) {
+                        var competences = JSON.parse(response);
+                        var options = '';
+                        for (var i = 0; i < competences.length; i++) {
+                            options += '<option value="' + competences[i].id_competences + '">' + competences[i].nom_competences + '</option>';
+                        }
+                        $('#competence').html(options);
+                    }
+                });
+            });
+        });
+        $('form').submit(function() {
+            var selectedCompetenceId = $('#competence').val();
+            $('<input>').attr({
+                type: 'hidden',
+                name: 'id_competence',
+                value: selectedCompetenceId
+            }).appendTo($(this));
+        });
+    </script>
 </head>
 
 <body>
     <div class="logo_centré">
         <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
-
     <div class="login-box">
-        <h1>Ajouter une Compétence</h1>
-        <form method="post" action="traitement_Ajout_Comp_Prof.php">
-
-            <label for="nom_competence">Nom :</label>
-            <input type="text" id="nom_competence" name="nom_competence" required>
+        <h1>Demander a une classe de s'auto-évaluer</h1>
+        <form method="post" action="traitement_Dmd_Eval.php">
 
             <label for="matiere">Matière :</label>
 
@@ -56,6 +82,7 @@
             ?>
 
             <select id="matiere" name="matiere" required>
+            <option disabled selected value="">Sélectionnez une Matière</option>
                 <?php foreach ($matieres as $matiere) : ?>
                     <option value="<?php echo $matiere['id_matiere']; ?>"><?php echo $matiere['nom_matiere']; ?></option>
                 <?php endforeach; ?>
@@ -82,6 +109,8 @@
                 <?php endforeach; ?>
             </select>
 
+            <label for="competence">Compétence à faire évaluer :</label>
+            <select id="competence" name="competence"></select>
 
             <label for="commentaire">Commentaire :</label>
             <input type="text" id="commentaire" name="commentaire">
@@ -89,8 +118,7 @@
             <label for="date">Date d'évaluation :</label>
             <input type="date" id="date" name="date">
 
-
-            <input type="submit" value="Ajouter">
+            <input type="submit" value="Demander">
         </form>
     </div><br>
     <?php pied_de_page(); ?>

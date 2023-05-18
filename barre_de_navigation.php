@@ -61,7 +61,7 @@ function barre_de_navigation_professeurs() {
                     <li><a href="#band">Etudiants</a></li>
                     <li><a href="#tour">Compétences</a></li>
                     <li><a href="#contact">Validations</a></li>
-                    <li><a href="#contact">Ajouts/Modifications</a></li>
+                    <li><a href="page_Prof_Ajout&Modif.php">Ajouts/Modifications</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

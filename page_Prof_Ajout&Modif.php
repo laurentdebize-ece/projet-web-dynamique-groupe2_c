@@ -3,7 +3,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Ajout & Modification</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,12 +23,18 @@
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Ajout_Comp_Prof.php"target="_blank">Ajouter</a>
-                    <a href="page_Ajout_Professeur.php"target="_blank">Modifier</a>
-                    <a href="page_Ajout_Administrateur.php"target="_blank">Supprimer</a>
+                    <a href="page_Ajout_Comp_Prof.php" target="_blank">Ajouter</a>
+                    <a href="page_Prof_Dmd_Eval.php" target="_blank">Modifier</a>
+                    <a href="page_Ajout_Administrateur.php" target="_blank">Supprimer</a>
                 </div>
             </div>
+        </div><br><br>
+        <h2>Evaluations</h2>
+        <div class="cadre">
+            <p>Il est possible d'ajouter une fonctionnalité d'auto-évaluation pour les élèves, vous permettant de saisir un commentaire et une date d'évaluation. Cette fonctionnalité favorise la réflexion sur les compétences, la documentation des progrès et contribue à leur développement personnel et académique.</p>
+            <button class="custom-dropbtn" onclick="window.open('page_Prof_Dmd_Eval.php', '_blank')">Ajouter</button>
         </div>
+
     </div>
     <?php pied_de_page(); ?>
 </body>

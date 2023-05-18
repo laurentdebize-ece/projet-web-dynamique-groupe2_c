@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page de suppression de matiere</title>
+    <title>Supprimer une matiere</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -20,11 +20,18 @@
         <h1>Supprimer une matiere</h1>
         <form method="post" action="traitement_Supp_Matiere.php">
 
-            <label for="nom_matiere">Nom :</label>
-            <input type="text" id="nom_matiere" name="nom_matiere" required><br>
+        <label for="matiere">Matiere :</label>
+            <select id="matiere" name="matiere" required>
+                <?php
+                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-            <label for="volume_horaire">Volume horaire :</label>
-            <input type="text" id="volume_horaire" name="volume_horaire" required><br>
+                $reponse = $bdd->query('SELECT id_matiere, nom_matiere FROM matiere');
+                while ($donnees = $reponse->fetch()) {
+                    echo '<option value="' . $donnees['id_matiere'] . '">' . $donnees['nom_matiere'] . '</option>';
+                }
+                $reponse->closeCursor();
+                ?>
+            </select>
             
             <input type="submit" value="Supprimer">
         </form>

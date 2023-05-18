@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page d'ajout d'une Compétence</title>
+    <title>Ajouter une compétence</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -46,6 +46,7 @@
     <div class="logo_centré">
         <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
+
     <div class="login-box">
         <h1>Ajouter une Compétence</h1>
         <form method="post" action="traitement_Ajout_Competence.php">
@@ -66,8 +67,8 @@
 
             <label for="professeur">Professeur :</label>
             <select id="professeur" name="professeur" required>
-                <!-- Les options seront ajoutées par jQuery -->
-            </select><br>
+
+        </select><br>
 
             <input type="submit" value="Ajouter">
         </form>

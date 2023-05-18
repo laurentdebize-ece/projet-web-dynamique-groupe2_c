@@ -3,7 +3,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Ajout & Modification</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -63,7 +63,7 @@
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Supp_Utilisateur"target="_blank">Supprimer un utilisateur</a>
+                    <a href="page_Supp_Utilisateur.php"target="_blank">Supprimer un utilisateur</a>
                     <a href="page_Supp_Matiere.php"target="_blank">Supprimer une matière</a>
                     <a href="page_Supp_Competence.php"target="_blank">Supprimer une compétence</a>
                     <a href="page_Supp_CompetenceTransv.php"target="_blank">Supprimer une compétence transverse</a>

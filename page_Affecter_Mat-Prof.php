@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page d'affectation d'une matière a un professeur</title>
+    <title>Affecter une matière a un professeur</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -48,9 +48,14 @@
     </div>
     <div class="login-box">
         <h1>Affecter une matière a un professeur</h1>
+
         <form method="post" action="traitement_Affect_Mat-Prof.php">
+
             <label for="matiere">Matière :</label>
             <select id="matiere" name="matiere" required>
+            <option disabled selected value="">Sélectionnez une Matière</option>
+
+
                 <?php
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
                 $reponse = $bdd->query('SELECT id_matiere, nom_matiere FROM matiere');
@@ -60,7 +65,6 @@
                 $reponse->closeCursor();
                 ?>
             </select>
-
 
             <label for="professeur">Professeur :</label>
             <select id="professeur" name="professeur" required>

@@ -42,7 +42,11 @@ if (mysqli_num_rows($result) > 0) {
     }
 else {
     // Affichage d'un message d'erreur si les informations d'identification sont incorrectes
-    echo "Identifiant ou mot de passe incorrect.";
+    echo '<script>alert("Identifiant ou mot de passe incorrect.");
+    window.location.href = "page_identification.php";
+    </script>';
+    exit();
+    
 }
 
 mysqli_close($conn);

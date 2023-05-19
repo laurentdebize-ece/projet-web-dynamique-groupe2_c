@@ -23,50 +23,51 @@
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Ajout_Etudiant.php"target="_blank">Ajouter un étudiant</a>
-                    <a href="page_Ajout_Professeur.php"target="_blank">Ajouter un professeur</a>
-                    <a href="page_Ajout_Administrateur.php"target="_blank">Ajouter un administrateur</a>
-                    <a href="page_Ajout_Matiere.php"target="_blank">Ajouter une matière</a>
-                    <a href="page_Ajout_Classe.php"target="_blank">Ajouter une classe</a>
-                    <a href="page_Ajout_Competence.php"target="_blank">Ajouter une compétence</a>
-                    <a href="page_Ajout_CompetenceTransv.php"target="_blank">Ajouter une compétence transverse</a>
-                    <a href="#"target="_blank">Affecter une classe à une matière</a>
-                    <a href="page_Affecter_Mat-Prof.php"target="_blank">Affecter un professeur à une matière</a>
-                    <a href="page_Affecter_Prof-Classe.php"target="_blank">Affecter un professeur à une classe</a>
-
+                    <a href="page_Ajout_Etudiant.php">Ajouter un étudiant</a>
+                    <a href="page_Ajout_Professeur.php">Ajouter un professeur</a>
+                    <a href="page_Ajout_Administrateur.php">Ajouter un administrateur</a>
+                    <a href="page_Ajout_Matiere.php">Ajouter une matière</a>
+                    <a href="page_Ajout_Classe.php">Ajouter une classe</a>
+                    <a href="page_Ajout_Competence.php">Ajouter une compétence</a>
+                    <a href="page_Ajout_CompetenceTransv.php">Ajouter une compétence transverse</a>
+                    <a href="page_Affecter_Matiere-Classe.php">Affecter une classe à une matière</a>
+                    <a href="page_Affecter_Mat-Prof.php">Affecter un professeur à une matière</a>
+                    <a href="page_Affecter_Prof-Classe.php">Affecter un professeur à une classe</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-    <h2>Modification</h2>
+        <h2>Modification</h2>
         <div class="cadre">
-        <p>Les possibilités de modification offertes sont variées et permettent de mettre à jour efficacement votre système. Vous pouvez modifier les profils d'utilisateurs existants en modifiant leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>
+            <p>Les possibilités de modification offertes sont variées et permettent de mettre à jour efficacement votre système. Vous pouvez modifier les profils d'utilisateurs existants en modifiant leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="a.php"target="_blank">Modifier un étudiant</a>
-                    <a href="b.php"target="_blank">Modifier un professeur</a>
-                    <a href="c.php"target="_blank">Modifier une matière</a>
-                    <a href="ajouter_matiere.php"target="_blank">Modifier une compétence</a>
-                    <a href="ajouter_matiere.php"target="_blank">Modifier une compétence transverse</a>
+                    <a href="page_Modif_Etudiant.php">Modifier un étudiant</a>
+                    <a href="page_Modif_Professeur.php">Modifier un professeur</a>
+                    <a href="page_Modif_Matiere.php">Modifier une matière</a>
+                    <a href="page_Modif_Classe.php">Modifier une classe</a>
+                    <a href="page_Modif_Competence.php">Modifier une compétence</a>
+                    <a href="page_Modif_CompTrans.php">Modifier une compétence transverse</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-    <h2>Suppression</h2>
+        <h2>Suppression</h2>
         <div class="cadre">
-        <p>Les possibilités de suppression offertes sont variées et permettent de gérer efficacement votre système. Vous pouvez supprimer des profils d'utilisateurs existants ainsi que leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>
+            <p>Les possibilités de suppression offertes sont variées et permettent de gérer efficacement votre système. Vous pouvez supprimer des profils d'utilisateurs existants ainsi que leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Supp_Utilisateur.php"target="_blank">Supprimer un utilisateur</a>
-                    <a href="page_Supp_Matiere.php"target="_blank">Supprimer une matière</a>
-                    <a href="page_Supp_Competence.php"target="_blank">Supprimer une compétence</a>
-                    <a href="page_Supp_CompetenceTransv.php"target="_blank">Supprimer une compétence transverse</a>
+                    <a href="page_Supp_Utilisateur.php">Supprimer un utilisateur</a>
+                    <a href="page_Supp_Matiere.php">Supprimer une matière</a>
+                    <a href="page_Supp_Classe.php">Supprimer une classe</a>
+                    <a href="page_Supp_Competence.php">Supprimer une compétence</a>
+                    <a href="page_Supp_CompetenceTransv.php">Supprimer une compétence transverse</a>
                 </div>
             </div>
         </div>

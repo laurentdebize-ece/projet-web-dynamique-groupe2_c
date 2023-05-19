@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
@@ -15,7 +14,7 @@
 </head>
 
 <body>
-    <?php barre_de_navigation_administrateur(); ?>
+    <?php barre_de_navigation_professeurs(); ?>
     <div class="container">
         <h2>Competences</h2>
         <div class="cadre">
@@ -23,16 +22,16 @@
             <div class="custom-dropdown">
                 <button class="custom-dropbtn">Choisissez une option</button>
                 <div class="custom-dropdown-content">
-                    <a href="page_Ajout_Comp_Prof.php" target="_blank">Ajouter</a>
-                    <a href="page_Prof_Dmd_Eval.php" target="_blank">Modifier</a>
-                    <a href="page_Ajout_Administrateur.php" target="_blank">Supprimer</a>
+                    <a href="page_Ajout_Comp_Prof.php">Ajouter</a>
+                    <a href="page_Modif_Comp_Prof.php">Modifier</a>
+                    <a href="page_Supp_Comp_Prof.php">Supprimer</a>
                 </div>
             </div>
         </div><br><br>
         <h2>Evaluations</h2>
         <div class="cadre">
             <p>Il est possible d'ajouter une fonctionnalité d'auto-évaluation pour les élèves, vous permettant de saisir un commentaire et une date d'évaluation. Cette fonctionnalité favorise la réflexion sur les compétences, la documentation des progrès et contribue à leur développement personnel et académique.</p>
-            <button class="custom-dropbtn" onclick="window.open('page_Prof_Dmd_Eval.php', '_blank')">Ajouter</button>
+            <button class="custom-dropbtn" onclick="window.open('page_Prof_Dmd_Eval.php')">Ajouter</button>
         </div>
 
     </div>

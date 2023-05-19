@@ -18,6 +18,13 @@ $stmt->execute(['id_competences' => $id_competences]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 $nom_competence = $result['nom_competences'];
 
+
+$sql4 = "DELETE FROM competences_etudiants WHERE id_competence = :id_competences";
+$requete4 = $bdd->prepare($sql4);
+$requete4->execute(array(
+    'id_competences' => $id_competences
+));
+
 $sql2 = "DELETE FROM competences_matieres WHERE id_competence = :id_competences";
 $requete = $bdd->prepare($sql2);
 $requete->execute(array(
@@ -29,6 +36,8 @@ $requete3 = $bdd->prepare($sql3);
 $requete3->execute(array(
     'id_competences' => $id_competences
 ));
+
+
 
 if ($requete->rowCount() > 0) {
     $message = "La compétence '$nom_competence' a été supprimée avec Succes";

@@ -38,48 +38,6 @@ $stmt->close();
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
     <title>Compétences</title>
-    <style>
-        body {
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10%;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            border: 1px solid black;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            height: 30%;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 100px;
-            left: 20px;
-            display: inline-block;
-            padding: 10px 20px;
-            color: white;
-            background-color: #808080;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            transition: background-color 0.2s ease;
-        }
-    </style>
 </head>
 
 <body>

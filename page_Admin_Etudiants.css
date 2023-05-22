@@ -8,12 +8,12 @@
 }
 
 .promo-button {
-    padding: 10px 20px;
+    padding: 20px 40px;
     font-size: 20px;
     margin: 10px;
     cursor: pointer;
     border-radius: 12px;
-    margin-top: 5%;
+    margin-top: 8%;
     background-color: #808080;
 
 }
@@ -40,7 +40,6 @@
     border-collapse: collapse;
     width: 50%;
     margin-top: 50px;
-    margin-bottom: 6%;
 }
 
 .centered-table th,

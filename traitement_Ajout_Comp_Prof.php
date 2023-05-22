@@ -46,11 +46,12 @@ $max_id = $resultat->fetch()['max_id'];
 $nouvel_id = $max_id + 1;
 
 // Insertion des données dans la table "competences"
-$sql2 = "INSERT INTO competences (id_competences, nom_competences) VALUES (:id, :nom_competence)";
+$sql2 = "INSERT INTO competences (id_competences, nom_competences, id_professeur) VALUES (:id, :nom_competence, :id_professeur)";
 $requete1 = $bdd->prepare($sql2);
 $requete1->execute(array(
     'id' => $nouvel_id,
-    'nom_competence' => $nom_competence
+    'nom_competence' => $nom_competence,
+    'id_professeur' => $id_professeur
 ));
 
 // Insertion des données dans la table "competences_matieres"

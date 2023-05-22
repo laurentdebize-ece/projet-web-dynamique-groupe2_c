@@ -2,12 +2,13 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Competences Transverses</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="page_Etu_MesCompTransv.css">
     <link rel="stylesheet" href="page_accueil_etudiant.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
@@ -15,15 +16,9 @@
 
 <body>
     <?php barre_de_navigation_etudiants(); ?>
-    <h1> Mes Competences Transverses </h1>
+    <h1>Competences Transverses</h1>
     <?php
-    // Connexion à la base de données
-    $servername = "localhost";
-    $username = "votre_nom_utilisateur";
-    $password = "votre_mot_de_passe";
-    $dbname = "projet_info_ing2";
-
-    $conn = new mysqli($servername, 'root', 'root', $dbname);
+    $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
     if ($conn->connect_error) {
         die("Échec de la connexion à la base de données : " . $conn->connect_error);
     }
@@ -36,7 +31,7 @@
     $idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
 
     // Requête SQL pour récupérer les données
-    $sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competence, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
+    $sql = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competence, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
     FROM etudiant e
     JOIN etudiiant_matiere em ON e.id_utilisateur = em.id_etudiant
     JOIN matiere m ON em.id_matiere = m.id_matiere
@@ -73,90 +68,6 @@
 
     // Affichage des résultats
     if ($result->num_rows > 0) {
-        echo "<style>
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    table {
-        width: 100%;
-        height : 50%;
-        border-collapse: collapse;
-    }
-    
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-        border: 1px solid black;
-    }
-    
-    th {
-        background-color: #f2f2f2;
-        height : 30%;
-    }
-    .acquis {
-        background-color: green;
-    }
-    
-    .en-cours {
-        background-color: orange;
-    }
-    
-    .non-acquis {
-        background-color: red;
-    }
-    input[type=range] {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 10px;
-        border-radius: 5px;
-        background: #d3d3d3;
-        outline: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background: #0056b3;
-        cursor: pointer;
-    }
-    
-    input[type=range]::-webkit-slider-thumb:hover {
-        background: #007bff;
-    }
-    
-    input[type=range]:focus::-webkit-slider-thumb {
-        background: #007bff;
-    }
-    
-    button[type=submit] {
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-family: 'Arial', sans-serif;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        background-color: #808080;
-        color: #ffffff;
-        margin-top : 20px;
-    }
-    
-    button[type=submit]:hover {
-        background-color: #0056b3;
-    }
-</style>";
-
         echo "<div class='container'>";
         echo "<table>
 <tr>

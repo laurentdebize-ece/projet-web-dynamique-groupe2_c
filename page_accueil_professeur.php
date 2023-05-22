@@ -13,42 +13,42 @@
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
     <script>
-    $(document).ready(function() {
-        <?php
-        session_start();
-        $id_utilisateur = $_SESSION['id_utilisateur'];
-        $premiere_connexion = $_SESSION['premiere_connexion'];
+        $(document).ready(function() {
+            <?php
+            session_start();
+            $id_utilisateur = $_SESSION['id_utilisateur'];
+            $premiere_connexion = $_SESSION['premiere_connexion'];
 
-        if ($premiere_connexion == 1) {
+            if ($premiere_connexion == 1) {
             ?>
-            var mdp = prompt("Entrez votre nouveau mot de passe (il ne sera plus modifiable) : ");
-            $.ajax({
-                type: 'POST',
-                url: 'modification_mdp.php',
-                data: {
-                    mot_de_passe: mdp,
-                    id_utilisateur: '<?php echo $id_utilisateur; ?>'
-                },
-                success: function(response) {
-                    alert("Le mot de passe a été modifié avec succès. Voici votre nouveau mot de passe : " + response);
-                    
-                    <?php $premiere_connexion = $_SESSION['premiere_connexion'] = 0;?>
-                },
-                error: function() {
-                    alert('Une erreur est survenue lors de la modification du mot de passe.');
-                }
-            });
-        <?php
-        }
-        ?>
-    });
-</script>
+                var mdp = prompt("Entrez votre nouveau mot de passe (il ne sera plus modifiable) : ");
+                $.ajax({
+                    type: 'POST',
+                    url: 'modification_mdp.php',
+                    data: {
+                        mot_de_passe: mdp,
+                        id_utilisateur: '<?php echo $id_utilisateur; ?>'
+                    },
+                    success: function(response) {
+                        alert("Le mot de passe a été modifié avec succès. Voici votre nouveau mot de passe : " + response);
+
+                        <?php $premiere_connexion = $_SESSION['premiere_connexion'] = 0; ?>
+                    },
+                    error: function() {
+                        alert('Une erreur est survenue lors de la modification du mot de passe.');
+                    }
+                });
+            <?php
+            }
+            ?>
+        });
+    </script>
 
 </head>
 
 <body>
-    <?php barre_de_navigation_professeurs(); ?>
     <h1>Professeur</h1>
+    <?php barre_de_navigation_professeurs(); ?>
     <div class="container text-center">
         <div class="photo-container">
             <img src="omnes_photo.png" alt="Photo Omnes">

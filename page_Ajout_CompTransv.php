@@ -18,7 +18,7 @@
             $('#matiere').change(function() {
                 var id_matiere = $(this).val();
                 $.ajax({
-                    url: 'z_affect_prof_formu.php',
+                    url: 'z_affect_prof_formu2.php',
                     type: 'POST',
                     data: {
                         id_matiere: id_matiere
@@ -66,6 +66,21 @@
                 $reponse = $bdd->query('SELECT id_matiere, nom_matiere FROM matiere');
                 while ($donnees = $reponse->fetch()) {
                     echo '<option value="' . $donnees['id_matiere'] . '">' . $donnees['nom_matiere'] . '</option>';
+                }
+                $reponse->closeCursor();
+                ?>
+            </select><br>
+
+
+            <label for="professeur">Professeur :</label>
+            <select id="professeur" name="professeur" required>
+                <option disabled selected value="">Sélectionnez un Professeur</option>
+
+                <?php
+                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
+                $reponse = $bdd->query('SELECT id_professeur, Nom_prof FROM professeur');
+                while ($donnees = $reponse->fetch()) {
+                    echo '<option value="' . $donnees['id_professeur'] . '">' . $donnees['Nom_prof'] . '</option>';
                 }
                 $reponse->closeCursor();
                 ?>

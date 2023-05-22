@@ -1,56 +1,160 @@
 /* Add a dark background color with a little bit see-through */
 .navbar {
-    margin-bottom: 0;
-    background-color: #929294;  
-    border: 0;
-    font-size: 11px;
-    letter-spacing: 3px;
-    opacity: 0.9;
-  }
-  
-  /* Add a gray color to all navbar links */
-  .navbar li a, .navbar .navbar-brand {
-    color: #d5d5d5 !important;
-  }
-  
-  /* On hover, the links will turn white */
-  .navbar-nav li a:hover {
-    color: #fff !important;
-  }
-  
-  /* The active link */
-  .navbar-nav li.active a {
-    color: #fff !important;
-    background-color:#29292c !important;
-  }
-  
-  /* Remove border color from the collapsible button */
-  .navbar-default .navbar-toggle {
-    border-color: transparent;
-  }
-  
-  /* Dropdown */
-  .open .dropdown-toggle {
-    color: #fff ;
-    background-color: #555 !important;
-  }
-  
-  /* Dropdown links */
-  .dropdown-menu li a {
-    color: #000 !important;
-  }
-  
-  /* On hover, the dropdown links will turn red */
-  .dropdown-menu li a:hover {
-    background-color: rgb(56, 55, 55) !important;
-  }
+  margin-bottom: 0;
+  background-color: #282828;
+  border: 0;
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: 0.9;
+}
 
-  h1 {
-    align-items:flex-start;
-    text-align: center;
-    margin-top: 6%;
-    text-decoration: underline;
-    font-size: 32px;
-    font-family: Arial, sans-serif;
+/* Add a gray color to all navbar links */
+.navbar li a,
+.navbar .navbar-brand {
+  color: #d5d5d5 !important;
+}
 
+/* On hover, the links will turn white */
+.navbar-nav li a:hover {
+  color: #fff !important;
+}
+
+/* The active link */
+.navbar-nav li.active a {
+  color: #fff !important;
+  background-color: #29292c !important;
+}
+
+/* Remove border color from the collapsible button */
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+}
+
+/* Dropdown */
+.open .dropdown-toggle {
+  color: #fff;
+  background-color: #555 !important;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+  color: #000 !important;
+}
+
+/* On hover, the dropdown links will turn red */
+.dropdown-menu li a:hover {
+  background-color: rgb(56, 55, 55) !important;
+}
+
+h1 {
+  align-items: flex-start;
+  text-align: center;
+  margin-top: 6%;
+  text-decoration: underline;
+  font-size: 32px;
+  font-family: Arial, sans-serif;
+
+}
+
+table {
+  text-align: center;
+  width: 80%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin: 4% auto; 
+}
+
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #0056b3;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.btn-matiere {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 500px;
+  background-color: #0056b3;
+  color: #ffffff;
+}
+.back-button {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  background-color: #808080;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.2s ease;
+}
+
+.promo-button {
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+  margin-top: 5%;
+  background-color: #484848;
+}
+
+.classe-button {
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+  margin-top: 50px;
+  background-color: #484848;
+}
+
+.centered {
+  width: 100%;
+  text-align: center;
+}
+
+.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  width: 80%;
+  margin-top: 50px;
+}
+
+.centered-table th,
+.centered-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.centered-table th {
+  background-color: #0056b3;
+  color: white;
+}
+
+.centered-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

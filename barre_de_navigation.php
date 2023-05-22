@@ -100,10 +100,10 @@ function barre_de_navigation_administrateur() {
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="page_accueil_administrateur.php">Accueil</a></li>
-                    <li><a href="#band">Professeurs</a></li>
-                    <li><a href="#tour">Etudiants</a></li>
-                    <li><a href="#contact">Matieres</a></li>
-                    <li><a href="#contact">Competences</a></li>
+                    <li><a href="page_Admin_Profs.php">Professeurs</a></li>
+                    <li><a href="page_Admin_Etudiants.php">Etudiants</a></li>
+                    <li><a href="page_Admin_Matieres.php">Matieres</a></li>
+                    <li><a href="page_Admin_Competences.php">Competences</a></li>
                     <li><a href="page_Admin_6_Ajout&Modif.php">Ajouts/Modifications</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">

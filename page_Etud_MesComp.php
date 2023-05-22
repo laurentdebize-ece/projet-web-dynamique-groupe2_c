@@ -9,177 +9,104 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="page_Etud_MesComp.js"></script>
+    <link rel="stylesheet" href="page_Etu_MesCompTransv.css">
     <link rel="stylesheet" href="page_accueil_etudiant.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
     <link rel="stylesheet" href="page_Etud_MesComp.css">
+    <style>
+        table {
+            margin-top: 14%;
+        }
+    </style>
 </head>
-<?php
 
-$conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
-if ($conn->connect_error) {
-    die("Échec de la connexion à la base de données : " . $conn->connect_error);
-}
+<body>
+    <?php barre_de_navigation_etudiants(); ?>
+    <h1>Mes Competences</h1>
+    <?php
 
-session_start();
-if (!isset($_SESSION['id_utilisateur'])) {
-    die("ID utilisateur non disponible en session.");
-}
+    $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
+    if ($conn->connect_error) {
+        die("Échec de la connexion à la base de données : " . $conn->connect_error);
+    }
 
-$idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
+    session_start();
+    if (!isset($_SESSION['id_utilisateur'])) {
+        die("ID utilisateur non disponible en session.");
+    }
 
-// Requête SQL pour récupérer les données
-$sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire,ce.date_evaluation, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition, vp.nom_validation
-    FROM etudiant e
-    JOIN etudiiant_matiere em ON e.id_utilisateur = em.id_etudiant
-    JOIN matiere m ON em.id_matiere = m.id_matiere
-    JOIN competences_matieres mc ON m.id_matiere = mc.id_matiere
-    JOIN competences c ON mc.id_competence = c.id_competences
-    JOIN competences_etudiants ce ON c.id_competences = ce.id_competence AND e.id_utilisateur = ce.id_etudiant
-    JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
-    JOIN professeur p ON pm.id_professeur = p.id_professeur
-    JOIN validation_prof vp ON ce.validation_prof = vp.id_validation
-    WHERE e.id_utilisateur = $idUtilisateur";
+    $idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
 
-// Vérifier si le bouton reset a été appuyé
-if (!isset($_POST['reset'])) {
-    // Ajout du critère de tri à la requête SQL
-    if (isset($_POST['sort'])) {
-        $sort = $_POST['sort'];
-        switch ($sort) {
-            case 'croissant_competences':
-                $sql .= " ORDER BY c.nom_competences ASC";
-                break;
-            case 'decroissant_competences':
-                $sql .= " ORDER BY c.nom_competences DESC";
-                break;
-            case 'croissant_date':
-                $sql .= " ORDER BY ce.date_evaluation ASC";
-                break;
-            case 'decroissant_date':
-                $sql .= " ORDER BY ce.date_evaluation DESC";
-                break;
-                // Ajoutez des cas supplémentaires pour les autres options de tri
+    // Requête SQL pour récupérer les données
+    $sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
+    FROM matiere AS m
+    JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
+    JOIN competences AS c ON cm.id_competence = c.id_competences
+    JOIN competences_etudiants AS ce ON c.id_competences = ce.id_competence
+    JOIN etudiant AS e ON ce.id_etudiant = e.id_etudiant
+    JOIN professeur AS p ON c.id_professeur = p.id_professeur
+    JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
+    JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
+    WHERE e.id_utilisateur = $idUtilisateur;
+    ";
+
+
+
+    // Vérifier si le bouton reset a été appuyé
+    if (!isset($_POST['reset'])) {
+        // Ajout du critère de tri à la requête SQL
+        if (isset($_POST['sort'])) {
+            $sort = $_POST['sort'];
+            switch ($sort) {
+                case 'croissant_competences':
+                    $sql .= " ORDER BY c.nom_competences ASC";
+                    break;
+                case 'decroissant_competences':
+                    $sql .= " ORDER BY c.nom_competences DESC";
+                    break;
+                case 'croissant_date':
+                    $sql .= " ORDER BY ce.date_evaluation ASC";
+                    break;
+                case 'decroissant_date':
+                    $sql .= " ORDER BY ce.date_evaluation DESC";
+                    break;
+                    // Ajoutez des cas supplémentaires pour les autres options de tri
+            }
+        }
+        if (isset($_POST['subject'])) {
+            $subject = $_POST['subject'];
+            $sql .= " AND m.id_matiere = $subject";
+        }
+
+        if (isset($_POST['teacher'])) {
+            $teacher = $_POST['teacher'];
+            $sql .= " AND p.id_professeur = $teacher";
+        }
+
+        if (isset($_POST['status'])) {
+            $status = $_POST['status'];
+            switch ($status) {
+                case 'acquis':
+                    $sql .= " AND ce.Id_niveau_acquisition = 3";
+                    break;
+                case 'en_cours':
+                    $sql .= " AND ce.Id_niveau_acquisition = 2";
+                    break;
+                case 'non_acquis':
+                    $sql .= " AND ce.Id_niveau_acquisition = 1";
+                    break;
+            }
         }
     }
-    if (isset($_POST['subject'])) {
-        $subject = $_POST['subject'];
-        $sql .= " AND m.id_matiere = $subject";
-    }
 
-    if (isset($_POST['teacher'])) {
-        $teacher = $_POST['teacher'];
-        $sql .= " AND p.id_professeur = $teacher";
-    }
+    $result = $conn->query($sql);
 
-    if (isset($_POST['status'])) {
-        $status = $_POST['status'];
-        switch ($status) {
-            case 'acquis':
-                $sql .= " AND ce.Id_niveau_acquisition = 3";
-                break;
-            case 'en_cours':
-                $sql .= " AND ce.Id_niveau_acquisition = 2";
-                break;
-            case 'non_acquis':
-                $sql .= " AND ce.Id_niveau_acquisition = 1";
-                break;
-        }
-    }
-}
+    // Affichage des résultats
+    if ($result->num_rows > 0) {
 
-$result = $conn->query($sql);
-
-// Affichage des résultats
-if ($result->num_rows > 0) {
-    echo "<style>
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                top: 250px; 
-            }
-            
-            table {
-                width: 100%;
-                height : 20%;
-                border-collapse: collapse;
-                
-            }
-            
-            th, td {
-                padding: 8px;
-                text-align: left;
-                border: 1px solid black;
-            }
-            
-            th {
-                background-color: #f2f2f2;
-                height : 30%;
-            }
-            .acquis {
-                background-color: green;
-            }
-            
-            .en-cours {
-                background-color: orange;
-            }
-            
-            .non-acquis {
-                background-color: red;
-            }
-            input[type=range] {
-                -webkit-appearance: none;
-                width: 100%;
-                height: 10px;
-                border-radius: 5px;
-                background: #d3d3d3;
-                outline: none;
-                padding: 0;
-                margin: 0;
-            }
-            
-            input[type=range]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 15px;
-                height: 15px;
-                border-radius: 50%;
-                background: #0056b3;
-                cursor: pointer;
-            }
-            
-            input[type=range]::-webkit-slider-thumb:hover {
-                background: #007bff;
-            }
-            
-            input[type=range]:focus::-webkit-slider-thumb {
-                background: #007bff;
-            }
-            
-            button[type=submit] {
-                color: white;
-                text-align: center;
-                text-decoration: none;
-                font-size: 16px;
-                cursor: pointer;
-                border-radius: 4px;
-                font-family: 'Arial', sans-serif;
-                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-                background-color: #808080;
-                color: #ffffff;
-                margin-top : 20px;
-            }
-            
-            button[type=submit]:hover {
-                background-color: #007bff;
-            }
-            
-        </style>";
-
-    echo "<div class='container'>";
-    echo "<table>
+        echo "<div class='container'>";
+        echo "<table>
             <tr>
                 <th>Matière</th>
                 <th>Nom du professeur</th>
@@ -191,24 +118,24 @@ if ($result->num_rows > 0) {
                 <th>Date evaluation du professeur</th>
             </tr>";
 
-    while ($row = $result->fetch_assoc()) {
-        // Récupérer la valeur actuelle du niveau d'acquisition depuis la base de données
-        $niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
-        $nomProf = $row["Nom_prof"];
-        $acquisition = $row['acquisition'];
-        $nom_validation = $row['nom_validation'];
+        while ($row = $result->fetch_assoc()) {
+            // Récupérer la valeur actuelle du niveau d'acquisition depuis la base de données
+            $niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
+            $nomProf = $row["Nom_prof"];
+            $acquisition = $row['acquisition'];
+            $nom_validation = $row['nom_validation'];
 
 
-        $class = '';
-        if ($acquisition === 'Acquis') {
-            $class = 'acquis';
-        } elseif ($acquisition === 'En cours d\'acquisition') {
-            $class = 'en-cours';
-        } elseif ($acquisition === 'Non acquis') {
-            $class = 'non-acquis';
-        }
+            $class = '';
+            if ($acquisition === 'Acquis') {
+                $class = 'acquis';
+            } elseif ($acquisition === 'En cours d\'acquisition') {
+                $class = 'en-cours';
+            } elseif ($acquisition === 'Non acquis') {
+                $class = 'non-acquis';
+            }
 
-        echo "<tr>
+            echo "<tr>
                 <td>" . $row["nom_matiere"] . "</td>
                 <td>" . $nomProf . "</td>
                 <td>" . $row["nom_competences"] . "</td>
@@ -224,51 +151,47 @@ if ($result->num_rows > 0) {
                 <td>" . $row["nom_validation"] . "</td>
                 <td>" . $row["date_evaluation"] . "</td>
                 </tr>";
-    }
-
-    echo "</table>";
-    echo "</div>";
-} else {
-    echo "Aucun résultat trouvé.";
-}
-
-// Vérification si le formulaire a été soumis
-if (isset($_POST['submit'])) {
-    // Parcourir les valeurs du formulaire soumis
-    foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
-
-        // Extraire l'ID de la matière et de la compétence
-        $idArray = explode("_", $idMatiereCompetence);
-        $idMatiere = $idArray[0];
-        $idCompetence = $idArray[1];
-
-        // Récupérer la nouvelle valeur saisie par l'utilisateur
-        $nouvelleValeur = intval($nouvelleValeur);
-        $idEtudiant = $_POST["idEtudiant"];
-
-        // Vérification si la nouvelle valeur est valide (entre 1 et 3)
-        if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
-            // Requête de mise à jour
-            $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ?, commentaire = '', validation_prof = 0 WHERE id_etudiant = ? AND id_competence = ?");
-            $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
-
-            // Exécution de la requête
-            $requete->execute();
-        } else {
-            echo "La valeur saisie pour la matière avec l'ID $idMatiere et la compétence avec l'ID $idCompetence n'est pas valide. Veuillez saisir une valeur entre 1 et 3.";
         }
+
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "Aucun résultat trouvé.";
     }
 
-    echo "Les valeurs ont été mises à jour avec succès.";
-    // Redirection vers la page actuelle
-    header("Location: " . $_SERVER["PHP_SELF"]);
-    exit(); // Assure la fin de l'exécution du script après la redirection
-}
-?>
+    // Vérification si le formulaire a été soumis
+    if (isset($_POST['submit'])) {
+        // Parcourir les valeurs du formulaire soumis
+        foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
 
-<body>
-    <?php barre_de_navigation_etudiants(); ?>
-    <h1>Mes Competences</h1>
+            // Extraire l'ID de la matière et de la compétence
+            $idArray = explode("_", $idMatiereCompetence);
+            $idMatiere = $idArray[0];
+            $idCompetence = $idArray[1];
+
+            // Récupérer la nouvelle valeur saisie par l'utilisateur
+            $nouvelleValeur = intval($nouvelleValeur);
+            $idEtudiant = $_POST["idEtudiant"];
+
+            // Vérification si la nouvelle valeur est valide (entre 1 et 3)
+            if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
+                // Requête de mise à jour
+                $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ?, commentaire = '', validation_prof = 0 WHERE id_etudiant = ? AND id_competence = ?");
+                $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
+
+                // Exécution de la requête
+                $requete->execute();
+            } else {
+                echo "La valeur saisie pour la matière avec l'ID $idMatiere et la compétence avec l'ID $idCompetence n'est pas valide. Veuillez saisir une valeur entre 1 et 3.";
+            }
+        }
+
+        echo "Les valeurs ont été mises à jour avec succès.";
+        // Redirection vers la page actuelle
+        header("Location: " . $_SERVER["PHP_SELF"]);
+        exit(); // Assure la fin de l'exécution du script après la redirection
+    }
+    ?>
 
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_trie">
         <label class=" titreTrier" for="sort">Trier le tableau:</label><br></br>
@@ -354,7 +277,6 @@ if (isset($_POST['submit'])) {
 
     <button class="btn btn-primary idBoutonUnAUn" onclick="UnFiltre()">Filtrer une seule compétence à la fois</button>
     <button class="btn btn-primary idBoutonPlusieurs" onclick="PlusieursFiltres()">Filtrer plusieurs compétences</button>
-    <br><br><br><br><br><br><br><br>
     <?php pied_de_page(); ?>
 </body>
 

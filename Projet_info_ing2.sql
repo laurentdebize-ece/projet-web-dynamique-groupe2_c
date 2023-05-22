@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : dim. 21 mai 2023 à 10:27
+-- Généré le : lun. 22 mai 2023 à 11:17
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -44,6 +44,17 @@ INSERT INTO `acquisition_competences` (`id`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `acquisition_competences2`
+--
+
+CREATE TABLE `acquisition_competences2` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `administrateur`
 --
 
@@ -57,16 +68,10 @@ CREATE TABLE `administrateur` (
 --
 
 INSERT INTO `administrateur` (`Id_administrateur`, `id_utilisateur`) VALUES
-(1, 32),
-(2, 43),
-(4, 54),
-(5, 55),
-(6, 56),
-(7, 57),
-(8, 58),
-(9, 59),
-(10, 60),
-(11, 68);
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -86,11 +91,9 @@ CREATE TABLE `classe` (
 --
 
 INSERT INTO `classe` (`id_classe`, `nom_classe`, `id_promotion`, `id_ecole`) VALUES
-(1, 'ING1GroupeA', 1, 1),
-(2, 'ING2GroupeC', 1, NULL),
-(4, 'ING1GroupeB', 1, 1),
-(5, 'ING1GroupeC', NULL, 1),
-(6, 'Exemple', 2, 50);
+(1, 'ING1Groupe1', 3, 1),
+(2, 'ING1Groupe2', 3, 1),
+(3, 'ING1Groupe3', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -100,89 +103,25 @@ INSERT INTO `classe` (`id_classe`, `nom_classe`, `id_promotion`, `id_ecole`) VAL
 
 CREATE TABLE `competences` (
   `id_competences` int(50) NOT NULL,
-  `nom_competences` varchar(50) NOT NULL
+  `nom_competences` varchar(50) NOT NULL,
+  `id_professeur` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `competences`
 --
 
-INSERT INTO `competences` (`id_competences`, `nom_competences`) VALUES
-(1, 'savoir coder'),
-(2, 'C1'),
-(3, 'Calculer une Integrale'),
-(4, 'Test competence'),
-(5, 'Test competence2'),
-(6, 'lilian rage haha'),
-(7, 'test nouveau code'),
-(8, 'test nouveau code'),
-(9, 'Test 10:58'),
-(10, 'Test 11H00'),
-(11, 'Test 11H00'),
-(12, 'Competence'),
-(16, 'Test 11H32'),
-(18, 'Test 11H54'),
-(19, 'Test 11H55'),
-(20, 'Test 11H59'),
-(21, 'Test 12H00'),
-(22, 'Test 12H01'),
-(23, 'Test 12H02'),
-(24, 'Test 12H04'),
-(25, 'Test 12H08'),
-(26, 'Test 12H08'),
-(27, 'Test 12H11'),
-(28, 'Test 12H14'),
-(30, 'Test 12H24'),
-(31, 'Test 12H26'),
-(32, 'Test 12H31'),
-(33, 'Test 12H34'),
-(34, 'Test 12H35'),
-(35, 'Test 12H39'),
-(36, 'Test 12H39'),
-(37, 'Test 12H41'),
-(38, 'Test 12H41'),
-(39, 'Test 12H41'),
-(40, 'Test 12H41'),
-(41, 'Test 12H43'),
-(42, 'Test 12H44'),
-(43, 'Test 12H49'),
-(44, 'Test 13H31'),
-(45, 'Test 13H34'),
-(46, 'Test 13H35'),
-(47, 'Test 13H37'),
-(48, 'Test 13H38'),
-(49, 'Test 13H40'),
-(50, 'Test 13H45'),
-(51, 'Test 13H47'),
-(52, 'Test 13H50'),
-(53, 'Test 13H58'),
-(54, 'Test 13H59'),
-(55, 'Test 14H01'),
-(56, 'Test 14H02'),
-(57, 'Test 14H04'),
-(58, 'Test 14H05'),
-(59, 'Test 14H06'),
-(61, 'Competence eleve  Info'),
-(63, '18/05 12:05'),
-(64, 'Test 12:10'),
-(65, 'Test 12:11'),
-(66, 'Test 12:12'),
-(67, 'Test 12:13'),
-(68, 'Test 12:14'),
-(69, 'Test 12:15'),
-(70, 'Test 12:17'),
-(71, 'Test 12:23'),
-(72, 'Test 12:25'),
-(73, 'Test 12:26'),
-(74, 'Test 12:36'),
-(75, 'Test 12:37'),
-(76, 'test'),
-(78, 'test4'),
-(79, 'test5'),
-(80, 'Test 12:46'),
-(81, 'Calculer une fonction inverse'),
-(82, 'Calculer une fonction '),
-(83, 'Exemple');
+INSERT INTO `competences` (`id_competences`, `nom_competences`, `id_professeur`) VALUES
+(1, 'Calculer une Integrale - Bianchi', 1),
+(2, 'Calculer fonction inverse - Bianchi', 1),
+(3, 'Calculer fonction complexe - Thieulin', 5),
+(4, 'Calculer flux - Dedecker', 2),
+(5, 'Calculer Pointing - Dedecker', 2),
+(6, 'Code php - Debize', 3),
+(7, 'Code css - Debize', 3),
+(8, 'Code C - Hintzy', 6),
+(9, 'Diagramme de Bode - Savard', 4),
+(10, 'Algebre de Bool - Hedli', 7);
 
 -- --------------------------------------------------------
 
@@ -204,54 +143,69 @@ CREATE TABLE `competences_etudiants` (
 --
 
 INSERT INTO `competences_etudiants` (`id_competence`, `id_etudiant`, `Id_niveau_acquisition`, `commentaire`, `date_evaluation`, `validation_prof`) VALUES
-(1, 1, 1, 'BIEN', '2023-05-03', 0),
-(2, 1, 2, 'Peu mieux faire', '2023-05-07', 0),
-(11, 1, 3, '', NULL, 0),
-(11, 2, 3, '', NULL, 0),
-(11, 3, 3, '', NULL, 0),
-(11, 4, 3, '', NULL, 0),
-(11, 5, 3, '', NULL, 0),
-(11, 6, 3, '', NULL, 0),
-(11, 7, 3, '', NULL, 0),
-(11, 8, 3, '', NULL, 0),
-(11, 9, 3, '', NULL, 0),
-(11, 10, 3, '', NULL, 0),
-(11, 11, 3, '', NULL, 0),
-(11, 12, 3, '', NULL, 0),
-(59, 2, 1, '', NULL, 0),
-(59, 12, 1, '', NULL, 0),
-(61, 2, 1, '', NULL, 0),
-(61, 12, 1, '', NULL, 0),
-(73, 1, 1, '', NULL, 0),
-(73, 3, 1, '', NULL, 0),
-(73, 5, 1, '', NULL, 0),
-(73, 7, 1, '', NULL, 0),
-(73, 9, 1, '', NULL, 0),
-(73, 10, 1, '', NULL, 0),
-(73, 11, 1, '', NULL, 0),
-(75, 1, 1, 'comm', '2023-05-20', 0),
-(75, 3, 1, 'comm', '2023-05-20', 0),
-(75, 5, 1, 'comm', '2023-05-20', 0),
-(75, 7, 1, 'comm', '2023-05-20', 0),
-(75, 9, 1, 'comm', '2023-05-20', 0),
-(75, 10, 1, 'comm', '2023-05-20', 0),
-(75, 11, 1, 'comm', '2023-05-20', 0),
-(76, 1, 1, '', '2023-05-20', 0),
-(76, 3, 1, '', '2023-05-20', 0),
-(76, 5, 1, '', '2023-05-20', 0),
-(76, 7, 1, '', '2023-05-20', 0),
-(76, 9, 1, '', '2023-05-20', 0),
-(76, 10, 1, '', '2023-05-20', 0),
-(76, 11, 1, '', '2023-05-20', 0),
-(80, 1, 1, 'comm', '2023-05-21', 0),
-(80, 3, 1, 'comm', '2023-05-21', 0),
-(80, 5, 1, 'comm', '2023-05-21', 0),
-(80, 7, 1, 'comm', '2023-05-21', 0),
-(80, 9, 1, 'comm', '2023-05-21', 0),
-(80, 10, 1, 'comm', '2023-05-21', 0),
-(80, 11, 1, 'comm', '2023-05-21', 0),
-(81, 8, 1, '', NULL, 0),
-(82, 8, 1, '', NULL, 0);
+(1, 1, 1, '', NULL, 0),
+(1, 2, 1, '', NULL, 0),
+(1, 3, 1, '', NULL, 0),
+(1, 4, 1, '', NULL, 0),
+(1, 5, 1, '', NULL, 0),
+(1, 6, 1, '', NULL, 0),
+(1, 7, 1, '', NULL, 0),
+(2, 1, 1, '', NULL, 0),
+(2, 2, 1, '', NULL, 0),
+(2, 3, 1, '', NULL, 0),
+(2, 4, 1, '', NULL, 0),
+(2, 5, 1, '', NULL, 0),
+(2, 6, 1, '', NULL, 0),
+(2, 7, 1, '', NULL, 0),
+(3, 8, 1, '', NULL, 0),
+(3, 9, 2, '', NULL, 0),
+(3, 10, 1, '', NULL, 0),
+(4, 1, 1, '', NULL, 0),
+(4, 2, 1, '', NULL, 0),
+(4, 3, 1, '', NULL, 0),
+(4, 4, 1, '', NULL, 0),
+(4, 5, 1, '', NULL, 0),
+(4, 6, 1, '', NULL, 0),
+(4, 7, 1, '', NULL, 0),
+(4, 8, 1, '', NULL, 0),
+(4, 9, 1, '', NULL, 0),
+(4, 10, 1, '', NULL, 0),
+(5, 1, 1, '', NULL, 0),
+(5, 2, 1, '', NULL, 0),
+(5, 3, 1, '', NULL, 0),
+(5, 4, 1, '', NULL, 0),
+(5, 5, 1, '', NULL, 0),
+(5, 6, 1, '', NULL, 0),
+(5, 7, 1, '', NULL, 0),
+(5, 8, 1, '', NULL, 0),
+(5, 9, 1, '', NULL, 0),
+(5, 10, 1, '', NULL, 0),
+(6, 5, 1, '', NULL, 0),
+(6, 6, 1, '', NULL, 0),
+(6, 7, 1, '', NULL, 0),
+(6, 8, 1, '', NULL, 0),
+(6, 9, 1, '', NULL, 0),
+(6, 10, 1, '', NULL, 0),
+(7, 5, 1, '', NULL, 0),
+(7, 6, 1, '', NULL, 0),
+(7, 7, 1, '', NULL, 0),
+(7, 8, 1, '', NULL, 0),
+(7, 9, 1, '', NULL, 0),
+(7, 10, 1, '', NULL, 0),
+(8, 1, 1, '', NULL, 0),
+(8, 2, 1, '', NULL, 0),
+(8, 3, 1, '', NULL, 0),
+(8, 4, 1, '', NULL, 0),
+(9, 1, 1, '', NULL, 0),
+(9, 2, 1, '', NULL, 0),
+(9, 3, 1, '', NULL, 0),
+(9, 4, 1, '', NULL, 0),
+(9, 8, 1, '', NULL, 0),
+(9, 9, 1, '', NULL, 0),
+(9, 10, 1, '', NULL, 0),
+(10, 5, 1, '', NULL, 0),
+(10, 6, 1, '', NULL, 0),
+(10, 7, 1, '', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -270,47 +224,15 @@ CREATE TABLE `competences_matieres` (
 
 INSERT INTO `competences_matieres` (`id_competence`, `id_matiere`) VALUES
 (1, 1),
-(2, 2),
-(6, 2),
-(7, 2),
-(8, 2),
-(11, 1),
-(12, 1),
-(16, 2),
-(18, 2),
-(19, 2),
-(20, 2),
-(21, 2),
-(22, 2),
-(23, 2),
-(24, 2),
-(26, 2),
-(27, 2),
-(28, 2),
-(30, 2),
-(31, 2),
-(32, 2),
-(35, 2),
-(59, 1),
-(61, 1),
-(65, 3),
-(66, 3),
-(67, 3),
-(68, 1),
-(69, 1),
-(70, 3),
-(71, 3),
-(72, 3),
-(73, 3),
-(74, 3),
-(75, 3),
-(76, 1),
-(78, 1),
-(79, 1),
-(80, 3),
-(81, 2),
-(82, 3),
-(83, 4);
+(2, 1),
+(3, 1),
+(4, 2),
+(5, 2),
+(6, 3),
+(7, 3),
+(8, 3),
+(9, 4),
+(10, 4);
 
 -- --------------------------------------------------------
 
@@ -328,8 +250,9 @@ CREATE TABLE `competences_transversales` (
 --
 
 INSERT INTO `competences_transversales` (`id_competence`, `nom_competences`) VALUES
-(1, 'bien s\'exprimer a l\'oral'),
-(2, 'uvhbn');
+(1, 'Capacité a travailler en groupe'),
+(2, 'Prise de parole en public'),
+(3, 'Participation');
 
 -- --------------------------------------------------------
 
@@ -344,14 +267,6 @@ CREATE TABLE `compet_trans_etudiant` (
   `commentaire` text NOT NULL,
   `date_evaluation` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `compet_trans_etudiant`
---
-
-INSERT INTO `compet_trans_etudiant` (`id_competence`, `id_etudiant`, `Id_niveau_acquisition`, `commentaire`, `date_evaluation`) VALUES
-(1, 1, 2, 'test', '2023-05-08'),
-(2, 1, 3, 'bnb,nnj', '2023-05-08');
 
 -- --------------------------------------------------------
 
@@ -369,9 +284,9 @@ CREATE TABLE `compet_trans_matiere` (
 --
 
 INSERT INTO `compet_trans_matiere` (`id_competence`, `id_matiere`) VALUES
-(1, 2),
-(1, 1),
-(2, 2);
+(1, 4),
+(2, 1),
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -390,8 +305,7 @@ CREATE TABLE `ecole` (
 
 INSERT INTO `ecole` (`id_ecole`, `Nom_ecole`) VALUES
 (1, 'ECE'),
-(49, 'ESCE'),
-(50, 'Exemple');
+(2, 'INSEEC');
 
 -- --------------------------------------------------------
 
@@ -410,24 +324,16 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`id_etudiant`, `id_utilisateur`, `id_classe`) VALUES
-(1, 1, 1),
-(2, 33, 2),
-(3, 34, 1),
-(4, 35, 5),
-(5, 36, 1),
-(6, 37, 5),
-(7, 38, 1),
-(8, 39, 4),
-(9, 40, 1),
-(10, 41, 1),
-(11, 42, 1),
-(12, 44, 2),
-(13, 61, 5),
-(14, 62, 2),
-(15, 63, 2),
-(16, 64, 4),
-(17, 65, NULL),
-(18, 66, 5);
+(1, 9, 1),
+(2, 10, 1),
+(3, 11, 1),
+(4, 12, 1),
+(5, 13, 2),
+(6, 14, 2),
+(7, 15, 2),
+(8, 16, 3),
+(9, 17, 3),
+(10, 20, 3);
 
 -- --------------------------------------------------------
 
@@ -446,15 +352,46 @@ CREATE TABLE `etudiiant_matiere` (
 --
 
 INSERT INTO `etudiiant_matiere` (`id_etudiant`, `id_matiere`, `id_prof`) VALUES
-(1, 1, 81),
+(1, 1, 1),
+(2, 1, 1),
+(3, 1, 1),
+(4, 1, 1),
 (1, 2, 2),
-(8, 3, 77),
-(14, 3, 82),
-(2, 3, 82),
-(12, 3, 82),
-(4, 2, 80),
-(6, 2, 80),
-(13, 2, 80);
+(2, 2, 2),
+(3, 2, 2),
+(4, 2, 2),
+(1, 3, 6),
+(2, 3, 6),
+(3, 3, 6),
+(4, 3, 6),
+(1, 4, 4),
+(2, 4, 4),
+(3, 4, 4),
+(4, 4, 4),
+(5, 1, 1),
+(6, 1, 1),
+(7, 1, 1),
+(5, 2, 2),
+(6, 2, 2),
+(7, 2, 2),
+(5, 3, 3),
+(6, 3, 3),
+(7, 3, 3),
+(5, 4, 7),
+(6, 4, 7),
+(7, 4, 7),
+(8, 1, 5),
+(9, 1, 5),
+(10, 1, 5),
+(8, 2, 2),
+(9, 2, 2),
+(10, 2, 2),
+(8, 3, 3),
+(9, 3, 3),
+(10, 3, 3),
+(8, 4, 4),
+(9, 4, 4),
+(10, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -473,10 +410,10 @@ CREATE TABLE `matiere` (
 --
 
 INSERT INTO `matiere` (`id_matiere`, `nom_matiere`, `volume_horaire`) VALUES
-(1, 'Info', '8'),
-(2, 'Maths', '8'),
-(3, 'Humanité', '1'),
-(4, 'Exemple', '10');
+(1, 'Mathematiques', '6'),
+(2, 'Physique', '4'),
+(3, 'Informatique', '4'),
+(4, 'Electronique', '4');
 
 -- --------------------------------------------------------
 
@@ -487,24 +424,50 @@ INSERT INTO `matiere` (`id_matiere`, `nom_matiere`, `volume_horaire`) VALUES
 CREATE TABLE `professeur` (
   `id_professeur` int(50) NOT NULL,
   `id_utilisateur` int(50) NOT NULL,
-  `Nom_prof` text NOT NULL,
-  `id_classe` int(11) DEFAULT NULL
+  `Nom_prof` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `professeur`
 --
 
-INSERT INTO `professeur` (`id_professeur`, `id_utilisateur`, `Nom_prof`, `id_classe`) VALUES
-(2, 2, 'Bianchi', 1),
-(74, 1, 'Debize', 2),
-(77, 29, 'Lafontaine', 4),
-(78, 48, 'Savard', 4),
-(79, 49, 'Prof', 5),
-(80, 50, 'Prof', 5),
-(81, 51, 'Professeur', 1),
-(82, 52, 'Professeur', 2),
-(83, 67, 'ExempleProf', 6);
+INSERT INTO `professeur` (`id_professeur`, `id_utilisateur`, `Nom_prof`) VALUES
+(1, 5, 'Bianchi'),
+(2, 6, 'Dedecker'),
+(3, 7, 'Debize'),
+(4, 8, 'Savard'),
+(5, 18, 'Thieulin'),
+(6, 19, 'Hintzy'),
+(7, 21, 'Hedli');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `professeur_classe`
+--
+
+CREATE TABLE `professeur_classe` (
+  `id_professeur` int(50) NOT NULL,
+  `id_classe` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `professeur_classe`
+--
+
+INSERT INTO `professeur_classe` (`id_professeur`, `id_classe`) VALUES
+(1, 1),
+(2, 1),
+(4, 1),
+(6, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(7, 2),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -522,22 +485,13 @@ CREATE TABLE `professeur_matiere` (
 --
 
 INSERT INTO `professeur_matiere` (`id_professeur`, `id_matiere`) VALUES
-(74, 1),
+(1, 1),
 (2, 2),
-(80, 3),
-(81, 3),
-(2, 3),
-(2, 2),
-(81, 1),
-(82, 2),
-(82, 3),
-(82, 1),
-(81, 2),
-(80, 2),
-(78, 2),
-(2, 1),
-(77, 3),
-(83, NULL);
+(3, 3),
+(4, 4),
+(5, 1),
+(6, 3),
+(7, 4);
 
 -- --------------------------------------------------------
 
@@ -555,8 +509,9 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`id_promotion`, `nom_promotion`) VALUES
-(1, '2026'),
-(2, '2028');
+(1, '2025'),
+(2, '2026'),
+(3, '2027');
 
 -- --------------------------------------------------------
 
@@ -579,54 +534,27 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`Id_utilisateur`, `Nom`, `Prenom`, `email`, `mot_de_passe`, `Statut`, `premiere_connexion`) VALUES
-(1, 'TOS', 'TOSTOS', 'lilian.rage@edu.ece.fr', 'TOSANDO', 'Etudiant', 0),
-(2, 'lol', 'loli', 'lilianclement69@gmail.com', '8754', 'Professeur', 0),
-(3, 'lol', 'loli', 'lilianclement69@gmail.com', '54211', 'Administrateur', 0),
-(4, 'lol', 'loli', 'lilianclement69@gmail.com', '8754', '', 0),
-(5, 'lol', 'lolo', 'lilianclement69@gmail.com', '8754', '', 0),
-(6, 'lol', 'lol', 'lilianclement69@gmail.com', '8754', '', 0),
-(7, 'lol', 'lol', 'lilianclement69@gmail.com', '8754', '', 0),
-(8, 'MUR', 'Matis', 'matis.mur@edu.ece.fr', 'matos', '', 0),
-(9, 'a', 'b', 'Matisspams@gmail.com', 'mat', '', 0),
-(10, 'decourselle', 'louise', 'louise.decourselle@edu.ece.fr', 'tas', '', 0),
-(11, 'A', 'B', 'A@gmail.com', 'B', 'Etudiant', 0),
-(29, 'Lafontaine', 'Franck', 'franck.lafontaine@edu.ece.fr', 'franck', 'Professeur', 0),
-(32, 'MUR', 'Matis', 'mmatismails@gmail.com', 'Matis', 'Administrateur', 0),
-(33, 'John', 'Joe', 'john@joe.fr', 'a', 'Etudiant', 0),
-(34, 'eleve', 'num1', 'eleve@gmail.com', 'TXciPS3p', 'Etudiant', 1),
-(35, 'eleve', 'num2', 'eleve2@gmail.com', 'fPBjAo9T', 'Etudiant', 1),
-(36, 'eleve', 'num3', 'eleve3@gmail.com', 'DId1e5KA', 'Etudiant', 1),
-(37, 'eleve', 'num4', 'eleve4@gmail.com', 'AYOXknoP', 'Etudiant', 1),
-(38, 'eleve', 'num5', 'eleve5@gmail.com', 'e47Dw6H7', 'Etudiant', 1),
-(39, 'eleve', 'num6', 'eleve6@gmail.com', 'sbatardelilian', 'Etudiant', 0),
-(40, 'eleve', 'num7', 'eleve7@gmail.com', '1Z1B9iAL', 'Etudiant', 1),
-(41, 'eleve', 'num7', 'eleve7@gmail.com', 'matisTest', 'Etudiant', 0),
-(42, 'eleve', 'num8', 'eleve8@gmail.com', 'ntm lilian', 'Etudiant', 0),
-(43, 'Decourselle', 'Louise', 'louise.decourselle@edu.ece.fr', 'louise', 'Administrateur', 0),
-(44, 'lilan', 'lilan', 'lilan@lilan.com', 'mdp', 'Etudiant', 0),
-(45, 'Savard', 'Mr', 'mr@savard.com', 'ypL2Dlam', 'Professeur', 1),
-(46, 'Savard', 'Mr', 'mr@savard.com', '4P79Oi1v', 'Professeur', 1),
-(47, 'Savard', 'Mr', 'mr@savard.com', 'LVfkEGVF', 'Professeur', 1),
-(48, 'Savard', 'Mr', 'mr@savard.com', 'Matis', 'Professeur', 0),
-(49, 'Prof', 'Prof', 'Prof1@prof.com', 'zFmBmk9x', 'Professeur', 1),
-(50, 'Prof', 'Prof', 'Prof2@prof.com', 'Matis', 'Professeur', 0),
-(51, 'Professeur', 'Professeur', 'Professeur@Professeur.com', 'Matis', 'Professeur', 0),
-(52, 'Professeur', 'Test', 'Professeur@Test.com', 'Matis', 'Professeur', 0),
-(54, 'Admin2', 'Admin2', 'admin2@admin.com', 'zMOfqKNU', 'Administrateur', 1),
-(55, 'Admin3', 'Admin3', 'admin3@admin.com', 'l3abT0vm', 'Administrateur', 1),
-(56, 'Admin4', 'Admin4', 'admin4@admin.com', 's0ombIR4', 'Administrateur', 1),
-(57, 'Admin5', 'Admin5', 'admin5@admin.com', '5lOgDfCn', 'Administrateur', 1),
-(58, 'Admin6', 'Admin6', 'admin6@admin.com', 'P6Oto1EU', 'Administrateur', 1),
-(59, 'Admin6', 'Admin6', 'admin6@admin.com', 'KZD7i13G', 'Administrateur', 1),
-(60, 'Admin7', 'Admin7', 'admin7@admin.com', 'MBLKSoSR', 'Administrateur', 1),
-(61, 'Etudiant', 'Diant', 'etudiant@diant.com', 'FLxMzSn7', 'Etudiant', 1),
-(62, 'Fin', 'etu', 'fin@etu.com', 'Matis', 'Etudiant', 0),
-(63, 'Matos', '', 'Matos@etu.com', 'wNnAiVmJ', 'Etudiant', 1),
-(64, 'Tos', '', 'tos@etu.com', 'iGnE1X2S', 'Etudiant', 1),
-(65, 'Name', '', 'name@etu.com', 'SinCC1gc', 'Etudiant', 1),
-(66, 'Exemple', 'Exemple', 'exemple@exemple.com', 'vEg1DqhO', 'Etudiant', 1),
-(67, 'ExempleProf', 'ExempleProf', 'ExempleProf@a.com', '0TSZiXr5', 'Professeur', 1),
-(68, 'ExempleAdmin', 'ExempleAdmin', 'ExempleAdmin@a.com', 'FjlRya9h', 'Administrateur', 1);
+(1, 'Admin1', 'Matis', 'Matis.mur@edu.ece.fr', 'matis', 'Administrateur', 0),
+(2, 'Admin2', 'Lilian', 'lilian.rage@edu.ece.fr', 'cfMZkUjj', 'Administrateur', 1),
+(3, 'Admin3', 'Louise', 'louise.decourselle@edu.ece.fr', 'xvXxBhdW', 'Administrateur', 1),
+(4, 'Admin4', 'Antoine', 'antoine.dejesus@edu.ece.fr', 'ZcFheVQq', 'Administrateur', 1),
+(5, 'Bianchi', 'Celine', 'celine@bianchi.com', 'g7nivhBP', 'Professeur', 1),
+(6, 'Dedecker', 'Samira', 'samira@dedecker.com', 'AVdALJpY', 'Professeur', 1),
+(7, 'Debize', 'Laurent', 'laurent@debize.com', 'Gq558zHc', 'Professeur', 1),
+(8, 'Savard', 'Christophe', 'christophe@savard.com', 'IXSiLt7a', 'Professeur', 1),
+(9, 'MUR', 'Matis', 'matis@mur.com', 'matis', 'Etudiant', 0),
+(10, 'Decourselle', 'Louise', 'louise@decourselle.com', 'lXzoB0Gg', 'Etudiant', 1),
+(11, 'De Jesus', 'Antoine', 'antoine@dejesus.com', 'hH6Tyv9l', 'Etudiant', 1),
+(12, 'Rage', 'Lilian', 'lilian@rage.com', 'dVNPkQp9', 'Etudiant', 1),
+(13, 'Toto', 'ElevClass2', 'toto@ElevClass2.com', 'dONuRIpE', 'Etudiant', 1),
+(14, 'tata', 'ElevClass2', 'tata@ElevClass2.com', '2VUoe5e9', 'Etudiant', 1),
+(15, 'titi', 'ElevClass2', 'titi@ElevClass2.com', 'hAr6sfOn', 'Etudiant', 1),
+(16, 'Uno', 'Un', 'uno@un.com', 'JS790HNO', 'Etudiant', 1),
+(17, 'Dos', 'Deux', 'dos@deux.com', 'AIs9IL8V', 'Etudiant', 1),
+(18, 'Thieulin', 'Coralie', 'coralie@thieulin.com', 'YJrzykD1', 'Professeur', 1),
+(19, 'Hintzy', 'Antoine', 'antoine@hintzy.com', 'fQHZ0M7v', 'Professeur', 1),
+(20, 'Tres', 'Trois', 'tres@trois.com', 'T54E2rQ7', 'Etudiant', 1),
+(21, 'Hedli', 'Afef', 'afef@hedli.com', 'yduLHLrL', 'Professeur', 1);
 
 -- --------------------------------------------------------
 
@@ -648,6 +576,17 @@ INSERT INTO `validation_prof` (`id_validation`, `nom_validation`) VALUES
 (1, 'Validé'),
 (2, 'Non validé');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `validation_prof2`
+--
+
+CREATE TABLE `validation_prof2` (
+  `id_validation` int(50) NOT NULL,
+  `nom_validation` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Index pour les tables déchargées
 --
@@ -656,6 +595,12 @@ INSERT INTO `validation_prof` (`id_validation`, `nom_validation`) VALUES
 -- Index pour la table `acquisition_competences`
 --
 ALTER TABLE `acquisition_competences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `acquisition_competences2`
+--
+ALTER TABLE `acquisition_competences2`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -677,7 +622,8 @@ ALTER TABLE `classe`
 -- Index pour la table `competences`
 --
 ALTER TABLE `competences`
-  ADD PRIMARY KEY (`id_competences`);
+  ADD PRIMARY KEY (`id_competences`),
+  ADD KEY `fk_competences_professeur` (`id_professeur`);
 
 --
 -- Index pour la table `competences_etudiants`
@@ -748,8 +694,14 @@ ALTER TABLE `matiere`
 --
 ALTER TABLE `professeur`
   ADD PRIMARY KEY (`id_professeur`),
-  ADD KEY `fk_Util` (`id_utilisateur`),
-  ADD KEY `fk_classe4` (`id_classe`);
+  ADD KEY `fk_Util` (`id_utilisateur`);
+
+--
+-- Index pour la table `professeur_classe`
+--
+ALTER TABLE `professeur_classe`
+  ADD PRIMARY KEY (`id_professeur`,`id_classe`),
+  ADD KEY `id_classe` (`id_classe`);
 
 --
 -- Index pour la table `professeur_matiere`
@@ -777,6 +729,12 @@ ALTER TABLE `validation_prof`
   ADD PRIMARY KEY (`id_validation`);
 
 --
+-- Index pour la table `validation_prof2`
+--
+ALTER TABLE `validation_prof2`
+  ADD PRIMARY KEY (`id_validation`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -784,6 +742,12 @@ ALTER TABLE `validation_prof`
 -- AUTO_INCREMENT pour la table `acquisition_competences`
 --
 ALTER TABLE `acquisition_competences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `acquisition_competences2`
+--
+ALTER TABLE `acquisition_competences2`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -802,6 +766,12 @@ ALTER TABLE `administrateur`
 ALTER TABLE `classe`
   ADD CONSTRAINT `fk_Ecole` FOREIGN KEY (`id_ecole`) REFERENCES `ecole` (`id_ecole`),
   ADD CONSTRAINT `fk_Prom1` FOREIGN KEY (`id_promotion`) REFERENCES `promotion` (`id_promotion`);
+
+--
+-- Contraintes pour la table `competences`
+--
+ALTER TABLE `competences`
+  ADD CONSTRAINT `fk_competences_professeur` FOREIGN KEY (`id_professeur`) REFERENCES `professeur` (`id_professeur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `competences_etudiants`
@@ -852,8 +822,14 @@ ALTER TABLE `etudiiant_matiere`
 -- Contraintes pour la table `professeur`
 --
 ALTER TABLE `professeur`
-  ADD CONSTRAINT `fk_Util` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`Id_utilisateur`),
-  ADD CONSTRAINT `fk_classe4` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id_classe`);
+  ADD CONSTRAINT `fk_Util` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`Id_utilisateur`);
+
+--
+-- Contraintes pour la table `professeur_classe`
+--
+ALTER TABLE `professeur_classe`
+  ADD CONSTRAINT `professeur_classe_ibfk_1` FOREIGN KEY (`id_professeur`) REFERENCES `professeur` (`id_professeur`) ON DELETE CASCADE,
+  ADD CONSTRAINT `professeur_classe_ibfk_2` FOREIGN KEY (`id_classe`) REFERENCES `classe` (`id_classe`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `professeur_matiere`

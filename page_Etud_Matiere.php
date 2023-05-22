@@ -14,25 +14,6 @@
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
     <title>Matières</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .btn-matiere {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            width: 500px;
-            background-color: #808080;
-            color: #ffffff;
-        }
-    </style>
 </head>
 
 <body>

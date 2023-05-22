@@ -28,5 +28,4 @@
     </div>
     <?php pied_de_page(); ?>
 </body>
-
 </html>

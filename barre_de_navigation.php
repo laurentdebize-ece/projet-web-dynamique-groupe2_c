@@ -17,10 +17,17 @@ function barre_de_navigation_etudiants() {
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+<<<<<<< HEAD
                     <li><a href="Matiere_etudiant_bouton.php">Matières</a></li>
                     <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
                     <li><a href="Mes_competences_transversales.php">Compétences transverses</a></li>
                     <li><a href="Toutes_les_compet.php">Toutes les Compétences</a></li>
+=======
+                    <li><a href="page_Etud_Matiere.php">Matières</a></li>
+                    <li><a href="page_Etud_MesComp.php">Mes Compétences</a></li>
+                    <li><a href="page_Etu_MesCompTransv.php">Compétences transverses</a></li>
+                    <li><a href="page_Etud_ToutesComp.php">Toutes les Compétences</a></li>
+>>>>>>> a395dbe754068782b444acc62beb072f00848ed1
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
@@ -58,11 +65,11 @@ function barre_de_navigation_professeurs() {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="page_accueil_etudiant.php">Accueil</a></li>
-                    <li><a href="#band">Etudiants</a></li>
-                    <li><a href="#tour">Compétences</a></li>
-                    <li><a href="#contact">Validations</a></li>
-                    <li><a href="#contact">Ajouts/Modifications</a></li>
+                    <li><a href="page_accueil_professeur.php">Accueil</a></li>
+                    <li><a href="page_Prof_Etudiants.php">Etudiants</a></li>
+                    <li><a href="page_Prof_Competences.php">Compétences</a></li>
+                    <li><a href="page_Prof_Validation.php">Validations</a></li>
+                    <li><a href="page_Prof_Ajout&Modif.php">Ajouts/Modifications</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
@@ -100,12 +107,12 @@ function barre_de_navigation_administrateur() {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+                    <li><a href="page_accueil_administrateur.php">Accueil</a></li>
                     <li><a href="#band">Professeurs</a></li>
                     <li><a href="#tour">Etudiants</a></li>
                     <li><a href="#contact">Matieres</a></li>
                     <li><a href="#contact">Competences</a></li>
-                    <li><a href="#contact">Ajouts/Modifications</a></li>
+                    <li><a href="page_Admin_6_Ajout&Modif.php">Ajouts/Modifications</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

@@ -44,3 +44,13 @@
   .dropdown-menu li a:hover {
     background-color: rgb(56, 55, 55) !important;
   }
+
+  h1 {
+    align-items:flex-start;
+    text-align: center;
+    margin-top: 6%;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+
+}

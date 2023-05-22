@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Page d'ajout de matiere</title>
+    <title>Ajouter une matiere</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
             <input type="text" id="nom_matiere" name="nom_matiere" required><br>
 
             <label for="volume_horaire">Volume horaire :</label>
-            <input type="text" id="volume_horaire" name="volume_horaire" required><br>
+            <input type="number" id="volume_horaire" name="volume_horaire" min="0" required><br>
 
             <input type="submit" value="Ajouter">
         </form>

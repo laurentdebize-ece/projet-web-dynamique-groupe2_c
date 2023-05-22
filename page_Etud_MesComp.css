@@ -1,0 +1,67 @@
+#Barre_de_trie {
+    position: absolute;
+    top: 150px;
+    left: 20px;
+}
+
+#Barre_de_filtre {
+    position: absolute;
+    top: 150px;
+    left: 500px;
+}
+
+#Barre_de_filtre2 {
+    position: absolute;
+    top: 150px;
+    left: 700px;
+}
+
+#Barre_de_filtre3 {
+    position: absolute;
+    top: 150px;
+    left: 900px;
+}
+
+#Barre_de_filtre4 {
+    position: absolute;
+    top: 150px;
+    left: 1250px;
+}
+
+.idBoutonUnAUn,
+.idBoutonPlusieurs,
+.button-position,
+.btn_trier {
+    position: absolute;
+    top: 100px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: #808080;
+    color: #ffffff;
+}
+
+.idBoutonUnAUn {
+    left: 650px;
+}
+
+.idBoutonPlusieurs {
+    left: 1250px;
+}
+
+.button-position {
+    left: 50px;
+    margin: 10px;
+}
+
+.btn_trier {
+    left: 400px;
+    top: 37px;
+}
+
+.titreTrier {
+    position: absolute;
+    left: 150px;
+    top: 10px;
+    color: #808080;
+    text-decoration: underline;
+}

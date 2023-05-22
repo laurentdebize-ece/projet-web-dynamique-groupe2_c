@@ -1,12 +1,27 @@
 <?php
 session_start();
 
+// Vérification que l'utilisateur est connecté
+//if (!isset($_SESSION['Nom']) || !isset($_SESSION['Prenom']) || !isset($_SESSION['email'])) {
+	// Si l'utilisateur n'est pas connecté, on le redirige vers la page de login
+	//header('Location: login.php');
+	//exit();
+//}
+
 // Récupération des informations de l'utilisateur depuis la session
-$nom = $_SESSION['nom'];
-$prenom = $_SESSION['prenom'];
+$Nom = $_SESSION['Nom'];
+$Prenom = $_SESSION['Prenom'];
 $email = $_SESSION['email'];
+<<<<<<< HEAD
+$nom_classe = $_SESSION['nom_classe'];
+$Nom_ecole = $_SESSION['Nom_ecole'];
+$ID_matiere_prof = $_SESSION['id_matiere'];
+
+
+=======
 $mot_de_passe = $_SESSION['mot_de_passe'];
 $Statut = $_SESSION['Statut'];
+>>>>>>> a395dbe754068782b444acc62beb072f00848ed1
 
 
 
@@ -31,6 +46,10 @@ $Statut = $_SESSION['Statut'];
 </head>
 
 <body>
+<<<<<<< HEAD
+	<?php barre_de_navigation(); ?>
+	
+=======
 	<?php
 	switch ($Statut) {
 		case 'Etudiant':
@@ -47,6 +66,7 @@ $Statut = $_SESSION['Statut'];
 			break;
 	} ?>
 
+>>>>>>> a395dbe754068782b444acc62beb072f00848ed1
 	<div class="container-titre">
 		<h1>Profil</h1>
 		<div class="profile-info">
@@ -54,11 +74,20 @@ $Statut = $_SESSION['Statut'];
 				<img src="photo_utilisateur.png" alt="Photo utilisateur" width="100" height="100">
 			</div>
 			<div class="text-container">
+<<<<<<< HEAD
+				<p><strong>Nom :</strong> <?php echo $Nom ?></p>
+				<p><strong>Prénom :</strong> <?php echo $Prenom ?></p>
+				<p><strong>email :</strong> <?php echo $email ?></p>
+				<p><strong>Ecole :</strong> <?php echo $Nom_ecole ?></p>
+				<p><strong>Classe :</strong> <?php echo $nom_classe ?></p>
+				
+=======
 				<p><strong>Statut :</strong> <?php echo $Statut ?></p>
 				<p><strong>Nom :</strong> <?php echo $nom ?></p>
 				<p><strong>Prénom :</strong> <?php echo $prenom ?></p>
 				<p><strong>Email :</strong> <?php echo $email ?></p>
 				<p><strong>Mot de Passe :</strong> <?php echo $mot_de_passe ?></p>
+>>>>>>> a395dbe754068782b444acc62beb072f00848ed1
 			</div>
 		</div>
 	</div>

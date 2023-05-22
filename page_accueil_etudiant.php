@@ -49,6 +49,7 @@
 </head>
 
 <body>
+    
     <?php barre_de_navigation_etudiants(); ?>
     <h1>Etudiant</h1>
     <div class="container text-center">
@@ -57,6 +58,91 @@
     </div>
     
     <?php pied_de_page(); ?>
+    <head>
+  <title></title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bubbleCanvas"></canvas>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const canevas = document.getElementById('bubbleCanvas');
+      const contexte = canevas.getContext('2d');
+      let bulles = [];
+      
+      canevas.width = window.innerWidth;
+      canevas.height = window.innerHeight;
+      
+      class Bulle {
+        constructor() {
+          this.x = Math.random() * canevas.width;
+          this.y = Math.random() * canevas.height;
+          this.rayon = Math.random() * 20 + 10;
+          this.couleur = 'rgba(255, 255, 255, 0.7)';
+          this.vitesseX = Math.random() * 2 - 1;
+          this.vitesseY = Math.random() * 2 - 1;
+        }
+        
+        miseAJour() {
+          this.x += this.vitesseX;
+          this.y += this.vitesseY;
+          
+          if (this.x + this.rayon > canevas.width || this.x - this.rayon < 0) {
+            this.vitesseX *= -1;
+          }
+          
+          if (this.y + this.rayon > canevas.height || this.y - this.rayon < 0) {
+            this.vitesseY *= -1;
+          }
+        }
+        
+        dessiner() {
+          contexte.beginPath();
+          contexte.arc(this.x, this.y, this.rayon, 0, Math.PI * 2);
+          contexte.fillStyle = this.couleur;
+          contexte.fill();
+          contexte.closePath();
+        }
+      }
+      
+      function creerBulles() {
+        for (let i = 0; i < 50; i++) {
+          bulles.push(new Bulle());
+        }
+      }
+      
+      function animerBulles() {
+        contexte.clearRect(0, 0, canevas.width, canevas.height);
+        
+        for (let bulle of bulles) {
+          bulle.miseAJour();
+          bulle.dessiner();
+        }
+        
+        requestAnimationFrame(animerBulles);
+      }
+      
+      creerBulles();
+      animerBulles();
+    });
+  </script>
+</body>
+</html>
+
 </body>
 
 </html>

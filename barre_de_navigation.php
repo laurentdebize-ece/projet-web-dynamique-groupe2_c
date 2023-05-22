@@ -10,23 +10,31 @@ function barre_de_navigation_etudiants() {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
+                <a href="page_accueil_etudiant.php">                    
                     <img src="logo_blanc2.png" alt="Logo" style="height: 25px; width: 100px;">
-                </a>
+                    </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="page_accueil_etudiant.php">Accueil</a></li>
+<<<<<<< HEAD
+                    <li><a href="Matiere_etudiant_bouton.php">Matières</a></li>
+                    <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
+                    <li><a href="Mes_competences_transversales.php">Compétences transverses</a></li>
+                    <li><a href="Toutes_les_compet.php">Toutes les Compétences</a></li>
+=======
                     <li><a href="page_Etud_Matiere.php">Matières</a></li>
                     <li><a href="page_Etud_MesComp.php">Mes Compétences</a></li>
                     <li><a href="page_Etu_MesCompTransv.php">Compétences transverses</a></li>
                     <li><a href="page_Etud_ToutesComp.php">Toutes les Compétences</a></li>
+>>>>>>> a395dbe754068782b444acc62beb072f00848ed1
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Nous Contacter</a></li>
+                            <li><a href="page_nous_contacter.php">Nous Contacter</a></li>
                             <li><a href="#">Crédits</a></li>
                             <li><a href="#">Omnes & Moi</a></li>
                         </ul>
@@ -68,7 +76,7 @@ function barre_de_navigation_professeurs() {
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Nous Contacter</a></li>
+                            <li><a href="page_nous_contacter.php">Nous Contacter</a></li>
                             <li><a href="#">Crédits</a></li>
                             <li><a href="#">Omnes & Moi</a></li>
                         </ul>
@@ -111,7 +119,7 @@ function barre_de_navigation_administrateur() {
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Nous Contacter</a></li>
+                            <li><a href="page_nous_contacter.php">Nous Contacter</a></li>
                             <li><a href="#">Crédits</a></li>
                             <li><a href="#">Omnes & Moi</a></li>
                         </ul>
@@ -129,22 +137,27 @@ function barre_de_navigation_administrateur() {
 
 <?php
 function pied_de_page () {
-?>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Accueil</a></li>
-                <li class="list-inline-item"><a href="#">Mentions Légales</a></li>
-                <li class="list-inline-item"><a href="#">Nous Contacter</a></li>
-                <li class="list-inline-item"><a href="#">Crédits</a></li>
-            </ul>
-            <p class="text-center">Omnes MySkills© 2023<br><br>
-
-            <em> Credits : <br>Louise  -  Antoine  -  Lilian  -  Matis</em>
-            </p>
-        </footer>
-    </div>
-<?php
-}
-?>
+    ?>
+        <div class="footer-basic">
+            <footer>
+                <div class="social">
+                    <a href="https://www.linkedin.com/in/lilian-rage-408a7921b/"><img src="instagram.png"></a>
+                    <a href="https://www.linkedin.com/in/lilian-rage-408a7921b/"><img src="linkedin.png" alt="Linkedin"></a>
+                    <a href="https://www.linkedin.com/in/lilian-rage-408a7921b/"><img src="twitter.png" alt="Twitter"></a>
+                    <a href="https://www.linkedin.com/in/lilian-rage-408a7921b/"><img src="facebook.png" alt="Facebook"></a>
+                </div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Accueil</a></li>
+                    <li class="list-inline-item"><a href="#">Mentions Légales</a></li>
+                    <li class="list-inline-item"><a href="page_nous_contacter.php">Nous Contacter</a></li>
+                    <li class="list-inline-item"><a href="#">Crédits</a></li>
+                </ul>
+                <p class="text-center">Omnes MySkills© 2023<br><br>
+    
+                <em> Credits : <br>Louise  -  Antoine  -  Lilian  -  Matis</em>
+                </p>
+            </footer>
+        </div>
+    <?php
+    }
+    

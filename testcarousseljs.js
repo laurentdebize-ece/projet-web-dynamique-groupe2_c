@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
     var $caroussel = $('#caroussel');
-    $img = $('#caroussel img');
+    var $img = $('#caroussel img');
     indexImg = $img.length -1;
     i = 0;
-    $currentImg = $img.eq(i);
+    var $currentImg = $img.eq(i);
     $img.css('display', 'none');
     $currentImg.css('display', 'block');
     var $next = $('#buttonNext');

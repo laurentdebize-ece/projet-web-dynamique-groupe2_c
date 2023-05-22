@@ -20,6 +20,8 @@ h1 {
     height: 675px;
     width: 900px;
     margin: auto;
+    justify-content: center;
+
 
 }
 
@@ -34,37 +36,29 @@ footer {
     height: 20%;
     padding: 10px;
 }
-#menuBtn{
-    position: relative;
-    margin: auto;
-}
 
-#conteneur {
-    display: flex;
-    justify-content:space-around;
-}
 
-#resultat {
+#caroussel {
     display: none;
   }
   
-  #resultat ul {
+  #caroussel ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
   
-  #resultat li {
+  #caroussel li {
     margin: 0;
     padding: 0;
   }
   
-  #resultat a {
+  #button {
     display: block;
     padding: 10px;
   }
   
-  #resultat a:hover {
+  #button:hover {
     background-color: #f5f5f5;
   }
   

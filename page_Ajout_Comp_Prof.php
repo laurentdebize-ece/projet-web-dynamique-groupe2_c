@@ -66,13 +66,14 @@
             <label for="classe">Classe :</label>
             <select id="classe" name="classe" required>
                 <?php
-                // Requête pour récupérer les classes du professeur
                 $query_classe = "
-        SELECT c.id_classe, c.nom_classe
-        FROM classe c
-        INNER JOIN professeur p ON c.id_classe = p.id_classe
-        WHERE p.id_professeur = :id_professeur
-    ";
+                SELECT c.id_classe, c.nom_classe
+                FROM classe c
+                INNER JOIN professeur_classe pc ON c.id_classe = pc.id_classe
+                INNER JOIN professeur p ON pc.id_professeur = p.id_professeur
+                WHERE p.id_professeur = :id_professeur
+            ";
+            
                 $stmt_classe = $bdd->prepare($query_classe);
                 $stmt_classe->execute(['id_professeur' => $id_professeur]);
                 $classes = $stmt_classe->fetchAll(PDO::FETCH_ASSOC);

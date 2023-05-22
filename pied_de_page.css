@@ -2,6 +2,8 @@
     padding:40px 0;
     background-color:#b5b4b4;
     color:#2e2e2f;
+    align-items:flex-end;
+    margin-top: 5%;
   }
   
   .footer-basic ul {

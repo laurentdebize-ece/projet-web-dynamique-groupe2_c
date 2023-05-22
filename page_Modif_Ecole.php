@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Ajouter une classe</title>
+    <title>Modifier une école</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,16 +17,16 @@
         <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Ajouter une classe</h1>
-        <form method="post" action="traitement_Ajout_Classe.php">
+        <form method="post" action="traitement_Modif_Ecole.php">
 
-            <label for="ecole">Ecole :</label>
+            <h1>Modifier une école</h1>
+            <label for="ecole">Ecole à modifier:</label>
             <select id="ecole" name="ecole" required>
                 <?php
                 // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'matiere'
+                // Récupération des données de la table 'ecole'
                 $query = "SELECT id_ecole, Nom_ecole FROM ecole";
                 $stmt = $bdd->query($query);
 
@@ -40,31 +40,16 @@
                 $stmt->closeCursor();
                 ?>
             </select><br>
+            <h3>Modifiez les champs nécessaires</h3>
 
-            <label for="promotion">Promotion :</label>
-            <select id="promotion" name="promotion" required>
-                <?php
-                // Récupération des données de la table 'matiere'
-                $query = "SELECT id_promotion, nom_promotion FROM promotion";
-                $stmt = $bdd->query($query);
+            <label for="nom">Nom de l'école :</label>
+            <input type="text" id="nom" name="nom" required><br>
 
-                // Affichage des options de la liste déroulante
-                while ($donnees = $stmt->fetch()) {
-                    echo '<option value="' . $donnees['id_promotion'] . '">' . $donnees['nom_promotion'] . '</option>';
-                }
-
-                // Fermeture de la connexion à la base de données
-                $stmt->closeCursor();
-                ?>
-            </select><br>
-
-            <label for="classe">Nom de la classe :</label>
-            <input type="text" id="classe" name="classe" required><br>
-
-            <input type="submit" value="Ajouter">
+            <input type="submit" value="Modifier">
         </form>
     </div><br>
     <?php pied_de_page(); ?>
+
 </body>
 
 </html>

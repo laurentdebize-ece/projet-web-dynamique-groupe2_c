@@ -44,6 +44,40 @@
 
             <label for="nom">Nom de la classe :</label>
             <input type="text" id="nom" name="nom" required><br>
+            <label for="ecole">Ecole :</label>
+            <select id="ecole" name="ecole" required>
+                <?php
+                // Récupération des données de la table 'matiere'
+                $query = "SELECT id_ecole, Nom_ecole FROM ecole";
+                $stmt = $bdd->query($query);
+
+                // Affichage des options de la liste déroulante
+                while ($donnees = $stmt->fetch()) {
+                    $Nom_ecole = $donnees['Nom_ecole'];
+                    echo '<option value="' . $donnees['id_ecole'] . '">' . $Nom_ecole . '</option>';
+                }
+
+                // Fermeture de la connexion à la base de données
+                $stmt->closeCursor();
+                ?>
+            </select><br>
+
+            <label for="promotion">Promotion :</label>
+            <select id="promotion" name="promotion" required>
+                <?php
+                // Récupération des données de la table 'matiere'
+                $query = "SELECT id_promotion, nom_promotion FROM promotion";
+                $stmt = $bdd->query($query);
+
+                // Affichage des options de la liste déroulante
+                while ($donnees = $stmt->fetch()) {
+                    echo '<option value="' . $donnees['id_promotion'] . '">' . $donnees['nom_promotion'] . '</option>';
+                }
+
+                // Fermeture de la connexion à la base de données
+                $stmt->closeCursor();
+                ?>
+            </select><br>
 
             <input type="submit" value="Modifier">
         </form>

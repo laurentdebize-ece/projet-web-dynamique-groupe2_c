@@ -45,11 +45,16 @@ $parameters[':id_professeur'] = $id_professeur;
 $stmt = $bdd->prepare($sql);
 $stmt->execute($parameters);
 
-// Modification du champ 'id_classe' dans la table 'professeur'
+// Modification du champ 'id_classe' dans la table 'professeur'$
+$sql_prof = "UPDATE professeur SET Nom_prof = :nom_prof WHERE id_professeur = :id_professeur";
+$stmt_prof = $bdd->prepare($sql_prof);
+$stmt_prof->execute(array(':nom_prof' => $nom, ':id_professeur' => $id_professeur));
+
+
 if (!empty($id_classe)) {
-    $sql_prof = "UPDATE professeur SET id_classe = :id_classe, Nom_prof = :nom_prof WHERE id_professeur = :id_professeur";
+    $sql_prof = "UPDATE professeur_classe SET id_classe = :id_classe WHERE id_professeur = :id_professeur";
     $stmt_prof = $bdd->prepare($sql_prof);
-    $stmt_prof->execute(array(':id_classe' => $id_classe, ':nom_prof' => $nom, ':id_professeur' => $id_professeur));
+    $stmt_prof->execute(array(':id_classe' => $id_classe, ':id_professeur' => $id_professeur));
 }
 
 if ($stmt->rowCount() > 0 || $stmt_prof->rowCount() > 0) {

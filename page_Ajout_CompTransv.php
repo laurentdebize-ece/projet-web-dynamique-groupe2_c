@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Ajouter une compétence</title>
+    <title>Ajouter une compétence transversale</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
             $('#matiere').change(function() {
                 var id_matiere = $(this).val();
                 $.ajax({
-                    url: 'z_affect_prof_formu2.php',
+                    url: 'z_affect_prof_formu.php',
                     type: 'POST',
                     data: {
                         id_matiere: id_matiere
@@ -51,8 +51,9 @@
     </div>
 
     <div class="login-box">
-        <h1>Ajouter une Compétence</h1>
-        <form method="post" action="traitement_Ajout_Competence.php">
+        <h1>Ajouter une Compétence Transverse</h1>
+        <form method="post" action="traitement_Ajout_CompTransv.php">
+
             <label for="nom_competence">Nom :</label>
             <input type="text" id="nom_competence" name="nom_competence" required><br>
 
@@ -70,10 +71,6 @@
                 ?>
             </select><br>
 
-            <label for="professeur">Professeur :</label>
-            <select id="professeur" name="professeur" required>
-
-            </select><br>
 
             <input type="submit" value="Ajouter">
         </form>

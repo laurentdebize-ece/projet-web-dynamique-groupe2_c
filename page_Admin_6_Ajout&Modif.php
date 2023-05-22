@@ -28,8 +28,10 @@
                     <a href="page_Ajout_Administrateur.php">Ajouter un administrateur</a>
                     <a href="page_Ajout_Matiere.php">Ajouter une matière</a>
                     <a href="page_Ajout_Classe.php">Ajouter une classe</a>
+                    <a href="page_Ajout_Promo.php">Ajouter une promotion</a>
+                    <a href="page_Ajout_Ecole.php">Ajouter une ecole</a>
                     <a href="page_Ajout_Competence.php">Ajouter une compétence</a>
-                    <a href="page_Ajout_CompetenceTransv.php">Ajouter une compétence transverse</a>
+                    <a href="page_Ajout_CompTransv.php">Ajouter une compétence transverse</a>
                     <a href="page_Affecter_Matiere-Classe.php">Affecter une classe à une matière</a>
                     <a href="page_Affecter_Mat-Prof.php">Affecter un professeur à une matière</a>
                     <a href="page_Affecter_Prof-Classe.php">Affecter un professeur à une classe</a>
@@ -49,8 +51,9 @@
                     <a href="page_Modif_Professeur.php">Modifier un professeur</a>
                     <a href="page_Modif_Matiere.php">Modifier une matière</a>
                     <a href="page_Modif_Classe.php">Modifier une classe</a>
+                    <a href="page_Modif_Ecole.php">Modifier une ecole</a>
                     <a href="page_Modif_Competence.php">Modifier une compétence</a>
-                    <a href="page_Modif_CompTrans.php">Modifier une compétence transverse</a>
+                    <a href="page_Modif_CompTransv.php">Modifier une compétence transverse</a>
                 </div>
             </div>
         </div>
@@ -66,12 +69,14 @@
                     <a href="page_Supp_Utilisateur.php">Supprimer un utilisateur</a>
                     <a href="page_Supp_Matiere.php">Supprimer une matière</a>
                     <a href="page_Supp_Classe.php">Supprimer une classe</a>
+                    <a href="page_Supp_Promotion.php">Supprimer une promotion</a>
+                    <a href="page_Supp_Ecole.php">Supprimer une ecole</a>
                     <a href="page_Supp_Competence.php">Supprimer une compétence</a>
-                    <a href="page_Supp_CompetenceTransv.php">Supprimer une compétence transverse</a>
+                    <a href="page_Supp_CompTransv.php">Supprimer une compétence transverse</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div><br>
     <?php pied_de_page(); ?>
 </body>
 

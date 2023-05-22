@@ -22,7 +22,7 @@ $stmt_update_etudiants = $bdd->prepare($sql_update_etudiants);
 $stmt_update_etudiants->execute(['id_classe' => $id_classe]);
 
 // Mise à jour de l'id_classe à NULL pour tous les professeurs appartenant à la classe
-$sql_update_professeurs = "UPDATE professeur SET id_classe = NULL WHERE id_classe = :id_classe";
+$sql_update_professeurs = "UPDATE professeur_classe SET id_classe = NULL WHERE id_classe = :id_classe";
 $stmt_update_professeurs = $bdd->prepare($sql_update_professeurs);
 $stmt_update_professeurs->execute(['id_classe' => $id_classe]);
 

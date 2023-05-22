@@ -33,7 +33,7 @@ $stmt_classe->execute(['id_classe' => $id_classe]);
 $result_classe = $stmt_classe->fetch(PDO::FETCH_ASSOC);
 $nom_classe = $result_classe['nom_classe'];
 
-$sql = "UPDATE professeur SET id_classe = :id_classe WHERE id_professeur = :id_professeur";
+$sql = "INSERT INTO professeur_classe (id_professeur, id_classe) VALUES (:id_professeur, :id_classe)";
 $requete = $bdd->prepare($sql);
 $requete->execute(array(
     'id_classe' => $id_classe,
@@ -43,12 +43,12 @@ $requete->execute(array(
 if ($requete->rowCount() > 0) {
     $message = "Le professeur '$nom_professeur' a été affecté à la classe '$nom_classe'.";
     echo '<script>alert("Succes : ' . $message . '");
-    window.location.href = "page_accueil_etudiant.php";
+    window.location.href = "page_Admin_6_Ajout&Modif.php";
     </script>';
     exit();
 } else {
     echo '<script>alert("Erreur, aucune action effectuée.");
-    window.location.href = "page_Admin_6_Ajout&Modif.php";
+    window.location.href = "page_Affecter_Prof-Classe.php";
     </script>';
     exit();
 }

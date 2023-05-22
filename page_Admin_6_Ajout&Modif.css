@@ -8,7 +8,10 @@ body{
 }
 .container h2 {
     text-align: center;
-	text-decoration: underline;
+    margin-top: 4%;
+    text-decoration: underline;
+    font-size: 32px;
+    font-family: Arial, sans-serif;
 }
 
 .cadre {
@@ -49,6 +52,7 @@ body{
     min-width: 160px;
     width: 100%;
     box-sizing: border-box;
+    z-index: 999; /* Valeur élevée pour s'afficher au premier plan */
 }
 
 .custom-dropdown-content a {

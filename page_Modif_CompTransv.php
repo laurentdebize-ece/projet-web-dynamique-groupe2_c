@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Ajouter une classe</title>
+    <title>Modifier une competence transversale</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,23 +17,23 @@
         <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Ajouter une classe</h1>
-        <form method="post" action="traitement_Ajout_Classe.php">
+        <form method="post" action="traitement_Modif_CompTransv.php">
 
-            <label for="ecole">Ecole :</label>
-            <select id="ecole" name="ecole" required>
+            <h1>Modifier une competence transversale</h1>
+            <label for="competence">Compétence transversale à modifier:</label>
+            <select id="competence" name="competence" required>
                 <?php
                 // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'matiere'
-                $query = "SELECT id_ecole, Nom_ecole FROM ecole";
+                // Récupération des données de la table 'competences'
+                $query = "SELECT id_competence, nom_competences FROM competences_transversales";
                 $stmt = $bdd->query($query);
 
                 // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
-                    $Nom_ecole = $donnees['Nom_ecole'];
-                    echo '<option value="' . $donnees['id_ecole'] . '">' . $Nom_ecole . '</option>';
+                    $nom_competences = $donnees['nom_competences'];
+                    echo '<option value="' . $donnees['id_competence'] . '">' . $nom_competences . '</option>';
                 }
 
                 // Fermeture de la connexion à la base de données
@@ -41,16 +41,22 @@
                 ?>
             </select><br>
 
-            <label for="promotion">Promotion :</label>
-            <select id="promotion" name="promotion" required>
+            <h3>Modifiez les champs nécessaires</h3>
+
+            <label for="nom">Nom de la competence :</label>
+            <input type="text" id="nom" name="nom">
+
+            <label for="matiere">Matiere:</label>
+            <select id="matiere" name="matiere">
                 <?php
                 // Récupération des données de la table 'matiere'
-                $query = "SELECT id_promotion, nom_promotion FROM promotion";
+                $query = "SELECT id_matiere, nom_matiere FROM matiere";
                 $stmt = $bdd->query($query);
 
                 // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
-                    echo '<option value="' . $donnees['id_promotion'] . '">' . $donnees['nom_promotion'] . '</option>';
+                    $nom_matiere = $donnees['nom_matiere'];
+                    echo '<option value="' . $donnees['id_matiere'] . '">' . $nom_matiere . '</option>';
                 }
 
                 // Fermeture de la connexion à la base de données
@@ -58,13 +64,11 @@
                 ?>
             </select><br>
 
-            <label for="classe">Nom de la classe :</label>
-            <input type="text" id="classe" name="classe" required><br>
-
-            <input type="submit" value="Ajouter">
+            <input type="submit" value="Modifier">
         </form>
     </div><br>
     <?php pied_de_page(); ?>
+
 </body>
 
 </html>

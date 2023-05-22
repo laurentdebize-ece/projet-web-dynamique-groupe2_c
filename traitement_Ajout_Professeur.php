@@ -62,7 +62,7 @@ $max_id_professeur = $resultat_prof->fetch()['max_id_professeur'];
 $nouvel_id_professeur = $max_id_professeur + 1;
 
 
-$sql3 = "INSERT INTO professeur (id_professeur, id_utilisateur, Nom_prof, id_classe) VALUES (:id_professeur, :id, :nom, NULL)";
+$sql3 = "INSERT INTO professeur (id_professeur, id_utilisateur, Nom_prof) VALUES (:id_professeur, :id, :nom)";
 $requete_etu = $bdd->prepare($sql3);
 $requete_etu->execute(array(
 	'id' => $nouvel_id,

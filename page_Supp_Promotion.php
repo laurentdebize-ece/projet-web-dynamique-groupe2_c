@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Ajouter une matiere</title>
+    <title>Supprimer une promotion</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,16 +17,23 @@
         <img src="logo.png" alt="Logo Omnes" width="375" height="125"> 
     </div>
     <div class="login-box">
-        <h1>Ajouter une matiere</h1>
-        <form method="post" action="traitement_Ajout_Matiere.php">
+        <h1>Supprimer une promotion</h1>
+        <form method="post" action="traitement_Supp_Promotion.php">
 
-            <label for="nom_matiere">Nom :</label>
-            <input type="text" id="nom_matiere" name="nom_matiere" required><br>
+        <label for="promotion">Promotion :</label>
+            <select id="promotion" name="promotion" required>
+                <?php
+                $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-            <label for="volume_horaire">Volume horaire :</label>
-            <input type="number" id="volume_horaire" name="volume_horaire" min="0" required><br>
-
-            <input type="submit" value="Ajouter">
+                $reponse = $bdd->query('SELECT id_promotion, nom_promotion FROM promotion');
+                while ($donnees = $reponse->fetch()) {
+                    echo '<option value="' . $donnees['id_promotion'] . '">' . $donnees['nom_promotion'] . '</option>';
+                }
+                $reponse->closeCursor();
+                ?>
+            </select>
+            
+            <input type="submit" value="Supprimer">
         </form>
     </div><br>
     <?php pied_de_page(); ?>

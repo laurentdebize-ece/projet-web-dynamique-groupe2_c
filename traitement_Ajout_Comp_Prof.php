@@ -25,13 +25,19 @@ if ($_POST['date'] === '') {
 }
 
 $id_utilisateur = $_SESSION['id_utilisateur'];
-$query = "SELECT id_professeur, id_classe FROM professeur WHERE id_utilisateur = :id_utilisateur";
+
+// Récupération de l'id_professeur et id_classe de l'utilisateur
+$query = "SELECT professeur.id_professeur, professeur_classe.id_classe
+          FROM professeur
+          LEFT JOIN professeur_classe ON professeur.id_professeur = professeur_classe.id_professeur
+          WHERE professeur.id_utilisateur = :id_utilisateur";
 $stmt = $bdd->prepare($query);
 $stmt->execute(['id_utilisateur' => $id_utilisateur]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $id_professeur = $result['id_professeur'];
 $id_classe = $result['id_classe'];
+
 
 // Récupération du nouvel ID
 $sql = "SELECT MAX(id_competences) as max_id FROM competences";

@@ -40,8 +40,8 @@ $requete->execute(array(
 $sql3 = "SELECT e.id_etudiant
         FROM etudiant e
         JOIN classe c ON e.id_classe = c.id_classe
-        JOIN professeur p ON c.id_classe = p.id_classe
-        WHERE p.id_professeur = :id_professeur";
+        JOIN professeur_classe pc ON c.id_classe = pc.id_classe
+        WHERE pc.id_professeur = :id_professeur";
 
 $requete = $bdd->prepare($sql3);
 $requete->bindParam(":id_professeur", $id_professeur);

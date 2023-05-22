@@ -48,8 +48,8 @@
 
 <body>
     <?php barre_de_navigation_professeurs(); ?>
+    <h1>Professeur</h1>
     <div class="container text-center">
-        <h1>Professeur</h1>
         <div class="photo-container">
             <img src="omnes_photo.png" alt="Photo Omnes">
         </div><br>

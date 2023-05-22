@@ -2,7 +2,7 @@
 <?php include 'barre_de_navigation.php'; ?>
 
 <head>
-    <title>Ajouter une matiere</title>
+    <title>Ajouter une ecole</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,17 +14,14 @@
 
 <body>
     <div class="logo_centré">
-        <img src="logo.png" alt="Logo Omnes" width="375" height="125"> 
+        <img src="logo.png" alt="Logo Omnes" width="375" height="125">
     </div>
     <div class="login-box">
-        <h1>Ajouter une matiere</h1>
-        <form method="post" action="traitement_Ajout_Matiere.php">
+        <h1>Ajouter une ecole</h1>
+        <form method="post" action="traitement_Ajout_Ecole.php">
 
-            <label for="nom_matiere">Nom :</label>
-            <input type="text" id="nom_matiere" name="nom_matiere" required><br>
-
-            <label for="volume_horaire">Volume horaire :</label>
-            <input type="number" id="volume_horaire" name="volume_horaire" min="0" required><br>
+            <label for="ecole">Nom de l'école :</label>
+            <input type="text" id="ecole" name="ecole" required><br>
 
             <input type="submit" value="Ajouter">
         </form>

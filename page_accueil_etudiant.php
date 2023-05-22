@@ -50,12 +50,12 @@
 
 <body>
     <?php barre_de_navigation_etudiants(); ?>
+    <h1>Etudiant</h1>
     <div class="container text-center">
         <h3>Omnes MySkills</h3>
         <p>Bienvenue sur Omnes MySkills, le site web qui permet aux étudiants de l'école Omnes d'évaluer leurs compétences dans chaque matière. Grâce à notre plateforme, les professeurs pourront lister les compétences à acquérir dans leur matière respective, et les étudiants pourront s'auto-évaluer pour chaque compétence. Tout au long de l'année, les professeurs pourront confirmer ou infirmer l'acquisition de ces compétences, permettant ainsi aux étudiants de suivre leur progression. Nous espérons que cette plateforme vous sera utile dans votre parcours éducatif à Omnes.</p>
     </div>
-
-    <br><br><br><br><br><br><br><br>
+    
     <?php pied_de_page(); ?>
 </body>
 

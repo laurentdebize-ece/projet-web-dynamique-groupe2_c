@@ -17,6 +17,7 @@
             position: absolute;
             top: 150px;
             left: 20px;
+            
         }
         #Barre_de_filtre {
             position: absolute;
@@ -42,17 +43,48 @@
             position: absolute;
             top: 100px;
             left: 650px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: #808080;
+            color: #ffffff;
         }
         .idBoutonPlusieurs{
             position: absolute;
             top: 100px;
             left: 1250px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: #808080;
+            color: #ffffff;
         }
         .button-position {
             position: absolute;
             top: 400px; 
             left: 50px;
+            margin: 10px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: #808080;
+            color: #ffffff;
         }
+        .btn_trier {
+            position: absolute;
+            left: 400px;
+            top: 37px;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: #808080;
+            color: #ffffff;
+        }
+        .titreTrier {
+            position: absolute;
+            left: 150px;
+            top: 10px;
+            color: #808080;
+            text-decoration: underline;
+        }
+
+
     </style>
     <script>
     function UnFiltre() {
@@ -88,7 +120,7 @@ if (!isset($_SESSION['Id_utilisateur'])) {
 $idUtilisateur = $_SESSION['Id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
 
 // Requête SQL pour récupérer les données
-$sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire,ce.date_evaluation, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
+$sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire,ce.date_evaluation, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition, vp.nom_validation
     FROM etudiant e
     JOIN etudiiant_matiere em ON e.id_utilisateur = em.id_etudiant
     JOIN matiere m ON em.id_matiere = m.id_matiere
@@ -97,6 +129,7 @@ $sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences,
     JOIN competences_etudiants ce ON c.id_competences = ce.id_competence AND e.id_utilisateur = ce.id_etudiant
     JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
     JOIN professeur p ON pm.id_professeur = p.id_professeur
+    JOIN validation_prof vp ON ce.validation_prof = vp.id_validation
     WHERE e.id_utilisateur = $idUtilisateur";
 
 // Vérifier si le bouton reset a été appuyé
@@ -187,6 +220,53 @@ if ($result->num_rows > 0) {
             .non-acquis {
                 background-color: red;
             }
+            input[type=range] {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 10px;
+                border-radius: 5px;
+                background: #d3d3d3;
+                outline: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #0056b3;
+                cursor: pointer;
+            }
+            
+            input[type=range]::-webkit-slider-thumb:hover {
+                background: #007bff;
+            }
+            
+            input[type=range]:focus::-webkit-slider-thumb {
+                background: #007bff;
+            }
+            
+            button[type=submit] {
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 4px;
+                font-family: 'Arial', sans-serif;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                background-color: #808080;
+                color: #ffffff;
+                margin-top : 20px;
+            }
+            
+            button[type=submit]:hover {
+                background-color: #007bff;
+            }
+            
         </style>";
     
     echo "<div class='container'>";
@@ -198,6 +278,7 @@ if ($result->num_rows > 0) {
                 <th>Modifier niveau d'acquisition</th>
                 <th>Niveau d'acquisition</th>
                 <th>Commentaire du professeur</th>
+                <th>Validation du professeur</th>
                 <th>Date evaluation du professeur</th>
             </tr>";
 
@@ -206,16 +287,18 @@ if ($result->num_rows > 0) {
         $niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
         $nomProf= $row["Nom_prof"];
         $acquisition = $row['acquisition'];
+        $nom_validation = $row['nom_validation'];
         
 
         $class = '';
         if ($acquisition === 'Acquis') {
             $class = 'acquis';
         } elseif ($acquisition === 'En cours d\'acquisition'){
-            $class = 'en-cours';
-            } elseif ($acquisition === 'Non acquis') {
-            $class = 'non-acquis';
-            }
+        $class = 'en-cours';
+        } elseif ($acquisition === 'Non acquis') {
+        $class = 'non-acquis';
+        }
+        
         echo "<tr>
                 <td>" . $row["nom_matiere"] . "</td>
                 <td>" . $nomProf . "</td>
@@ -229,6 +312,7 @@ if ($result->num_rows > 0) {
                 </td>
                 <td class=\"$class\">" . $acquisition . "</td>
                 <td>" . $row["commentaire"] . "</td>
+                <td>" . $row["nom_validation"] . "</td>
                 <td>" . $row["date_evaluation"] . "</td>
                 </tr>";
         }
@@ -243,6 +327,7 @@ if ($result->num_rows > 0) {
     if (isset($_POST['submit'])) {
         // Parcourir les valeurs du formulaire soumis
         foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
+
             // Extraire l'ID de la matière et de la compétence
             $idArray = explode("_", $idMatiereCompetence);
             $idMatiere = $idArray[0];
@@ -255,7 +340,7 @@ if ($result->num_rows > 0) {
             // Vérification si la nouvelle valeur est valide (entre 1 et 3)
             if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
                 // Requête de mise à jour
-                $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ? WHERE id_etudiant = ? AND id_competence = ?");
+                $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ?, commentaire = '', validation_prof = 0 WHERE id_etudiant = ? AND id_competence = ?");
                 $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
     
                 // Exécution de la requête
@@ -277,13 +362,13 @@ if ($result->num_rows > 0) {
     <body>
     <?php barre_de_navigation(); ?>
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" id="Barre_de_trie">
-        <label for="sort">Trier le tableau:</label><br></br>
+        <label class = " titreTrier" for="sort">Trier le tableau:</label><br></br>
         <select name="sort" id="sort">
             <option value="croissant_competences">Ordre alphabétique croissant du nom des compétences</option>
             <option value="decroissant_competences">Ordre alphabétique décroissant du nom des compétences</option>
             <option value="croissant_date">Date d'évaluation croissante</option>
             <option value="decroissant_date">Date d'évaluation décroissante</option>
-            <input type="submit" value="Trier">
+            <input class = "btn btn-primary btn_trier" type="submit" value="Trier">
         </select>
     </form>
     <div style = "display : none" id="FiltreUnAUN" class="form-container">
@@ -354,12 +439,12 @@ if ($result->num_rows > 0) {
     
     
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-    <input class="button-position" type="submit" name="reset" value="Réinitialiser">
+    <input class="btn btn-primary button-position" type="submit" name="reset" value="Réinitialiser">
     </form>
 
 
-    <button class = "idBoutonUnAUn" onclick="UnFiltre()">Filtrer une seule compétence à la fois</button>
-    <button class = "idBoutonPlusieurs" onclick="PlusieursFiltres()">Filtrer plusieurs compétences</button>
+    <button class = "btn btn-primary idBoutonUnAUn" onclick="UnFiltre()">Filtrer une seule compétence à la fois</button>
+    <button class = "btn btn-primary idBoutonPlusieurs" onclick="PlusieursFiltres()">Filtrer plusieurs compétences</button>
     <br><br><br><br><br><br><br><br>
 <?php pied_de_page(); ?>
 </body>

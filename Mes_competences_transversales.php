@@ -90,6 +90,7 @@ if ($result->num_rows > 0) {
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
+        border: 1px solid black;
     }
     
     th {
@@ -106,6 +107,52 @@ if ($result->num_rows > 0) {
     
     .non-acquis {
         background-color: red;
+    }
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #0056b3;
+        cursor: pointer;
+    }
+    
+    input[type=range]::-webkit-slider-thumb:hover {
+        background: #007bff;
+    }
+    
+    input[type=range]:focus::-webkit-slider-thumb {
+        background: #007bff;
+    }
+    
+    button[type=submit] {
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: 'Arial', sans-serif;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        background-color: #808080;
+        color: #ffffff;
+        margin-top : 20px;
+    }
+    
+    button[type=submit]:hover {
+        background-color: #0056b3;
     }
 </style>";
 

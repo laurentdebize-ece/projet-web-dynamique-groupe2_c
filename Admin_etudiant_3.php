@@ -18,7 +18,7 @@ $ID_matiere_prof = $_SESSION['id_matiere']; // ou une autre méthode pour obteni
 $id_professeur = $_SESSION['id_professeur'];
 $nom_classe = $_GET['nom_classe'];
 
-$sql = "SELECT DISTINCT u.Nom, u.Prenom, u.email, em.id_matiere
+$sql = "SELECT DISTINCT u.Nom, u.Prenom, u.email
 FROM utilisateur u
 JOIN etudiant e ON u.Id_utilisateur = e.id_utilisateur
 JOIN etudiiant_matiere em ON e.id_etudiant = em.id_etudiant
@@ -26,7 +26,7 @@ JOIN matiere m ON em.id_matiere = m.id_matiere
 JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
 JOIN professeur p ON pm.id_professeur = p.id_professeur
 JOIN classe c ON e.id_classe = c.id_classe
-WHERE c.nom_classe = '$nom_classe' AND em.id_matiere = '$ID_matiere_prof'AND em.id_prof = '$id_professeur'";
+WHERE c.nom_classe = '$nom_classe'";
 
 
 $result = $conn->query($sql);

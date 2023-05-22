@@ -69,7 +69,7 @@
         function showClasses(nom_promotion) {
             // Clear student details when showing classes
             $("#student-details").html('');
-            $.get("Professeurs_etudiants_Bouton_classe.php", {nom_promotion: nom_promotion}, function(data){
+            $.get("Admin_etudiant_2.php", {nom_promotion: nom_promotion}, function(data){
                 var classNames = data.split(','); // Assuming the names are comma-separated
                 var html = '';
                 for (var i = 0; i < classNames.length; i++) {
@@ -80,7 +80,7 @@
         }
 
         function showStudentDetails(nom_classe) {
-            $.get("Professeurs_etudiants_tableaux_etudiants.php", {nom_classe: nom_classe}, function(data){
+            $.get("Admin_etudiant_3.php", {nom_classe: nom_classe}, function(data){
             var students = data.split(';');
             var html = '<table class="centered-table">';
             html += '<tr><th>Nom</th><th>Prenom</th><th>Email</th></tr>';
@@ -119,14 +119,7 @@
     $userId = $_SESSION['Id_utilisateur'];
 
     $sql = "SELECT DISTINCT p.nom_promotion 
-    FROM promotion p
-    JOIN classe c ON p.id_promotion = c.id_promotion
-    JOIN etudiant e ON c.id_classe = e.id_classe
-    JOIN etudiiant_matiere em ON e.id_etudiant = em.id_etudiant
-    JOIN matiere m ON em.id_matiere = m.id_matiere
-    JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere
-    JOIN professeur prof ON pm.id_professeur = prof.id_professeur
-    WHERE prof.id_utilisateur = $userId";
+    FROM promotion p";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {

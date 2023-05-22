@@ -15,6 +15,8 @@ $email = $_SESSION['email'];
 $nom_classe = $_SESSION['nom_classe'];
 $Nom_ecole = $_SESSION['Nom_ecole'];
 $ID_matiere_prof = $_SESSION['id_matiere'];
+$id_professeur = $_SESSION['id_professeur'];
+$Id_administrateur = $_SESSION['Id_administrateur'];
 
 
 
@@ -54,6 +56,8 @@ $ID_matiere_prof = $_SESSION['id_matiere'];
 				<p><strong>email :</strong> <?php echo $email ?></p>
 				<p><strong>Ecole :</strong> <?php echo $Nom_ecole ?></p>
 				<p><strong>Classe :</strong> <?php echo $nom_classe ?></p>
+				<p><strong>Classe :</strong> <?php echo $id_professeur ?></p>
+				<p><strong>Classe :</strong> <?php echo $Id_administrateur ?></p>
 			</div>
 		</div>
 	</div>

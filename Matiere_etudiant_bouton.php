@@ -12,31 +12,25 @@
     <title>Matières</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             font-family: Arial, sans-serif;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
             margin-top: 50px;
         }
 
         h1 {
-            text-align: center;
+            margin-bottom: 30px;
         }
 
-        button {
+        .btn-matiere {
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
             width: 500px;
+            background-color: #808080;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -73,7 +67,7 @@ $stmt->close();
     <div class="container">
         <h1>Matières</h1>
         <?php foreach ($matieres as $matiere): ?>
-                <button onclick="window.location.href= 'Matiere_etudiant_competences.php?matiere_id=<?php echo $matiere['id_matiere']; ?>'"><?php echo $matiere['nom_matiere']; ?></button>
+            <a href="Matiere_etudiant_competences.php?matiere_id=<?php echo $matiere['id_matiere']; ?>" class="btn btn-primary btn-matiere"><?php echo $matiere['nom_matiere']; ?></a>
         <?php endforeach; ?>
     </div>
     <?php pied_de_page(); ?>

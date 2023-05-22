@@ -11,9 +11,20 @@
     <link rel="stylesheet" href="page_accueil_etudiant.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
-
 </head>
-
+<head>
+  <style>
+    .titre {
+      text-align: center;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+  <h2 class="titre">Toutes les compétences OMNES</h2>
 
 <?php
 include 'barre_de_navigation.php';
@@ -37,7 +48,6 @@ if (!isset($_SESSION['Id_utilisateur'])) {
 
 $idUtilisateur = $_SESSION['Id_utilisateur']; // ID utilisateur actuel
 $idEtudiant = $_SESSION['id_etudiant'];
-echo $idEtudiant;
 // Récupérer les compétences de l'étudiant actuellement connecté
 $sql1 = "SELECT c.id_competences, c.nom_competences
         FROM competences c
@@ -85,6 +95,7 @@ if ($result1->num_rows > 0 || $result2->num_rows > 0) {
                 padding: 8px;
                 text-align: left;
                 border-bottom: 1px solid #ddd;
+                border: 1px solid black;
             }
             
             th {
@@ -137,7 +148,7 @@ if ($result1->num_rows > 0 || $result2->num_rows > 0) {
 
 if (isset($_POST['submit'])) {
     $id_competence = intval($_POST['id_competence']);
-    $id_etudiant = intval($_SESSION['Id_utilisateur']);
+    $id_etudiant = intval($_SESSION['id_etudiant']);
     $requete = $conn->prepare("INSERT INTO competences_etudiants (id_competence, id_etudiant, Id_niveau_acquisition, commentaire, date_evaluation) VALUES (?, ?, 1, 'testos', '2023-05-10')");
     $requete->bind_param("ii", $id_competence, $id_etudiant);
     $requete->execute();

@@ -73,8 +73,13 @@
     echo "<table>";
     echo "<tr><th>Matiere</th><th>Competence</th></tr>";
     if ($result->num_rows > 0) {
+        $displayedCompetences = array();  // Tableau pour enregistrer les compétences déjà affichées
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row['nom_matiere'] . "</td><td>" . $row['nom_competences'] . "</td></tr>";
+            // Vérifier si la compétence a déjà été affichée
+            if (!in_array($row['nom_competences'], $displayedCompetences)) {
+                echo "<tr><td>" . $row['nom_matiere'] . "</td><td>" . $row['nom_competences'] . "</td></tr>";
+                $displayedCompetences[] = $row['nom_competences'];  // Ajouter la compétence au tableau des compétences déjà affichées
+            }
         }
     }
     echo "</table>";
@@ -85,6 +90,7 @@
     </div>
     <div id="results" class="centered"></div>
     <div id="student-details" class="centered"></div>
+    <br><br><br><br><br><br><br><br>
     <?php pied_de_page(); ?>
 </body>
 </html>

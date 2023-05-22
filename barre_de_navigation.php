@@ -19,7 +19,7 @@ function barre_de_navigation() {
                     <li><a href="Matiere_etudiant_bouton.php">Matières</a></li>
                     <li><a href="Mes_Competences_Etudiant.php">Mes Compétences</a></li>
                     <li><a href="Mes_competences_transversales.php">Compétences transverses</a></li>
-                    <li><a href="Toutes_les_compet.php">Toutes les Compétences</a></li>
+                    <li><a href="Admin_etudiant_1.php">Toutes les Compétences</a></li>
                     <li><a href="page_profile.php">Mon Compte</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

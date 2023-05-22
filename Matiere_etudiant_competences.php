@@ -66,11 +66,31 @@ $stmt->close();
         th {
             background-color: #f2f2f2;
         }
+        .back-button {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #808080;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.2s ease;
+        }
+
+
+        
+
     </style>
 </head>
 <body>
     <?php barre_de_navigation(); ?>
     <div class="container">
+    <a href="Matiere_etudiant_bouton.php" class="back-button" style="margin-top:20px;">
+            &#8592; Retour
+        </a>
         <h1>Compétences</h1>
         <table>
             <thead>

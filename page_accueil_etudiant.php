@@ -103,6 +103,35 @@
   </div>
 
   <div id="notificationContainer"></div>
+  <?php
+  $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
+  if ($conn->connect_error) {
+      die("Échec de la connexion à la base de données : " . $conn->connect_error);
+  }
+  $idUtilisateur = $_SESSION['id_utilisateur'];
+
+  $sql2 = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur,e.id_etudiant, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
+    FROM matiere AS m
+    JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
+    JOIN competences AS c ON cm.id_competence = c.id_competences
+    JOIN competences_etudiants AS ce ON c.id_competences = ce.id_competence
+    JOIN etudiant AS e ON ce.id_etudiant = e.id_etudiant
+    JOIN professeur AS p ON c.id_professeur = p.id_professeur
+    JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
+    JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
+    WHERE e.id_utilisateur = $idUtilisateur AND ce.date_evaluation = CURDATE()";
+
+  $result2 = $conn->query($sql2);
+
+  // Affichage des résultats
+  if ($result2->num_rows > 0) {
+    $row = $result2->fetch_assoc();
+    $nomCompetence = $row["nom_competences"];
+    echo '<script>
+        localStorage.setItem("notification", "' . $nomCompetence . '");
+    </script>';
+  }
+  ?>
 
   <?php pied_de_page(); ?>
 </body>

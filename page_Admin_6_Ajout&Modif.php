@@ -38,10 +38,8 @@
                     <a href="page_Affecter_Prof-Classe.php">Affecter un professeur à une classe</a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
+        </div><br>
+        <button class="custom-dropbtn" onclick="window.open('mode_demploi.php')">Mode d'emploi pour l'ajout d'entités</button><br><br>
         <h2>Modification</h2>
         <div class="cadre">
             <p>Les possibilités de modification offertes sont variées et permettent de mettre à jour efficacement votre système. Vous pouvez modifier les profils d'utilisateurs existants en modifiant leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>
@@ -58,9 +56,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
         <h2>Suppression</h2>
         <div class="cadre">
             <p>Les possibilités de suppression offertes sont variées et permettent de gérer efficacement votre système. Vous pouvez supprimer des profils d'utilisateurs existants ainsi que leurs informations personnelles. Explorez ces options pour personnaliser votre système selon vos besoins spécifiques.</p>

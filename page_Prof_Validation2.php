@@ -1,43 +1,52 @@
 <?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "projet_info_ing2";
 session_start();
+// Créer une connexion
+$conn = new mysqli($servername, 'root', 'root', $dbname);
  
-$conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
- if ($conn->connect_error) {
+// Vérifier la connexion
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
  
 $nom_promotion = $_GET['nom_promotion'];
-$idUtilisateur = $_SESSION['id_utilisateur'];
+// Récupérer l'ID du professeur
+$userId = $_SESSION['id_utilisateur'];
  
-$sqlIdProfesseur = "SELECT p.id_professeur
-                    FROM professeur p
-                    WHERE p.id_utilisateur = '$idUtilisateur'";
-$resultIdProfesseur = $conn->query($sqlIdProfesseur);
+$sql_professeur = "SELECT id_professeur FROM professeur WHERE id_utilisateur = $userId";
+$result_professeur = $conn->query($sql_professeur);
  
-if ($resultIdProfesseur->num_rows > 0) {
-  $rowIdProfesseur = $resultIdProfesseur->fetch_assoc();
-  $idProfesseur = $rowIdProfesseur['id_professeur'];
-}else{
-    echo '0 result';
+if ($result_professeur && $result_professeur->num_rows > 0) {
+    $row_professeur = $result_professeur->fetch_assoc();
+    $id_professeur = $row_professeur['id_professeur'];
+} else {
+    echo 'Erreur: Aucun professeur correspondant trouvé.';
+    exit();
 }
  
+
 $sql = "SELECT c.nom_classe
-        FROM classe c
-        JOIN promotion p ON c.id_promotion = p.id_promotion
-        JOIN professeur_classe pc ON c.id_classe = pc.id_classe
-        WHERE p.nom_promotion = '$nom_promotion' AND pc.id_professeur = '$idProfesseur'";
-       
+FROM classe c
+JOIN promotion p ON c.id_promotion = p.id_promotion
+JOIN professeur_classe pc ON c.id_classe = pc.id_classe
+WHERE p.nom_promotion = '$nom_promotion' AND pc.id_professeur = $id_professeur";
+ 
 $result = $conn->query($sql);
 $classNames = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $classNames[] = $row['nom_classe'];
     }
+}else{
+    echo 'Erreur: Aucune classe correspondant trouvé.';
+ 
 }
  
 echo implode(",", $classNames);
  
 $conn->close();
 ?>
- 
  

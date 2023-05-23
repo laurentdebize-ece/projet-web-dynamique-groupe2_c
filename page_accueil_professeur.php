@@ -65,23 +65,20 @@
 
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="Physique.jpg" alt="Physique">
+                        <img src="ecole1.png" alt="ecole1">
                         <div class="carousel-caption">
-                            <h3>Physique</h3>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="maths.jpg" alt="Mathématiques">
+                        <img src="lions.png" alt="lions">
                         <div class="carousel-caption">
-                            <h3>Mathématiques</h3>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="info.jpg" alt="Informatique">
+                        <img src="dinos.png" alt="dinos">
                         <div class="carousel-caption">
-                            <h3>Informatique</h3>
                         </div>
                     </div>
                 </div>

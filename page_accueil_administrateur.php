@@ -6,6 +6,7 @@
     <title>Accueil Administrateur</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -51,7 +52,7 @@
     <canvas id="bubbleCanvas"></canvas>
     <h1>Scolarite</h1>
     <div class="container text-center">
-        <div style="width: 90%; margin: auto;">
+    <div style="width: 90%; margin: auto;">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -61,23 +62,20 @@
 
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="Physique.jpg" alt="Physique">
+                        <img src="ecole1.png" alt="ecole1">
                         <div class="carousel-caption">
-                            <h3>Physique</h3>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="maths.jpg" alt="Mathématiques">
+                        <img src="lions.png" alt="lions">
                         <div class="carousel-caption">
-                            <h3>Mathématiques</h3>
                         </div>
                     </div>
 
                     <div class="item">
-                        <img src="info.jpg" alt="Informatique">
+                        <img src="dinos.png" alt="dinos">
                         <div class="carousel-caption">
-                            <h3>Informatique</h3>
                         </div>
                     </div>
                 </div>
@@ -92,9 +90,6 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-        </div><br>
-        <div class="photo-container">
-            <img src="omnes_photo.png" alt="Photo Omnes">
         </div><br>
         <h3>Omnes MySkills</h3><br>
         <p>Bienvenue sur Omnes MySkills, le site web qui permet aux étudiants de l'école Omnes d'évaluer leurs compétences dans chaque matière. Grâce à notre plateforme, les professeurs pourront lister les compétences à acquérir dans leur matière respective, et les étudiants pourront s'auto-évaluer pour chaque compétence. Tout au long de l'année, les professeurs pourront confirmer ou infirmer l'acquisition de ces compétences, permettant ainsi aux étudiants de suivre leur progression. Nous espérons que cette plateforme vous sera utile dans votre parcours éducatif à Omnes.</p>

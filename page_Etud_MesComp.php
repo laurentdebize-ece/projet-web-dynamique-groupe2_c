@@ -5,10 +5,10 @@
     <title>Mes Competences</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css>
+    <link rel="stylesheet" href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css>
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js></script>
     <script type="text/javascript" src="page_Etud_MesComp.js"></script>
     <link rel="stylesheet" href="page_Etu_MesCompTransv.css">
     <link rel="stylesheet" href="page_accueil_etudiant.css">
@@ -36,11 +36,13 @@
     if (!isset($_SESSION['id_utilisateur'])) {
         die("ID utilisateur non disponible en session.");
     }
+    /*$date = date("Y/m/d");
 
-    $idUtilisateur = $_SESSION['id_utilisateur']; 
 
-    // Requête SQL
-    $sql = "SELECT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
+    $idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
+
+    // Requête SQL pour récupérer les données
+    $sql = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur,e.id_etudiant, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
     FROM matiere AS m
     JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
     JOIN competences AS c ON cm.id_competence = c.id_competences
@@ -49,14 +51,33 @@
     JOIN professeur AS p ON c.id_professeur = p.id_professeur
     JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
     JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
-    WHERE e.id_utilisateur = $idUtilisateur;
-    ";
+    WHERE e.id_utilisateur = $idUtilisateur";
 
 
+    $sql2 = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur,e.id_etudiant, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
+    FROM matiere AS m
+    JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
+    JOIN competences AS c ON cm.id_competence = c.id_competences
+    JOIN competences_etudiants AS ce ON c.id_competences = ce.id_competence
+    JOIN etudiant AS e ON ce.id_etudiant = e.id_etudiant
+    JOIN professeur AS p ON c.id_professeur = p.id_professeur
+    JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
+    JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
+    WHERE e.id_utilisateur = $idUtilisateur AND ce.date_evaluation = CURDATE()";
 
-    // Bouton reset appuyé?
+    $result2 = $conn->query($sql2);
+
+    $result2 = $conn->query($sql2);
+
+    // Affichage des résultats
+    if ($result2->num_rows > 0) {
+        $row = $result2->fetch_assoc();
+        $nomCompetence = $row["nom_competences"];
+        echo '<script>alert("' . $nomCompetence . '");</script>';
+    }*/
+
+    // Vérifier si le bouton reset a été appuyé
     if (!isset($_POST['reset'])) {
-
         // Ajout du critère de tri à la requête SQL
         if (isset($_POST['sort'])) {
             $sort = $_POST['sort'];
@@ -73,6 +94,7 @@
                 case 'decroissant_date':
                     $sql .= " ORDER BY ce.date_evaluation DESC";
                     break;
+                    // Ajoutez des cas supplémentaires pour les autres options de tri
             }
         }
         if (isset($_POST['subject'])) {
@@ -103,7 +125,7 @@
 
     $result = $conn->query($sql);
 
-    // résultats
+    // Affichage des résultats
     if ($result->num_rows > 0) {
 
         echo "<div class='container'>";
@@ -120,11 +142,12 @@
             </tr>";
 
         while ($row = $result->fetch_assoc()) {
-
+            // Récupérer la valeur actuelle du niveau d'acquisition depuis la base de données
             $niveauAcquisitionActuel = $row["Id_niveau_acquisition"];
             $nomProf = $row["Nom_prof"];
             $acquisition = $row['acquisition'];
             $nom_validation = $row['nom_validation'];
+
 
 
             $class = '';
@@ -142,7 +165,7 @@
                 <td>" . $row["nom_competences"] . "</td>
                 <td>
                     <form method='POST' action='" . $_SERVER["PHP_SELF"] . "'>
-                        <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competences"] . "]' value='" . $niveauAcquisitionActuel . "'>
+                        <input type='range' min='1' max='3' step='1' name='nouvelleValeur[" . $row["id_matiere"] . "_" . $row["id_competences"] . "_" . $row["id_etudiant"] . "]' value='" . $niveauAcquisitionActuel . "'>
                         <input type='hidden' name='idEtudiant' value='" . $row["id_utilisateur"] . "'>
                         <button type='submit' name='submit'>Envoyer</button>
                     </form>
@@ -160,24 +183,30 @@
         echo "Aucun résultat trouvé.";
     }
 
-    if (isset($_POST['submit'])) {
 
+
+    // Vérification si le formulaire a été soumis
+    if (isset($_POST['submit'])) {
+        // Parcourir les valeurs du formulaire soumis
         foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
 
-
+            // Extraire l'ID de la matière et de la compétence
             $idArray = explode("_", $idMatiereCompetence);
             $idMatiere = $idArray[0];
             $idCompetence = $idArray[1];
+            $id_etudiant = $idArray[2];
 
-
+            // Récupérer la nouvelle valeur saisie par l'utilisateur
             $nouvelleValeur = intval($nouvelleValeur);
             $idEtudiant = $_POST["idEtudiant"];
 
-
+            // Vérification si la nouvelle valeur est valide (entre 1 et 3)
             if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
-
+                // Requête de mise à jour
                 $requete = $conn->prepare("UPDATE competences_etudiants SET Id_niveau_acquisition = ?, commentaire = '', validation_prof = 0 WHERE id_etudiant = ? AND id_competence = ?");
-                $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
+                $requete->bind_param("iii", $nouvelleValeur, $id_etudiant, $idCompetence);
+
+                // Exécution de la requête
                 $requete->execute();
             } else {
                 echo "La valeur saisie pour la matière avec l'ID $idMatiere et la compétence avec l'ID $idCompetence n'est pas valide. Veuillez saisir une valeur entre 1 et 3.";
@@ -185,9 +214,9 @@
         }
 
         echo "Les valeurs ont été mises à jour avec succès.";
-
+        // Redirection vers la page actuelle
         header("Location: " . $_SERVER["PHP_SELF"]);
-        exit();
+        exit(); // Assure la fin de l'exécution du script après la redirection
     }
     ?>
 

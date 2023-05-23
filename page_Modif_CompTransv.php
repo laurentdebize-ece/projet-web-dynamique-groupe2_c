@@ -24,20 +24,15 @@
             <label for="competence">Compétence transversale à modifier:</label>
             <select id="competence" name="competence" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'competences'
                 $query = "SELECT id_competence, nom_competences FROM competences_transversales";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom_competences = $donnees['nom_competences'];
                     echo '<option value="' . $donnees['id_competence'] . '">' . $nom_competences . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>
@@ -50,17 +45,13 @@
             <label for="matiere">Matiere:</label>
             <select id="matiere" name="matiere">
                 <?php
-                // Récupération des données de la table 'matiere'
                 $query = "SELECT id_matiere, nom_matiere FROM matiere";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom_matiere = $donnees['nom_matiere'];
                     echo '<option value="' . $donnees['id_matiere'] . '">' . $nom_matiere . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>

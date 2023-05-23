@@ -8,7 +8,6 @@ try {
     die("Erreur : " . $e->getMessage());
 }
 
-// Récupération des données du formulaire
 $id_matiere = $_POST['matiere'];
 $id_classe = $_POST['classe'];
 
@@ -32,9 +31,8 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($result) {
     $id_professeur = $result['id_professeur'];
-    // Utiliser la variable $id_professeur comme souhaité
-    // ...
-    // Sélection du nom de la matière
+
+    // nom  matière
     $query = "SELECT nom_matiere FROM matiere WHERE id_matiere = :id_matiere";
     $stmt = $bdd->prepare($query);
     $stmt->bindParam(':id_matiere', $id_matiere, PDO::PARAM_INT);
@@ -42,7 +40,7 @@ if ($result) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $nom_matiere = $result['nom_matiere'];
 
-    // Sélection du nom de la classe
+    //  nom classe
     $query = "SELECT nom_classe FROM classe WHERE id_classe = :id_classe";
     $stmt = $bdd->prepare($query);
     $stmt->bindParam(':id_classe', $id_classe, PDO::PARAM_INT);
@@ -52,14 +50,14 @@ if ($result) {
 
 
 
-    // Sélection des étudiants de la classe
+    // étudiants de la classe
     $query = "SELECT id_etudiant FROM etudiant WHERE id_classe = :id_classe";
     $stmt = $bdd->prepare($query);
     $stmt->bindParam(':id_classe', $id_classe, PDO::PARAM_INT);
     $stmt->execute();
     $etudiants = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    // Insertion des étudiants dans la table etudiiant_matiere
+    // on insere des étudiants dans la table etudiiant_matiere
     $query = "INSERT INTO etudiiant_matiere (id_etudiant, id_matiere, id_prof) VALUES (:id_etudiant, :id_matiere, :id_professeur)";
     $stmt = $bdd->prepare($query);
     $stmt->bindParam(':id_matiere', $id_matiere, PDO::PARAM_INT);
@@ -70,8 +68,6 @@ if ($result) {
         $stmt->execute();
     }
 
-
-    // Afficher l'alerte en fonction de l'action effectuée
     if ($stmt->rowCount() > 0) {
         $message = "Les étudiants de la classe '$nom_classe' ont été ajoutés avec succès à la matière '$nom_matiere'.";
         echo '<script>alert("Succès : ' . $message . '");

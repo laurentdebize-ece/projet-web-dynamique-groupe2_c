@@ -24,20 +24,16 @@
             <label for="ecole">Ecole à modifier:</label>
             <select id="ecole" name="ecole" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'ecole'
                 $query = "SELECT id_ecole, Nom_ecole FROM ecole";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $Nom_ecole = $donnees['Nom_ecole'];
                     echo '<option value="' . $donnees['id_ecole'] . '">' . $Nom_ecole . '</option>';
                 }
 
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>

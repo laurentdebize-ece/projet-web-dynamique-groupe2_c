@@ -24,21 +24,16 @@
             <label for="etudiant">Professeur à modifier:</label>
             <select id="etudiant" name="etudiant" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
-
-                // Récupération des données de la table 'professeur' avec les informations de l'utilisateur
                 $query = "SELECT p.id_professeur, u.Nom, u.Prenom FROM professeur p JOIN utilisateur u ON p.id_utilisateur = u.Id_utilisateur";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom = $donnees['Nom'];
                     $prenom = $donnees['Prenom'];
                     echo '<option value="' . $donnees['id_professeur'] . '">' . $prenom . ' ' . $nom . '</option>';
                 }
 
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>
@@ -56,18 +51,13 @@
             <label for="classe">Classe :</label>
             <select id="classe" name="classe">
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'classe'
                 $reponse = $bdd->query('SELECT id_classe, nom_classe FROM classe');
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $reponse->fetch()) {
                     echo '<option value="' . $donnees['id_classe'] . '">' . $donnees['nom_classe'] . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $reponse->closeCursor();
                 ?>
             </select><br>

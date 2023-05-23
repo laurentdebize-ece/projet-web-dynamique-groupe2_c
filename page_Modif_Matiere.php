@@ -24,20 +24,14 @@
             <label for="matiere">Matière à modifier:</label>
             <select id="matiere" name="matiere" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
-
-                // Récupération des données de la table 'matiere'
                 $query = "SELECT id_matiere, nom_matiere FROM matiere";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom_matiere = $donnees['nom_matiere'];
                     echo '<option value="' . $donnees['id_matiere'] . '">' . $nom_matiere . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>

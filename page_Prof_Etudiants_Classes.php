@@ -18,7 +18,7 @@ if ($resultIdProfesseur->num_rows > 0) {
   $rowIdProfesseur = $resultIdProfesseur->fetch_assoc();
   $idProfesseur = $rowIdProfesseur['id_professeur'];
 }else{
-    echo '0 result';
+    echo '0 resultats';
 }
  
 $sql = "SELECT c.nom_classe

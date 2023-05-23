@@ -29,7 +29,7 @@
         die("ID utilisateur non disponible en session.");
     }
 
-    $idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
+    $idUtilisateur = $_SESSION['id_utilisateur'];
 
     // Requête SQL pour récupérer les données
     $sql = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competence, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur, ce.commentaire, p.Nom_prof, (SELECT ac.nom FROM acquisition_competences ac WHERE ac.id = ce.Id_niveau_acquisition) AS acquisition
@@ -45,7 +45,7 @@
 
     $result = $conn->query($sql);
 
-    // Fonction pour regrouper les données par compétences
+    // On regroupe les données par compétences
     function groupDataByCompetence($result)
     {
         $groupedData = [];
@@ -67,7 +67,7 @@
         return $groupedData;
     }
 
-    // Affichage des résultats
+    // On affiche les résultats (si au moins 1ligne)
     if ($result->num_rows > 0) {
         echo "<div class='container'>";
         echo "<table>
@@ -118,45 +118,38 @@
         echo "Aucun résultat trouvé.";
     }
 
-    // Vérification si le formulaire a été soumis
     if (isset($_POST['submit'])) {
-        // Parcourir les valeurs du formulaire soumis
+        // On parcour les valeurs du formulaire soumis
+
         foreach ($_POST['nouvelleValeur'] as $idMatiereCompetence => $nouvelleValeur) {
-            // Extraire l'ID de la matière et de la compétence
             $idArray = explode("_", $idMatiereCompetence);
             $idMatiere = $idArray[0];
             $idCompetence = $idArray[1];
 
-
-            // Récupérer la nouvelle valeur saisie par l'utilisateur
+            // Recuperation de la nouvelle valeur saisie par l'utilisateur
             $nouvelleValeur = intval($nouvelleValeur);
             $idEtudiant = $_POST["idEtudiant"];
 
-            // Vérification si la nouvelle valeur est valide (entre 1 et 3)
             if ($nouvelleValeur >= 1 && $nouvelleValeur <= 3) {
                 // Requête de mise à jour
                 $requete = $conn->prepare("UPDATE compet_trans_etudiant SET Id_niveau_acquisition = ? WHERE id_etudiant = ? AND id_competence = ?");
                 $requete->bind_param("iii", $nouvelleValeur, $idEtudiant, $idCompetence);
 
-                // Exécution de la requête
                 $requete->execute();
             } else {
                 echo "La valeur saisie pour la matière avec l'ID $idMatiere et la compétence avec l'ID $idCompetence n'est pas valide. Veuillez saisir une valeur entre 1 et 3.";
             }
+
             // Requête SQL pour vérifier si l'enregistrement existe déjà
             $sql = "SELECT * FROM compet_trans_etudiant WHERE id_etudiant = $idUtilisateur AND id_matiere = $idMatiere AND id_competence = $idCompetence";
             $result = $conn->query($sql);
 
-            // Mise à jour ou insertion de la nouvelle valeur
             if ($result->num_rows > 0) {
-                // Mise à jour de l'enregistrement existant
                 $sql = "UPDATE compet_trans_etudiant SET Id_niveau_acquisition = $nouvelleValeur WHERE id_etudiant = $idUtilisateur AND id_matiere = $idMatiere AND id_competence = $idCompetence";
             } else {
                 // Insertion d'un nouvel enregistrement
                 $sql = "INSERT INTO compet_trans_etudiant (id_etudiant, id_matiere, id_competence, Id_niveau_acquisition) VALUES ($idUtilisateur, $idMatiere, $idCompetence, $nouvelleValeur)";
             }
-
-            // Exécution de la requête
             if ($conn->query($sql) === TRUE) {
                 echo "Mise à jour effectuée avec succès.";
             } else {
@@ -166,16 +159,11 @@
         // Actualiser la page pour afficher les nouvelles valeurs
 
         header("Location: " . $_SERVER["PHP_SELF"]);
-        exit(); // Assure la fin de l'exécution du script après la redirection
+        exit();
     }
 
-    // Fermeture de la connexion à la base de données
     $conn->close();
-
-    // Inclusion du pied de page
-    ?>
-
-    <?php pied_de_page(); ?>
+    pied_de_page(); ?>
 </body>
 
 </html>

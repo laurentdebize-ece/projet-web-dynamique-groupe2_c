@@ -23,17 +23,14 @@
     <div class="container">
         <?php
         session_start();
-
-        // Connexion à la base de données
         $conn = new mysqli("localhost", 'root', "root", "projet_info_ing2");
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Récupérer l'id de l'étudiant connecté
         $id_utilisateur = $_SESSION['id_utilisateur'];
 
-        // Récupérer les matières de l'étudiant
+        // On recup les matières de l'étudiant
         $sql = "SELECT m.id_matiere, m.nom_matiere FROM etudiiant_matiere em JOIN matiere m ON em.id_matiere = m.id_matiere WHERE em.id_etudiant = (SELECT id_etudiant FROM etudiant WHERE id_utilisateur = ?)";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {

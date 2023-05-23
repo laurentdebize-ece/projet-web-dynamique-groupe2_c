@@ -19,7 +19,7 @@
             $stmt->bindParam(':id_utilisateur', $id_utilisateur);
             $stmt->execute();
 
-            echo $mot_de_passe; // Retourner le nouveau mot de passe en tant que réponse
+            echo $mot_de_passe; // On retourne le mdp
 
         } catch (Exception $e) {
             echo "Une erreur s'est produite : " . $e->getMessage();

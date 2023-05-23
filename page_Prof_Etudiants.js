@@ -1,10 +1,9 @@
 function showClasses(nom_promotion) {
-    // Clear student details when showing classes
     $("#student-details").html('');
     $.get("page_Prof_Etudiants_Classes.php", {
         nom_promotion: nom_promotion
     }, function(data) {
-        var classNames = data.split(','); // Assuming the names are comma-separated
+        var classNames = data.split(','); 
         var html = '';
         for (var i = 0; i < classNames.length; i++) {
             html += '<button  class="btn btn-primary classe-button" onclick="showStudentDetails(\'' + classNames[i] + '\')">' + classNames[i] + '</button>';

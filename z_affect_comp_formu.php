@@ -7,7 +7,7 @@ if (isset($_POST['id_matiere'])) {
 
     $bdd = new PDO("mysql:host=localhost;dbname=Projet_info_ing2;charset=utf8", "root", "root");
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Requête pour récupérer id_professeur en fonction de id_utilisateur
+
     $query = "SELECT id_professeur FROM professeur WHERE id_utilisateur = :id_utilisateur";
     $stmt = $bdd->prepare($query);
     $stmt->execute(['id_utilisateur' => $id_utilisateur]);

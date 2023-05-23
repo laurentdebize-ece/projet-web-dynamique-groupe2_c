@@ -59,17 +59,17 @@
 
             $bdd = new PDO("mysql:host=localhost;dbname=Projet_info_ing2;charset=utf8", "root", "root");
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Requête pour récupérer id_professeur en fonction de id_utilisateur
+
             $query = "SELECT id_professeur FROM professeur WHERE id_utilisateur = :id_utilisateur";
             $stmt = $bdd->prepare($query);
             $stmt->execute(['id_utilisateur' => $id_utilisateur]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Vérification si l'id_professeur existe
+
             if ($result) {
                 $id_professeur = $result['id_professeur'];
 
-                // Requête pour récupérer les matières du professeur
+                // Recup des matières du prof
                 $query_matiere = "
         SELECT m.id_matiere, m.nom_matiere
         FROM matiere m
@@ -83,7 +83,7 @@
             ?>
 
             <select id="matiere" name="matiere" required>
-            <option disabled selected value="">Sélectionnez une Matière</option>
+                <option disabled selected value="">Sélectionnez une Matière</option>
                 <?php foreach ($matieres as $matiere) : ?>
                     <option value="<?php echo $matiere['id_matiere']; ?>"><?php echo $matiere['nom_matiere']; ?></option>
                 <?php endforeach; ?>
@@ -94,7 +94,7 @@
             <label for="classe">Classe :</label>
             <select id="classe" name="classe" required>
                 <?php
-                // Requête pour récupérer les classes du professeur
+
                 $query_classe = "
         SELECT c.id_classe, c.nom_classe
         FROM classe c

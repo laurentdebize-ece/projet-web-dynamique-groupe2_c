@@ -24,20 +24,15 @@
             <label for="classe">Classe à modifier:</label>
             <select id="classe" name="classe" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'classe'
                 $query = "SELECT id_classe, nom_classe FROM classe";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom_classe = $donnees['nom_classe'];
                     echo '<option value="' . $donnees['id_classe'] . '">' . $nom_classe . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>
@@ -48,17 +43,14 @@
             <label for="ecole">Ecole :</label>
             <select id="ecole" name="ecole" required>
                 <?php
-                // Récupération des données de la table 'matiere'
                 $query = "SELECT id_ecole, Nom_ecole FROM ecole";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $Nom_ecole = $donnees['Nom_ecole'];
                     echo '<option value="' . $donnees['id_ecole'] . '">' . $Nom_ecole . '</option>';
                 }
 
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>
@@ -66,16 +58,12 @@
             <label for="promotion">Promotion :</label>
             <select id="promotion" name="promotion" required>
                 <?php
-                // Récupération des données de la table 'matiere'
                 $query = "SELECT id_promotion, nom_promotion FROM promotion";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     echo '<option value="' . $donnees['id_promotion'] . '">' . $donnees['nom_promotion'] . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>

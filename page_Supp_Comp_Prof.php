@@ -25,7 +25,6 @@
             <label for="competence">Compétence à modifier:</label>
             <select id="competence" name="competence" required>
                 <?php
-                // On affiche les compétences appartenant aux matières auxquelles le professeur est associé.
 
                 session_start();
                 $id_utilisateur = $_SESSION['id_utilisateur'];
@@ -33,17 +32,14 @@
                 $bdd = new PDO("mysql:host=localhost;dbname=Projet_info_ing2;charset=utf8", "root", "root");
                 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                // Requête pour récupérer id_professeur en fonction de id_utilisateur
                 $query = "SELECT id_professeur FROM professeur WHERE id_utilisateur = :id_utilisateur";
                 $stmt = $bdd->prepare($query);
                 $stmt->execute(['id_utilisateur' => $id_utilisateur]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Vérification si l'id_professeur existe
                 if ($result) {
                     $id_professeur = $result['id_professeur'];
 
-                    // Requête pour récupérer les matières du professeur
                     $query_matiere = "
             SELECT m.id_matiere, m.nom_matiere
             FROM matiere m
@@ -54,11 +50,11 @@
                     $stmt_matiere->execute(['id_professeur' => $id_professeur]);
                     $matieres = $stmt_matiere->fetchAll(PDO::FETCH_ASSOC);
 
-                    // Affichage des compétences pour chaque matière
+
                     foreach ($matieres as $matiere) {
                         echo "<optgroup label='" . $matiere['nom_matiere'] . "'>";
 
-                        // Requête pour récupérer les compétences de la matière
+
                         $query_competence = "
                 SELECT c.id_competences, c.nom_competences
                 FROM competences c
@@ -69,7 +65,6 @@
                         $stmt_competence->execute(['id_matiere' => $matiere['id_matiere']]);
                         $competences = $stmt_competence->fetchAll(PDO::FETCH_ASSOC);
 
-                        // Affichage des compétences
                         foreach ($competences as $competence) {
                             echo "<option value='" . $competence['id_competences'] . "'>" . $competence['nom_competences'] . "</option>";
                         }

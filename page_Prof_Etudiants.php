@@ -33,7 +33,6 @@ session_start();
             }
                 $id_utilisateur = $_SESSION['id_utilisateur'];
  
-            // Requête pour récupérer l'ID du professeur à partir de l'ID de l'utilisateur
             $sql = "SELECT id_professeur FROM professeur WHERE id_utilisateur = '$id_utilisateur'";
             $result = $conn->query($sql);
  
@@ -41,7 +40,7 @@ session_start();
                 $row = $result->fetch_assoc();
                 $id_professeur = $row['id_professeur'];
             } else {
-                // Gérer le cas où aucun résultat n'est trouvé pour l'ID de l'utilisateur
+
                 echo "Erreur : Aucun professeur trouvé pour cet utilisateur.";
                 exit();
             }

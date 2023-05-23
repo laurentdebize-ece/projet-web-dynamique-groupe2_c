@@ -12,17 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Construire le sujet et le corps de l'e-mail
     $corps = "Nom: $nom\n";
     $corps .= "Prénom: $prenom\n";
     $corps .= "Email: $email\n";
     $corps .= "Message: $message\n";
-
-    // En-têtes de l'e-mail
     $headers = "From: $email\r\n";
     $headers .= "Reply-To: $email\r\n";
 
-    // Envoyer l'e-mail
+    // On envoie le mail
     mail($adresseEmailDestinataire, $sujet, $corps, $headers);
 
 

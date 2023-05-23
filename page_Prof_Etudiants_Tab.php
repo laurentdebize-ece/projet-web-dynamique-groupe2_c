@@ -7,7 +7,6 @@ if ($conn->connect_error) {
  
 $userId = $_SESSION['id_utilisateur'];
  
-// Récupérer l'ID du professeur
 $sql_professeur = "SELECT id_professeur FROM professeur WHERE id_utilisateur = $userId";
 $result_professeur = $conn->query($sql_professeur);
  
@@ -17,7 +16,7 @@ if ($result_professeur && $result_professeur->num_rows > 0) {
 } else {
     echo 'Erreur1';
 }
-// Récupérer l'ID de la matière enseignée par le professeur
+
 $sql_matiere_prof = "SELECT id_matiere FROM professeur_matiere WHERE id_professeur = $id_professeur";
 $result_matiere_prof = $conn->query($sql_matiere_prof);
  
@@ -52,7 +51,7 @@ if ($result->num_rows > 0) {
     </script>';
         exit();
 }
-// Remove the last semicolon
+// on vire la derniere ,
 $studentDetails = rtrim($studentDetails, ';');
  
 echo $studentDetails;

@@ -11,7 +11,7 @@
 	border-radius: 20px;
 	margin-top: 50px;
 	margin-bottom: 20px;
-
+	color: #f2f2f2;
 }
 
 .login-box h1 {
@@ -35,6 +35,7 @@ input[type="text"],input[type="email"], input[type="password"], input[type="date
 	border: none;
 	background-color: #fff;
 	box-shadow: 0 0 5px #ccc;
+	color: black;
 }
 
 input[type="submit"] {

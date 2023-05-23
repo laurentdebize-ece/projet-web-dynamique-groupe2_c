@@ -8,11 +8,10 @@ try {
 	die("Erreur : " . $e->getMessage());
 }
 
-// Récupération des données du formulaire
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];
 $email = $_POST['email'];
-$statut = 'Administrateur'; // Modification de la valeur de 'statut'
+$statut = 'Administrateur';
 $premiere_connexion = $_POST['premiere_connexion'] = 1;
 
 
@@ -34,14 +33,14 @@ function generateRandomPassword($length = 8) {
     return $password;
 }
 
-// Récupération du nouvel ID
+//  nouvel ID
 $sql = "SELECT MAX(Id_utilisateur) as max_id FROM utilisateur";
 $resultat = $bdd->query($sql);
 $max_id = $resultat->fetch()['max_id'];
 $nouvel_id = $max_id + 1;
 
 
-// Insertion des données dans la base de données
+// On insere
 $sql2 = "INSERT INTO utilisateur (Id_utilisateur, Nom, Prenom, email, mot_de_passe, statut, premiere_connexion) VALUES (:id, :nom, :prenom, :email, :mot_de_passe, :statut, :premiere_connexion)";
 $requete = $bdd->prepare($sql2);
 $requete->execute(array(
@@ -54,7 +53,6 @@ $requete->execute(array(
     'premiere_connexion' => $premiere_connexion
 ));
 
-// Récupération du nouvel ID administrateur
 $sql4 = "SELECT MAX(Id_administrateur) as max_id_administrateur FROM administrateur";
 $resultat_Admin = $bdd->query($sql4);
 $max_id_Admin = $resultat_Admin ->fetch()['max_id_administrateur'];
@@ -68,7 +66,6 @@ $requete->execute(array(
 	'Id_administrateur' => $nouvel_id_Admin
 ));
 
-// Afficher l'alerte avec les informations de l'utilisateur
 if ($requete->rowCount() > 0) {
     $message = "Succes : Un nouvel administrateur a été ajouté : Nom : $nom, Prénom : $prenom, Email : $email";
     echo '<script>alert("' . $message . '");

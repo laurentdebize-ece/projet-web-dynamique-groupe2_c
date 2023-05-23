@@ -22,18 +22,14 @@
     <h1>Mes Competences</h1>
     <?php
     session_start();
-
-    // Créer une connexion
     $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
-
-    // Vérifier la connexion
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
     $id_utilisateur = $_SESSION['id_utilisateur'];
 
-    // Requête pour récupérer l'ID du professeur à partir de l'ID de l'utilisateur
+    // on recup l'ID professeur à partir de l'ID utilisateur
     $sql = "SELECT id_professeur FROM professeur WHERE id_utilisateur = '$id_utilisateur'";
     $result = $conn->query($sql);
 
@@ -41,17 +37,14 @@
         $row = $result->fetch_assoc();
         $id_professeur = $row['id_professeur'];
     } else {
-        // Gérer le cas où aucun résultat n'est trouvé pour l'ID de l'utilisateur
         echo "Erreur : Aucun professeur trouvé pour cet utilisateur.";
         exit();
     }
 
-    // Requête pour récupérer l'ID de la matière enseignée par le professeur
     $sql_matiere_prof = "SELECT id_matiere FROM professeur_matiere WHERE id_professeur = '$id_professeur'";
     $result_matiere_prof = $conn->query($sql_matiere_prof);
 
     if ($result_matiere_prof === false || $result_matiere_prof->num_rows === 0) {
-        // Gérer le cas où aucun résultat n'est trouvé pour l'ID de l'utilisateur
         echo "Erreur : Aucune matière trouvée pour cet utilisateur.";
         exit();
     }
@@ -71,12 +64,12 @@
     echo "<table>";
     echo "<tr><th>Matière</th><th>Compétence</th></tr>";
     if ($result->num_rows > 0) {
-        $displayedCompetences = array();  // Tableau pour enregistrer les compétences déjà affichées
+        $displayedCompetences = array();  
         while ($row = $result->fetch_assoc()) {
-            // Vérifier si la compétence a déjà été affichée
+
             if (!in_array($row['nom_competences'], $displayedCompetences)) {
                 echo "<tr><td>" . $row['nom_matiere'] . "</td><td>" . $row['nom_competences'] . "</td></tr>";
-                $displayedCompetences[] = $row['nom_competences'];  // Ajouter la compétence au tableau des compétences déjà affichées
+                $displayedCompetences[] = $row['nom_competences'];  
             }
         }
     } else {

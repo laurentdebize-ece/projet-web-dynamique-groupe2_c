@@ -33,18 +33,19 @@
 
             $bdd = new PDO("mysql:host=localhost;dbname=Projet_info_ing2;charset=utf8", "root", "root");
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Requête pour récupérer id_professeur en fonction de id_utilisateur
+
+            // On récupere id_professeur en fonction de id_utilisateur
             $query = "SELECT id_professeur FROM professeur WHERE id_utilisateur = :id_utilisateur";
             $stmt = $bdd->prepare($query);
             $stmt->execute(['id_utilisateur' => $id_utilisateur]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Vérification si l'id_professeur existe
+            // Si il existe, 
             if ($result) {
                 $id_professeur = $result['id_professeur'];
 
-                // Requête pour récupérer les matières du professeur
-                $query_matiere = "
+            // On récupere les matieres du prof
+            $query_matiere = "
         SELECT m.id_matiere, m.nom_matiere
         FROM matiere m
         INNER JOIN professeur_matiere pm ON m.id_matiere = pm.id_matiere

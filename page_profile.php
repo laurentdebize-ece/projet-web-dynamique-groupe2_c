@@ -1,7 +1,15 @@
 <?php
 session_start();
 
-// Récupération des informations de l'utilisateur depuis la session
+
+if (isset($_GET['deconnexion'])) {
+	session_destroy();
+	echo '<script>alert("Vous avez été déconnecté avec succès !");
+    window.location.href = "page_identification.php";
+    </script>';
+	exit();
+}
+// recup des inofs depuis la session
 $nom = $_SESSION['nom'];
 $prenom = $_SESSION['prenom'];
 $email = $_SESSION['email'];
@@ -9,8 +17,6 @@ $mot_de_passe = $_SESSION['mot_de_passe'];
 $Statut = $_SESSION['Statut'];
 
 
-
-// Affichage des informations de l'utilisateur
 
 ?>
 <?php include 'barre_de_navigation.php'; ?>
@@ -22,16 +28,23 @@ $Statut = $_SESSION['Statut'];
 	<title>Profil</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">ƒ
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="page_accueil_etudiant.js"></script>
+	<link rel="stylesheet" href="page_accueil_etudiant.css">
 	<link rel="stylesheet" href="page_profile.css">
 	<link rel="stylesheet" href="barre_de_navigation.css">
 	<link rel="stylesheet" href="pied_de_page.css">
 </head>
 
 <body>
+
+	<a href="?deconnexion=true" class="btn-deconnexion"><i class="ion-log-out"></i></a>
+
+	<canvas id="bubbleCanvas"></canvas>
+
 	<?php
 	switch ($Statut) {
 		case 'Etudiant':

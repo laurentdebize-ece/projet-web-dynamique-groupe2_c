@@ -31,8 +31,8 @@
         die("ID utilisateur non disponible en session.");
     }
 
-    $idUtilisateur = $_SESSION['id_utilisateur']; // ID utilisateur actuel
-    // Requête SQL pour récupérer l'id_etudiant à partir de l'id_utilisateur
+    $idUtilisateur = $_SESSION['id_utilisateur']; 
+
     $sql = "SELECT e.id_etudiant
 FROM etudiant e
 JOIN utilisateur u ON e.id_utilisateur = u.Id_utilisateur
@@ -45,14 +45,14 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
     } else {
         echo 'faute';
     }
-    // Récupérer les compétences de l'étudiant actuellement connecté
+
     $sql1 = "SELECT c.id_competences, c.nom_competences
         FROM competences c
         JOIN competences_etudiants ce ON c.id_competences = ce.id_competence
         JOIN etudiant e ON ce.id_etudiant = e.id_etudiant
         WHERE e.id_etudiant = '$idEtudiant'";
 
-    // Récupérer toutes les compétences qui ne sont pas associées à l'étudiant actuellement connecté
+    // on recup tt les compétences qui sont pas associées à l'étudiant connecté
     $sql2 = "SELECT c.id_competences, c.nom_competences
         FROM competences c
         LEFT JOIN competences_etudiants ce ON c.id_competences = ce.id_competence
@@ -66,7 +66,7 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
     // Tableau pour stocker les id_competences
     $competencesEtudiant = array();
 
-    // Stocker les compétences de l'étudiant dans un tableau
+    // on stock les comp de l'étudiant dans un tableau
     if ($result1->num_rows > 0) {
         while ($row = $result1->fetch_assoc()) {
             $competencesEtudiant[$row["id_competences"]] = $row["nom_competences"];
@@ -74,8 +74,6 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
     } else {
         echo 'eufjdk';
     }
-
-    // Affichage des résultats
     if ($result1->num_rows > 0 || $result2->num_rows > 0) {
 
         echo "<div class='container'>";
@@ -87,7 +85,7 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
  
             </tr>";
 
-        // Affichage des compétences de l'étudiant actuellement connecté
+        // On affiche les compétences de l'étudiant actuellement connecté
         foreach ($competencesEtudiant as $id_competences => $nom_competences) {
             echo "<tr>
                 <td>" . $id_competences . "</td>
@@ -96,10 +94,9 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
               </tr>";
         }
 
-        // Affichage des compétences qui ne sont pas associées à l'étudiant actuellement connecté
         if ($result2->num_rows > 0) {
             while ($row = $result2->fetch_assoc()) {
-                if (!isset($competencesEtudiant[$row["id_competences"]])) { // Si la compétence n'est pas déjà associée à l'étudiant
+                if (!isset($competencesEtudiant[$row["id_competences"]])) { 
                     echo "<tr>
                         <td>" . $row["id_competences"] . "</td>
                         <td>" . $row["nom_competences"] . "</td>
@@ -124,15 +121,15 @@ WHERE u.id_utilisateur = '$idUtilisateur'";
 
     if (isset($_POST['submit'])) {
         $id_competence = intval($_POST['id_competence']);
-        // $id_etudiant = intval($_SESSION['id_etudiant']); // Commented this line
+
         $requete = $conn->prepare("INSERT INTO competences_etudiants (id_competence, id_etudiant, Id_niveau_acquisition, commentaire, date_evaluation) VALUES (?, ?, 1, 'testos', '2023-05-10')");
-        $requete->bind_param("ii", $id_competence, $idEtudiant); // Replaced $_SESSION['id_etudiant'] with $idEtudiant
+        $requete->bind_param("ii", $id_competence, $idEtudiant); 
+    
         $requete->execute();
 
         echo "La compétence a été ajoutée à votre profil avec succès.";
-        // Redirection vers la page actuelle
         header("Location: " . $_SERVER["PHP_SELF"]);
-        exit(); // Assure la fin de l'exécution du script après la redirection
+        exit(); 
     }
 
 

@@ -40,7 +40,8 @@
 
     if ($result->num_rows > 0) {
         echo "<div class='table-container'><table><tr><th>Matière</th><th>Classe</th><th>Professeur</th></tr>";
-        // Afficher les données de chaque ligne
+
+        // On affiche les données de chaque ligne
         while ($row = $result->fetch_assoc()) {
             echo "<tr><td>" . $row["nom_matiere"] . "</td><td>" . $row["classes"] . "</td><td>" . $row["professeurs"] . "</td></tr>";
         }

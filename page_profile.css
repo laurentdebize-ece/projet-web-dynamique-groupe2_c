@@ -1,16 +1,41 @@
 .profile-info {
 	max-width: 800px;
 	margin: 0 auto;
-	border: 4px solid #0e0e0e;
+	border-radius: 20px;
+	border: 0;
 	padding: 20px;
 	margin-top: 5%;
 	margin-bottom: 10%;
 
 	display: flex;
 	align-items: center;
-	background-image: linear-gradient(to right, #ff0000, #0000ff);
+	background-image: linear-gradient(to right, #f8f2d4, #ddcfa7);
 }
 
 .photo-container {
 	margin-right: 20px;
 }
+
+.btn-deconnexion {
+	position: fixed;
+	top: 8%;
+	right: 15px;
+	width: 40px;
+	height: 40px;
+	background-color: #ccc;
+	color: #000000;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0.3s ease;
+  }
+  
+  .btn-deconnexion i {
+	font-size: 24px;
+  }
+  
+  .btn-deconnexion:hover {
+	background-color: #ff0000;
+  }
+  

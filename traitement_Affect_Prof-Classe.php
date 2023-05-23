@@ -8,7 +8,6 @@ try {
     die("Erreur : " . $e->getMessage());
 }
 
-// Récupération des données du formulaire
 if (isset($_POST['professeur']) && isset($_POST['classe'])) {
     $id_professeur = $_POST['professeur'];
     $id_classe = $_POST['classe'];
@@ -19,14 +18,14 @@ if (isset($_POST['professeur']) && isset($_POST['classe'])) {
     echo "Echec ";
 }
 
-// Récupération du nom du professeur
+// nom professeur
 $query_professeur = "SELECT Nom_prof FROM professeur WHERE id_professeur = :id_professeur";
 $stmt_professeur = $bdd->prepare($query_professeur);
 $stmt_professeur->execute(['id_professeur' => $id_professeur]);
 $result_professeur = $stmt_professeur->fetch(PDO::FETCH_ASSOC);
 $nom_professeur = $result_professeur['Nom_prof'];
 
-// Récupération du nom de la classe
+// nom classe
 $query_classe = "SELECT nom_classe FROM classe WHERE id_classe = :id_classe";
 $stmt_classe = $bdd->prepare($query_classe);
 $stmt_classe->execute(['id_classe' => $id_classe]);

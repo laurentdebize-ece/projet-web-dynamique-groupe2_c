@@ -32,18 +32,15 @@
             <label for="classe">Classe :</label>
             <select id="classe" name="classe" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'classe'
+                // On récupere les donnés de la classe
                 $reponse = $bdd->query('SELECT id_classe, nom_classe FROM classe');
 
-                // Affichage des options de la liste déroulante
+                // On affiche, 
                 while ($donnees = $reponse->fetch()) {
                     echo '<option value="' . $donnees['id_classe'] . '">' . $donnees['nom_classe'] . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $reponse->closeCursor();
                 ?>
             </select>

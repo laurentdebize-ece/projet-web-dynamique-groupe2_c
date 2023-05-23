@@ -1,13 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "projet_info_ing2";
- 
-// Créer une connexion
-$conn = new mysqli($servername, 'root', 'root', $dbname);
- 
-// Vérifier la connexion
+
+$conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

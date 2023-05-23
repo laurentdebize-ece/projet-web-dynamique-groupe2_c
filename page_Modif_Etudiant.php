@@ -24,21 +24,17 @@
             <label for="etudiant">Etudiant à modifier:</label>
             <select id="etudiant" name="etudiant" required>
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'etudiant' avec les informations de l'utilisateur
+                // On recup les données de la table 'etudiant' avec les infos de l'utilisateur
                 $query = "SELECT e.id_etudiant, u.Nom, u.Prenom FROM etudiant e JOIN utilisateur u ON e.id_utilisateur = u.Id_utilisateur";
                 $stmt = $bdd->query($query);
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $stmt->fetch()) {
                     $nom = $donnees['Nom'];
                     $prenom = $donnees['Prenom'];
                     echo '<option value="' . $donnees['id_etudiant'] . '">' . $prenom . ' ' . $nom . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $stmt->closeCursor();
                 ?>
             </select><br>
@@ -56,24 +52,17 @@
             <label for="classe">Classe :</label>
             <select id="classe" name="classe">
                 <?php
-                // Connexion à la base de données
                 $bdd = new PDO('mysql:host=localhost;dbname=projet_info_ing2;charset=utf8', 'root', 'root');
 
-                // Récupération des données de la table 'classe'
+                // recup des données de la table 'classe'
                 $reponse = $bdd->query('SELECT id_classe, nom_classe FROM classe');
 
-                // Affichage des options de la liste déroulante
                 while ($donnees = $reponse->fetch()) {
                     echo '<option value="' . $donnees['id_classe'] . '">' . $donnees['nom_classe'] . '</option>';
                 }
-
-                // Fermeture de la connexion à la base de données
                 $reponse->closeCursor();
                 ?>
             </select><br>
-
-
-
 
             <input type="submit" value="Modifier">
         </form>

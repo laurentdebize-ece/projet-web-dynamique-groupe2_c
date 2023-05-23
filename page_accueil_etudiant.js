@@ -62,8 +62,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 $(document).ready(function() {
     displayNotification();
-
-    // Event listener for changes in localStorage
     $(window).on('storage', function(e) {
         if (e.originalEvent.key === 'notification') {
             displayNotification();
@@ -84,7 +82,6 @@ $(document).ready(function() {
         }
     }
 
-    // Remove notification button click event
     $(document).on('click', '#removeNotification', function() {
         localStorage.removeItem("notification");
         $("#notificationContainer").fadeOut("slow", function() {

@@ -52,7 +52,7 @@ body{
     min-width: 160px;
     width: 100%;
     box-sizing: border-box;
-    z-index: 999; /* Valeur élevée pour s'afficher au premier plan */
+    z-index: 999; 
 }
 
 .custom-dropdown-content a {

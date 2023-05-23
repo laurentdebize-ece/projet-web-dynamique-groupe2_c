@@ -48,7 +48,7 @@ session_start(); ?>
                     echo '<button class=" btn btn-primary promo-button" onclick="showClasses(\'' . $row["nom_promotion"] . '\')">' . $row["nom_promotion"] . '</button>';
                 }
             } else {
-                echo "0 results";
+                echo "0 resultats";
             }
  
             $conn->close();

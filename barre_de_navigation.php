@@ -135,7 +135,7 @@ function pied_de_page()
 ?>
     <div class="footer-basic">
         <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-linkedin"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-github"></i></a></div>
+            <div class="social"><a href="https://instagram.com/m.matisss?igshid=MjEwN2IyYWYwYw=="><i class="icon ion-social-instagram"></i></a><a href="https://www.linkedin.com/in/matis-mur-52856019b/"><i class="icon ion-social-linkedin"></i></a><a href="https://www.linkedin.com/in/lilian-rage-408a7921b/"><i class="icon ion-social-twitter"></i></a><a href="https://github.com/laurentdebize-ece/projet-web-dynamique-groupe2_c"><i class="icon ion-social-github"></i></a></div>
 
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Accueil</a></li>

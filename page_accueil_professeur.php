@@ -11,7 +11,7 @@
     <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js></script>
     <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js></script>
     <script type="text/javascript" src="page_accueil_etudiant.js"></script>
-    <link rel="stylesheet" href="page_accueil_professeur.css">
+    <link rel="stylesheet" href="page_accueil_etudiant.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
     <script>
@@ -52,6 +52,8 @@
     <?php barre_de_navigation_professeurs(); ?>
     
     <h1>Professeur</h1>
+    <canvas id="bubbleCanvas"></canvas>
+
     <div class="container text-center">
         <div style="width: 90%; margin: auto;">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -99,7 +101,6 @@
         <p>Bienvenue sur Omnes MySkills, le site web qui permet aux étudiants de l'école Omnes d'évaluer leurs compétences dans chaque matière. Grâce à notre plateforme, les professeurs pourront lister les compétences à acquérir dans leur matière respective, et les étudiants pourront s'auto-évaluer pour chaque compétence. Tout au long de l'année, les professeurs pourront confirmer ou infirmer l'acquisition de ces compétences, permettant ainsi aux étudiants de suivre leur progression. Nous espérons que cette plateforme vous sera utile dans votre parcours éducatif à Omnes.</p>
     </div>
 
-    <canvas id="bubbleCanvas"></canvas>
     <?php pied_de_page(); ?>
 </body>
 

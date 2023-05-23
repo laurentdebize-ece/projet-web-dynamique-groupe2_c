@@ -1,78 +1,93 @@
 <!DOCTYPE html>
-<html>
 <?php include 'barre_de_navigation.php'; ?>
+<html lang="en">
 
 <head>
-    <title>Toutes les compétences</title>
+    <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css>
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js></script>
     <link rel="stylesheet" href="page_accueil_etudiant.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
-    <link rel="stylesheet" href="page_Etud_ToutesComp.css">
 </head>
 
 <body>
-    <h1>Toutes les compétences OMNES</h1>
     <?php barre_de_navigation_etudiants(); ?>
+
+    <h1>Toutes les compétences OMNES</h1>
+
     <?php
-    $conn = new mysqli("localhost", "root", "root", "projet_info_ing2");
+    $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
     if ($conn->connect_error) {
         die("Échec de la connexion à la base de données : " . $conn->connect_error);
     }
+
     session_start();
     if (!isset($_SESSION['id_utilisateur'])) {
         die("ID utilisateur non disponible en session.");
     }
-    $idUtilisateur = $_SESSION['id_utilisateur'];
 
-    // Récupérer l'id de l'étudiant à partir de l'id_utilisateur
-    $sql = "SELECT id_etudiant FROM etudiant WHERE id_utilisateur = $idUtilisateur";
+    $idUtilisateur = $_SESSION['id_utilisateur']; // ID utilisateur actuel
+    // Requête SQL pour récupérer l'id_etudiant à partir de l'id_utilisateur
+    $sql = "SELECT e.id_etudiant
+FROM etudiant e
+JOIN utilisateur u ON e.id_utilisateur = u.Id_utilisateur
+WHERE u.id_utilisateur = '$idUtilisateur'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $idEtudiant = $row['id_etudiant'];
     } else {
-        die("Aucun enregistrement d'étudiant trouvé pour cet utilisateur.");
+        echo 'faute';
     }
-
-
+    // Récupérer les compétences de l'étudiant actuellement connecté
     $sql1 = "SELECT c.id_competences, c.nom_competences
         FROM competences c
         JOIN competences_etudiants ce ON c.id_competences = ce.id_competence
         JOIN etudiant e ON ce.id_etudiant = e.id_etudiant
-        WHERE e.id_utilisateur = $idEtudiant";
+        WHERE e.id_etudiant = '$idEtudiant'";
 
+    // Récupérer toutes les compétences qui ne sont pas associées à l'étudiant actuellement connecté
     $sql2 = "SELECT c.id_competences, c.nom_competences
         FROM competences c
         LEFT JOIN competences_etudiants ce ON c.id_competences = ce.id_competence
         LEFT JOIN etudiant e ON ce.id_etudiant = e.id_etudiant
-        WHERE e.id_utilisateur <> $idEtudiant OR e.id_utilisateur IS NULL";
+        WHERE e.id_etudiant <> '$idEtudiant' OR e.id_etudiant IS NULL
+        GROUP BY c.id_competences";
 
     $result1 = $conn->query($sql1);
     $result2 = $conn->query($sql2);
 
+    // Tableau pour stocker les id_competences
     $competencesEtudiant = array();
 
+    // Stocker les compétences de l'étudiant dans un tableau
     if ($result1->num_rows > 0) {
         while ($row = $result1->fetch_assoc()) {
             $competencesEtudiant[$row["id_competences"]] = $row["nom_competences"];
         }
+    } else {
+        echo 'eufjdk';
     }
 
+    // Affichage des résultats
     if ($result1->num_rows > 0 || $result2->num_rows > 0) {
+
         echo "<div class='container'>";
-        echo "<table class='tableau'>            
-        <tr>
+        echo "<table>
+            <tr>
                 <th>id_competences</th>
                 <th>nom_competences</th>
                 <th>Ajouter</th>
+ 
             </tr>";
 
+        // Affichage des compétences de l'étudiant actuellement connecté
         foreach ($competencesEtudiant as $id_competences => $nom_competences) {
             echo "<tr>
                 <td>" . $id_competences . "</td>
@@ -81,9 +96,10 @@
               </tr>";
         }
 
+        // Affichage des compétences qui ne sont pas associées à l'étudiant actuellement connecté
         if ($result2->num_rows > 0) {
             while ($row = $result2->fetch_assoc()) {
-                if (!isset($competencesEtudiant[$row["id_competences"]])) {
+                if (!isset($competencesEtudiant[$row["id_competences"]])) { // Si la compétence n'est pas déjà associée à l'étudiant
                     echo "<tr>
                         <td>" . $row["id_competences"] . "</td>
                         <td>" . $row["nom_competences"] . "</td>
@@ -96,6 +112,8 @@
                       </tr>";
                 }
             }
+        } else {
+            echo 'FAUX';
         }
 
         echo "</table>";
@@ -106,19 +124,21 @@
 
     if (isset($_POST['submit'])) {
         $id_competence = intval($_POST['id_competence']);
-        $id_etudiant = intval($_SESSION['id_etudiant']);
+        // $id_etudiant = intval($_SESSION['id_etudiant']); // Commented this line
         $requete = $conn->prepare("INSERT INTO competences_etudiants (id_competence, id_etudiant, Id_niveau_acquisition, commentaire, date_evaluation) VALUES (?, ?, 1, 'testos', '2023-05-10')");
-        $requete->bind_param("ii", $id_competence, $id_etudiant);
+        $requete->bind_param("ii", $id_competence, $idEtudiant); // Replaced $_SESSION['id_etudiant'] with $idEtudiant
         $requete->execute();
 
         echo "La compétence a été ajoutée à votre profil avec succès.";
+        // Redirection vers la page actuelle
         header("Location: " . $_SERVER["PHP_SELF"]);
-        exit();
+        exit(); // Assure la fin de l'exécution du script après la redirection
     }
+
+
     ?>
 
     <?php pied_de_page(); ?>
-
 </body>
 
 </html>

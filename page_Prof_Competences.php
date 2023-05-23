@@ -7,6 +7,7 @@
     <title>Mes Competences</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-    <?php barre_de_navigation_professeurs();?>
+    <?php barre_de_navigation_professeurs(); ?>
     <h1>Mes Competences</h1>
     <?php
     session_start();
@@ -60,10 +61,10 @@
 
 
     $sql = "SELECT m.nom_matiere, c.nom_competences
-    FROM matiere m 
-    JOIN competences_matieres mc ON m.id_matiere = mc.id_matiere 
-    JOIN competences c ON mc.id_competence = c.id_competences 
-    WHERE m.id_matiere = '$ID_matiere_prof'";
+    FROM matiere m
+    JOIN competences_matieres mc ON m.id_matiere = mc.id_matiere
+    JOIN competences c ON mc.id_competence = c.id_competences
+    WHERE m.id_matiere = '$ID_matiere_prof' AND c.id_professeur = '$id_professeur'";
 
     $result = $conn->query($sql);
 
@@ -91,4 +92,4 @@
     <?php pied_de_page(); ?>
 </body>
 
-</html>
+</html> 

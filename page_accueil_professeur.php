@@ -6,9 +6,11 @@
     <title>Accueil Professeur</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css>
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js></script>
+    <script type="text/javascript" src="page_accueil_etudiant.js"></script>
     <link rel="stylesheet" href="page_accueil_professeur.css">
     <link rel="stylesheet" href="barre_de_navigation.css">
     <link rel="stylesheet" href="pied_de_page.css">
@@ -47,15 +49,58 @@
 </head>
 
 <body>
-    <h1>Professeur</h1>
     <?php barre_de_navigation_professeurs(); ?>
+    
+    <h1>Professeur</h1>
     <div class="container text-center">
-        <div class="photo-container">
-            <img src="omnes_photo.png" alt="Photo Omnes">
+        <div style="width: 90%; margin: auto;">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="Physique.jpg" alt="Physique">
+                        <div class="carousel-caption">
+                            <h3>Physique</h3>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="maths.jpg" alt="Mathématiques">
+                        <div class="carousel-caption">
+                            <h3>Mathématiques</h3>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="info.jpg" alt="Informatique">
+                        <div class="carousel-caption">
+                            <h3>Informatique</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div><br>
         <h3>Omnes MySkills</h3><br>
         <p>Bienvenue sur Omnes MySkills, le site web qui permet aux étudiants de l'école Omnes d'évaluer leurs compétences dans chaque matière. Grâce à notre plateforme, les professeurs pourront lister les compétences à acquérir dans leur matière respective, et les étudiants pourront s'auto-évaluer pour chaque compétence. Tout au long de l'année, les professeurs pourront confirmer ou infirmer l'acquisition de ces compétences, permettant ainsi aux étudiants de suivre leur progression. Nous espérons que cette plateforme vous sera utile dans votre parcours éducatif à Omnes.</p>
     </div>
+
+    <canvas id="bubbleCanvas"></canvas>
     <?php pied_de_page(); ?>
 </body>
+
 </html>

@@ -3,7 +3,7 @@ function showClasses(nom_promotion) {
     $("#student-details").html('');
     $.get("page_Prof_Validation2.php", {
         nom_promotion: nom_promotion
-    }, function(data) {
+    }, function (data) {
         var classNames = data.split(','); // Assuming the names are comma-separated
         var html = '';
         for (var i = 0; i < classNames.length; i++) {
@@ -16,7 +16,7 @@ function showClasses(nom_promotion) {
 function showStudentDetails(nom_classe) {
     $.get("page_Prof_Validation3.php", {
         nom_classe: nom_classe
-    }, function(data) {
+    }, function (data) {
         var students = data.split(';');
         var html = '<table class="centered-table">';
         html += '<tr><th>Nom</th><th>Prenom</th><th>Email</th><th>Competence</th><th>Niveau d\'acquisition</th><th>Validation</th><th>Commentaire</th></tr>';
@@ -31,14 +31,14 @@ function showStudentDetails(nom_classe) {
     });
 }
 
-$(document).ready(function() {
-    $(document).on('submit', '.comment-form', function(e) {
+$(document).ready(function () {
+    $(document).on('submit', '.comment-form', function (e) {
         e.preventDefault();
         var etudiantId = $(this).find('input[name="etudiant_id"]').val();
         var competenceId = $(this).find('input[name="competence_id"]').val();
         updateComment(etudiantId, competenceId);
     });
-    $(document).on('submit', '.validation-form', function(event) {
+    $(document).on('submit', '.validation-form', function (event) {
         event.preventDefault();
         var competenceId = $(this).find('input[name="competence_id"]').val();
         var etudiantId = $(this).find('input[name="etudiant_id"]').val();
@@ -53,15 +53,9 @@ function updateComment(etudiantId, competenceId) {
         etudiant_id: etudiantId,
         competence_id: competenceId,
         commentaire: commentaire
-    }, function(response) {
-        // This function is called when the request is successful
-        console.log("Response from server: " + response);
-        // Here you can update your page based on the response from the server
-        if (response == "Record updated successfully") {
-            alert("Comment updated successfully");
-        } else {
-            alert("Error updating comment");
-        }
+    }, function (response) {
+        alert("Commentaire mise à jour avec succès");
+
     });
 }
 
@@ -74,16 +68,18 @@ function updateValidation(etudiantId, competenceId, validation) {
             competence_id: competenceId,
             validation: validation
         },
-        success: function(response) {
+        success: function (response) {
             console.log("Response from server: " + response);
             if (response === "Record updated successfully") {
                 alert("Validation mise à jour avec succès");
+                localStorage.setItem("notification", "Validation mise à jour avec succès");
             } else {
                 alert("Erreur lors de la mise à jour de la validation");
             }
         },
-        error: function() {
+        error: function () {
             alert("Une erreur s'est produite lors de la requête AJAX");
         }
     });
 }
+

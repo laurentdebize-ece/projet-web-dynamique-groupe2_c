@@ -19,7 +19,7 @@
                     url: 'z_affect_comp_formu.php',
                     type: 'POST',
                     data: {
-                        id_matiere: id_matiere
+                        id_matiere: id_matiere,
                     },
                     success: function(response) {
                         var competences = JSON.parse(response);

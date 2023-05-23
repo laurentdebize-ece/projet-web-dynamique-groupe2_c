@@ -32,12 +32,22 @@ canvas {
     padding: 10px;
     color: #fff;
 }
-
+#notificationContainer2 {
+    display: none;
+    position: fixed;
+    top: 200px;
+    right: 20px;
+    width: 200px;
+    background-color: #f52a2a;
+    border: 5px solid #131010;
+    padding: 10px;
+    color: #fff;
+}
 #notificationContainer p {
     margin: 0;
 }
 
-#removeNotification {
+#removeNotification, #removeNotification2 {
     margin-top: 10px;
     background-color: #fff;
     color: #6e82c7;

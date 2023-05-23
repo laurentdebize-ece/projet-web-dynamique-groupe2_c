@@ -4,21 +4,21 @@
   border: 0;
   font-size: 11px;
   letter-spacing: 3px;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .navbar li a,
 .navbar .navbar-brand {
-  color: #d5d5d5 !important;
+  color: #d5d5d5 ;
 }
 
 .navbar-nav li a:hover {
-  color: #fff !important;
+  color: #fff ;
 }
 
 .navbar-nav li.active a {
-  color: #fff !important;
-  background-color: #29292c !important;
+  color: #fff ;
+  background-color: #29292c ;
 }
 
 .navbar-default .navbar-toggle {
@@ -27,15 +27,15 @@
 
 .open .dropdown-toggle {
   color: #fff;
-  background-color: #555 !important;
+  background-color: #555 ;
 }
 
 .dropdown-menu li a {
-  color: #000 !important;
+  color: #000 ;
 }
 
 .dropdown-menu li a:hover {
-  background-color: rgb(56, 55, 55) !important;
+  background-color: rgb(56, 55, 55) ;
 }
 
 h1 {

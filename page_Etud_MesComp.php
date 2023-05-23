@@ -18,6 +18,8 @@
     <style>
         table {
             margin-top: 14%;
+            width: 100%;
+
         }
     </style>
 </head>
@@ -36,7 +38,7 @@
     if (!isset($_SESSION['id_utilisateur'])) {
         die("ID utilisateur non disponible en session.");
     }
-    /*$date = date("Y/m/d");
+    $date = date("Y/m/d");
 
 
     $idUtilisateur = $_SESSION['id_utilisateur']; // Remplacez par l'ID utilisateur souhaité
@@ -52,7 +54,7 @@
     JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
     JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
     WHERE e.id_utilisateur = $idUtilisateur";
-
+    /*
 
     $sql2 = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur,e.id_etudiant, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
     FROM matiere AS m
@@ -213,10 +215,12 @@
             }
         }
 
-        echo "Les valeurs ont été mises à jour avec succès.";
         // Redirection vers la page actuelle
         header("Location: " . $_SERVER["PHP_SELF"]);
         exit(); // Assure la fin de l'exécution du script après la redirection
+
+        // Message de succès
+        echo "Les valeurs ont été mises à jour avec succès.";
     }
     ?>
 

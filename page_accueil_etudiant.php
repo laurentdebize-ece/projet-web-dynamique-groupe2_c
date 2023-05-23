@@ -66,21 +66,21 @@
 
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="Physique.jpg" alt="Physique">
+            <a href="page_Etud_Matiere1.php?matiere_id=2"><img src="Physique.jpg" alt="Physique"></a>
             <div class="carousel-caption">
               <h3>Physique</h3>
             </div>
           </div>
 
           <div class="item">
-            <img src="maths.jpg" alt="Mathématiques">
+            <a href="page_Etud_Matiere1.php?matiere_id=1"><img src="maths.jpg" alt="Mathématiques"></a>
             <div class="carousel-caption">
               <h3>Mathématiques</h3>
             </div>
           </div>
 
           <div class="item">
-            <img src="info.jpg" alt="Informatique">
+            <a href="page_Etud_Matiere1.php?matiere_id=3"><img src="info.jpg" alt="Informatique"></a>
             <div class="carousel-caption">
               <h3>Informatique</h3>
             </div>
@@ -106,32 +106,37 @@
   <?php
   $conn = new mysqli("localhost", 'root', 'root', "projet_info_ing2");
   if ($conn->connect_error) {
-      die("Échec de la connexion à la base de données : " . $conn->connect_error);
+    die("Échec de la connexion à la base de données : " . $conn->connect_error);
   }
   $idUtilisateur = $_SESSION['id_utilisateur'];
 
   $sql2 = "SELECT DISTINCT m.id_matiere, m.nom_matiere, c.id_competences, c.nom_competences, ce.Id_niveau_acquisition, e.id_utilisateur,e.id_etudiant, ce.commentaire, ce.date_evaluation, p.Nom_prof, ac.nom AS acquisition, vp.nom_validation
-    FROM matiere AS m
-    JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
-    JOIN competences AS c ON cm.id_competence = c.id_competences
-    JOIN competences_etudiants AS ce ON c.id_competences = ce.id_competence
-    JOIN etudiant AS e ON ce.id_etudiant = e.id_etudiant
-    JOIN professeur AS p ON c.id_professeur = p.id_professeur
-    JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
-    JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
-    WHERE e.id_utilisateur = $idUtilisateur AND ce.date_evaluation = CURDATE()";
+  FROM matiere AS m
+  JOIN competences_matieres AS cm ON m.id_matiere = cm.id_matiere
+  JOIN competences AS c ON cm.id_competence = c.id_competences
+  JOIN competences_etudiants AS ce ON c.id_competences = ce.id_competence
+  JOIN etudiant AS e ON ce.id_etudiant = e.id_etudiant
+  JOIN professeur AS p ON c.id_professeur = p.id_professeur
+  JOIN acquisition_competences AS ac ON ce.Id_niveau_acquisition = ac.id
+  JOIN validation_prof AS vp ON ce.validation_prof = vp.id_validation
+  WHERE e.id_utilisateur = $idUtilisateur AND ce.date_evaluation = CURDATE()";
 
   $result2 = $conn->query($sql2);
 
-  // Affichage des résultats
   if ($result2->num_rows > 0) {
     $row = $result2->fetch_assoc();
-    $nomCompetence = $row["nom_competences"];
-    echo '<script>
-        localStorage.setItem("notification", "' . $nomCompetence . '");
+    $idNiveauAcquisition = $row["Id_niveau_acquisition"];
+
+    if ($idNiveauAcquisition == 1) {
+      $nomCompetence = $row["nom_competences"];
+      echo '<script>
+        localStorage.setItem("notification2", "Compétence à évaluer pour ce jour : <br><br>' . $nomCompetence . '");
     </script>';
+      echo '<div id="notificationContainer2"></div>';
+    }
   }
   ?>
+  ƒ
 
   <?php pied_de_page(); ?>
 </body>

@@ -62,6 +62,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 $(document).ready(function() {
     displayNotification();
+
+    // Event listener for changes in localStorage
     $(window).on('storage', function(e) {
         if (e.originalEvent.key === 'notification') {
             displayNotification();
@@ -70,6 +72,7 @@ $(document).ready(function() {
 
     function displayNotification() {
         var notification = localStorage.getItem("notification");
+        var notification2 = localStorage.getItem("notification2");
         if (notification) {
             $("#notificationContainer").html(
                 '<p>' + notification + '</p><button id="removeNotification">Supprimer la notification</button><button id="goToPageButton">Aller à la page correspondante</button>'
@@ -80,11 +83,27 @@ $(document).ready(function() {
                 $(this).empty();
             });
         }
+        if (notification2) {
+            $("#notificationContainer2").html(
+                '<p>' + notification2 + '</p><button id="removeNotification2">Supprimer la notification</button><button id="goToPageButton">Aller à la page correspondante</button>'
+            );
+            $("#notificationContainer2").fadeIn("slow");
+        } else {
+            $("#notificationContainer2").fadeOut("slow", function() {
+                $(this).empty();
+            });
+        }
     }
 
+    // Remove notification button click event
     $(document).on('click', '#removeNotification', function() {
         localStorage.removeItem("notification");
         $("#notificationContainer").fadeOut("slow", function() {
+            $(this).empty();
+        });
+    });$(document).on('click', '#removeNotification2', function() {
+        localStorage.removeItem("notification2");
+        $("#notificationContainer2").fadeOut("slow", function() {
             $(this).empty();
         });
     });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : lun. 22 mai 2023 à 11:17
+-- Généré le : mar. 23 mai 2023 à 21:43
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -150,10 +150,10 @@ INSERT INTO `competences_etudiants` (`id_competence`, `id_etudiant`, `Id_niveau_
 (1, 5, 1, '', NULL, 0),
 (1, 6, 1, '', NULL, 0),
 (1, 7, 1, '', NULL, 0),
-(2, 1, 1, '', NULL, 0),
-(2, 2, 1, '', NULL, 0),
-(2, 3, 1, '', NULL, 0),
-(2, 4, 1, '', NULL, 0),
+(2, 1, 1, '', '2023-05-23', 0),
+(2, 2, 1, 'pour ce jour', '2023-05-23', 0),
+(2, 3, 1, 'pour ce jour', '2023-05-23', 0),
+(2, 4, 1, 'pour ce jour', '2023-05-23', 0),
 (2, 5, 1, '', NULL, 0),
 (2, 6, 1, '', NULL, 0),
 (2, 7, 1, '', NULL, 0),
@@ -242,17 +242,19 @@ INSERT INTO `competences_matieres` (`id_competence`, `id_matiere`) VALUES
 
 CREATE TABLE `competences_transversales` (
   `id_competence` int(50) NOT NULL,
-  `nom_competences` text NOT NULL
+  `nom_competences` text NOT NULL,
+  `id_professeur` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `competences_transversales`
 --
 
-INSERT INTO `competences_transversales` (`id_competence`, `nom_competences`) VALUES
-(1, 'Capacité a travailler en groupe'),
-(2, 'Prise de parole en public'),
-(3, 'Participation');
+INSERT INTO `competences_transversales` (`id_competence`, `nom_competences`, `id_professeur`) VALUES
+(2, 'Participation', 2),
+(3, 'Prise de parole en public', 3),
+(4, 'Capacité à travailler en groupe', 4),
+(5, 'Participation2', 5);
 
 -- --------------------------------------------------------
 
@@ -265,8 +267,40 @@ CREATE TABLE `compet_trans_etudiant` (
   `id_etudiant` int(50) NOT NULL,
   `Id_niveau_acquisition` int(50) NOT NULL,
   `commentaire` text NOT NULL,
-  `date_evaluation` date NOT NULL
+  `date_evaluation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `compet_trans_etudiant`
+--
+
+INSERT INTO `compet_trans_etudiant` (`id_competence`, `id_etudiant`, `Id_niveau_acquisition`, `commentaire`, `date_evaluation`) VALUES
+(2, 1, 1, '', NULL),
+(2, 2, 1, '', NULL),
+(2, 3, 1, '', NULL),
+(2, 4, 1, '', NULL),
+(2, 5, 1, '', NULL),
+(2, 6, 1, '', NULL),
+(2, 7, 1, '', NULL),
+(2, 8, 1, '', NULL),
+(2, 9, 3, '', NULL),
+(2, 10, 1, '', NULL),
+(3, 5, 1, '', NULL),
+(3, 6, 1, '', NULL),
+(3, 7, 1, '', NULL),
+(3, 8, 1, '', NULL),
+(3, 9, 1, '', NULL),
+(3, 10, 1, '', NULL),
+(4, 1, 1, '', NULL),
+(4, 2, 1, '', NULL),
+(4, 3, 1, '', NULL),
+(4, 4, 1, '', NULL),
+(4, 8, 1, '', NULL),
+(4, 9, 1, '', NULL),
+(4, 10, 1, '', NULL),
+(5, 8, 1, '', NULL),
+(5, 9, 1, '', NULL),
+(5, 10, 1, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,9 +318,10 @@ CREATE TABLE `compet_trans_matiere` (
 --
 
 INSERT INTO `compet_trans_matiere` (`id_competence`, `id_matiere`) VALUES
-(1, 4),
-(2, 1),
-(3, 4);
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -538,8 +573,8 @@ INSERT INTO `utilisateur` (`Id_utilisateur`, `Nom`, `Prenom`, `email`, `mot_de_p
 (2, 'Admin2', 'Lilian', 'lilian.rage@edu.ece.fr', 'cfMZkUjj', 'Administrateur', 1),
 (3, 'Admin3', 'Louise', 'louise.decourselle@edu.ece.fr', 'xvXxBhdW', 'Administrateur', 1),
 (4, 'Admin4', 'Antoine', 'antoine.dejesus@edu.ece.fr', 'ZcFheVQq', 'Administrateur', 1),
-(5, 'Bianchi', 'Celine', 'celine@bianchi.com', 'g7nivhBP', 'Professeur', 1),
-(6, 'Dedecker', 'Samira', 'samira@dedecker.com', 'AVdALJpY', 'Professeur', 1),
+(5, 'Bianchi', 'Celine', 'celine@bianchi.com', 'celine', 'Professeur', 0),
+(6, 'Dedecker', 'Samira', 'samira@dedecker.com', 'samira', 'Professeur', 0),
 (7, 'Debize', 'Laurent', 'laurent@debize.com', 'Gq558zHc', 'Professeur', 1),
 (8, 'Savard', 'Christophe', 'christophe@savard.com', 'IXSiLt7a', 'Professeur', 1),
 (9, 'MUR', 'Matis', 'matis@mur.com', 'matis', 'Etudiant', 0),
@@ -645,7 +680,8 @@ ALTER TABLE `competences_matieres`
 -- Index pour la table `competences_transversales`
 --
 ALTER TABLE `competences_transversales`
-  ADD PRIMARY KEY (`id_competence`);
+  ADD PRIMARY KEY (`id_competence`),
+  ADD KEY `fk_competences_professeur2` (`id_professeur`);
 
 --
 -- Index pour la table `compet_trans_etudiant`
@@ -748,7 +784,7 @@ ALTER TABLE `acquisition_competences`
 -- AUTO_INCREMENT pour la table `acquisition_competences2`
 --
 ALTER TABLE `acquisition_competences2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -788,6 +824,12 @@ ALTER TABLE `competences_etudiants`
 ALTER TABLE `competences_matieres`
   ADD CONSTRAINT `fk_Matiere3` FOREIGN KEY (`id_matiere`) REFERENCES `matiere` (`id_matiere`),
   ADD CONSTRAINT `fk_competence1` FOREIGN KEY (`id_competence`) REFERENCES `competences` (`id_competences`);
+
+--
+-- Contraintes pour la table `competences_transversales`
+--
+ALTER TABLE `competences_transversales`
+  ADD CONSTRAINT `fk_competences_professeur2` FOREIGN KEY (`id_professeur`) REFERENCES `professeur` (`id_professeur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `compet_trans_etudiant`

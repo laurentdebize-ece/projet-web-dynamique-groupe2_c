@@ -1,10 +1,10 @@
 function showClasses(nom_promotion) {
-
+ 
     $("#student-details").html('');
     $.get("page_Prof_Validation2.php", {
         nom_promotion: nom_promotion
     }, function (data) {
-        var classNames = data.split(','); 
+        var classNames = data.split(',');
         var html = '';
         for (var i = 0; i < classNames.length; i++) {
             html += '<button  class="btn btn-primary classe-button" onclick="showStudentDetails(\'' + classNames[i] + '\')">' + classNames[i] + '</button>';
@@ -12,7 +12,7 @@ function showClasses(nom_promotion) {
         $("#results").html(html);
     });
 }
-
+ 
 function showStudentDetails(nom_classe) {
     $.get("page_Prof_Validation3.php", {
         nom_classe: nom_classe
@@ -30,7 +30,7 @@ function showStudentDetails(nom_classe) {
         $("#student-details").html(html);
     });
 }
-
+ 
 $(document).ready(function () {
     $(document).on('submit', '.comment-form', function (e) {
         e.preventDefault();
@@ -46,7 +46,7 @@ $(document).ready(function () {
         updateValidation(etudiantId, competenceId, validation);
     });
 });
-
+ 
 function updateComment(etudiantId, competenceId) {
     var commentaire = $('#commentaire-' + etudiantId + '-' + competenceId).val();
     $.post("update_comment.php", {
@@ -55,10 +55,10 @@ function updateComment(etudiantId, competenceId) {
         commentaire: commentaire
     }, function (response) {
         alert("Commentaire mise à jour avec succès");
-
+        localStorage.setItem("notification", "Validation mise à jour avec succès");
     });
 }
-
+ 
 function updateValidation(etudiantId, competenceId, validation) {
     $.ajax({
         url: "update_validation.php",
@@ -82,4 +82,6 @@ function updateValidation(etudiantId, competenceId, validation) {
         }
     });
 }
+ 
 
+ 
